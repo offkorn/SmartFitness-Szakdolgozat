@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartFitness.Converters"
+             x:Class="SmartFitness.Views.WorkoutPlanDetailPage"
+             BackgroundColor="White">
+    
+    <ContentPage.Resources>
+        <converters:ListToStringConverter x:Key="ListToStringConverter" />
+        <converters:DaysCountConverter x:Key="DaysCountConverter" />
+        <converters:BoolToStringConverter x:Key="BoolToStartCancelConverter" TrueValue="Cancel" FalseValue="Start" />
+        <converters:BoolToColorConverter x:Key="BoolToTextColorConverter" TrueColor="#FF0000" FalseColor="#FFFFFF" />
+        <converters:BoolToColorConverter x:Key="BoolToBackgroundColorConverter" TrueColor="#FFDEAD" FalseColor="#FF6A00" />
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="10">
+
+
+            
+                
+                <VerticalStackLayout Margin="0,0,0,10" Spacing="10" HorizontalOptions="Center">
+
+                    <Image Source="program_icon.svg"
+                       Aspect="AspectFit" HorizontalOptions="Center"
+                       Scale="1"
+                           HeightRequest="80"
+                       Margin="0,0,0,20" />
+
+
+                    <HorizontalStackLayout Spacing="5" >
+                        <Frame BorderColor="Transparent"
+                               BackgroundColor="Black"
+                               Padding="10" >
+                            
+                            <Label Text="{Binding WorkoutPlan.Location, StringFormat='{0}'}"
+                                   FontSize="Micro"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                        </Frame>
+                        
+                        <Frame BorderColor="Transparent"
+                               BackgroundColor="Black"
+                               
+                              
+                               Padding="10">
+                            <Label Text="{Binding WorkoutPlan.ExperienceLevel, StringFormat='{0}'}" 
+                                    FontSize="Micro"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                        </Frame>
+                        
+                        <Frame BorderColor="Transparent"
+                               BackgroundColor="Black"
+                               VerticalOptions="Start"
+                              
+                               Padding="10">
+                            <Label  Text="{Binding WorkoutPlan.Goals, Converter={StaticResource ListToStringConverter}, StringFormat='{0}'}" 
+                                    FontSize="Micro"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2"/>
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <Label Text="{Binding WorkoutPlan.Title}" FontSize="Large" FontAttributes="Bold" Margin="0,20,0,5"/>
+
+
+                    <HorizontalStackLayout Spacing="20">
+                        <Label Text="{Binding WorkoutPlan.Weeks, StringFormat='{0} Weeks'}"
+                               FontSize="Small"
+                               TextColor="Coral"/>
+                        <Label FontAttributes="Bold">|</Label>
+                        <Label Text="{Binding WorkoutPlan.Days, Converter={StaticResource DaysCountConverter}, StringFormat='{0} Day / Week'}"
+                               FontSize="Small"/>
+                    </HorizontalStackLayout>
+
+
+
+                    <Label Text="{Binding WorkoutPlan.Equipment, Converter={StaticResource ListToStringConverter}, StringFormat='Equipments: {0}'}" 
+                           FontSize="Small"
+                           TextColor="#4A6375"/>
+                </VerticalStackLayout>
+           
+
+
+            <Label Text="Weekly Workouts" FontSize="Subtitle" FontAttributes="Bold" Margin="0,20,0,10"/>
+
+
+
+            <CollectionView ItemsSource="{Binding PlanDays}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="WhiteSmoke" 
+                               BorderColor="Transparent" 
+                               CornerRadius="10" 
+                               Margin="10,5,10,5" 
+                               Padding="10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.SelectPlanDayCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                      CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="*,Auto" Margin="10,0,10,0">
+                                <Label Grid.Column="0" Text="{Binding Day}"   FontSize="Medium" FontAttributes="Bold"/>
+                                <Image Grid.Column="1" Source="back_icon" VerticalOptions="Center" Rotation="0" Scale="0.8" HorizontalOptions="End"/>
+                            </Grid>
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+            <!-- Start Program Button -->
+            <!--egyszerre csak egy program mehet, szóval a többi program start gombja ne működjön amíg 
+            a már elkezdett program start gombja cancel-t ír, tehát aktiválva van
+            illetve ha a cancel-re nyomunk akkor kerdezze meg, hogy are you sure to cancel-->
+            <Button Text="{Binding IsProgramStarted, Converter={StaticResource BoolToStartCancelConverter}}"
+                    FontSize="Subtitle"
+                    TextColor="{Binding IsProgramStarted, Converter={StaticResource BoolToTextColorConverter}}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumHeightRequest="40"
+                    Margin="30,40,30,20"
+                    Padding="10"
+                    BackgroundColor="{Binding IsProgramStarted, Converter={StaticResource BoolToBackgroundColorConverter}}"
+                    CornerRadius="10"
+                    VerticalOptions="CenterAndExpand"
+                    Command="{Binding ToggleStartCommand}"/>
+
+
+
+          
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Pages.NutritionPage"
+             Title="Basics of Nutrition"
+             BackgroundColor="#F6FAFD"
+             Shell.TitleColor="Black"
+             NavigationPage.HasBackButton="True"
+             NavigationPage.IconColor="Red"
+             NavigationPage.HasNavigationBar="True"
+             Shell.NavBarIsVisible="True">
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Spacing="0" Padding="0" VerticalOptions="FillAndExpand">
+
+
+            <!-- Title and Introduction -->
+            <Frame BackgroundColor="White"
+                   HasShadow="False"
+                   BorderColor="Transparent"
+                   CornerRadius="0"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="80"
+                   Margin="0,12,0,0"
+                   Padding="12">
+                <VerticalStackLayout Margin="15,10" Spacing="8">
+                    <Frame BorderColor="Transparent" BackgroundColor="#28A745" VerticalOptions="Start" HorizontalOptions="Start" Padding="8">
+                        <Label Text="Fitness"
+                               FontSize="Micro"
+                               FontAttributes="Bold"
+                               TextColor="White"/>
+                    </Frame>
+                    <Label FontAttributes="Bold" FontSize="Medium" FontAutoScalingEnabled="True" Margin="0,8,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Basics of " FontAttributes="Bold" FontSize="Medium" TextColor="#1A2A3A"/>
+                                <Span Text="Nutrition" FontAttributes="Bold" FontSize="Medium" TextColor="#28A745"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontSize="Small" TextColor="#4A6375" LineHeight="1.2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Nutrition is the foundation of health and fitness. It involves balancing " FontSize="Small" TextColor="#4A6375"/>
+                                <Span Text="macronutrients" FontSize="Small" TextColor="#007BFF" FontAttributes="Bold"/>
+                                <Span Text=" (carbs, proteins, fats) and micronutrients." FontSize="Small" TextColor="#4A6375"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Key Tips -->
+            <Frame BackgroundColor="White"
+                   HasShadow="False"
+                   BorderColor="Transparent"
+                   CornerRadius="0"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100"
+                   Margin="0,12,0,0"
+                   Padding="12">
+                <VerticalStackLayout Margin="15,10" Spacing="8">
+                    <Frame BorderColor="Transparent" BackgroundColor="#28A745" VerticalOptions="Start" HorizontalOptions="Start" Padding="8">
+                        <Label Text="KEY TIPS" FontSize="Micro" FontAttributes="Bold" TextColor="White"/>
+                    </Frame>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10" RowSpacing="8" Margin="0,10,0,0" RowDefinitions="auto,auto">
+                        <Label Grid.Column="0" Grid.Row="0" Text="• Balance Macros: Aim for 40% carbs, 30% protein, 30% fats."
+                               FontSize="Medium"
+                               TextColor="#1A2A3A"
+                               LineHeight="1.2"/>
+                        <Label Grid.Column="1" Grid.Row="0" Text="• Hydration: Drink 2-3 liters of water daily."
+                               FontSize="Medium"
+                               TextColor="#1A2A3A"
+                               LineHeight="1.2"/>
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="• Whole Foods: Prioritize fruits, vegetables, and lean proteins."
+                               FontSize="Medium"
+                               TextColor="#1A2A3A"
+                               LineHeight="1.2"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Additional Info -->
+            <Frame BackgroundColor="White"
+                   HasShadow="False"
+                   BorderColor="Transparent"
+                   CornerRadius="0"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100"
+                   Margin="0,12,0,0"
+                   Padding="12">
+                <VerticalStackLayout Margin="15,10" Spacing="8">
+                    <Frame BorderColor="Transparent" BackgroundColor="#28A745" VerticalOptions="Start" HorizontalOptions="Start" Padding="8">
+                        <Label Text="ADDITIONAL INFO" FontSize="Micro" FontAttributes="Bold" TextColor="White"/>
+                    </Frame>
+                    <Label FontSize="Small" LineHeight="1.2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Track your " FontSize="Small" TextColor="#1A2A3A"/>
+                                <Span Text="calories" FontSize="Small" TextColor="#FD7E14" FontAttributes="Bold"/>
+                                <Span Text=" using apps to meet your energy needs for weight loss, maintenance, or muscle gain." FontSize="Small" TextColor="#1A2A3A"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

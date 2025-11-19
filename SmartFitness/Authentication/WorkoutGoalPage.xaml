@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Authentication.WorkoutGoalPage"
+             Title="Workout Goal"
+             BackgroundColor="White">
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Padding="0" Spacing="15" HorizontalOptions="Center">
+
+            <!-- Cím -->
+            <Label Text="Select your workout goals"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="20,10,0,20" />
+
+            <!-- Edzéscélok választása -->
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Frame x:Name="StrengthFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="200">
+                    <Label Text="Strength"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Frame x:Name="MuscleGainFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="200">
+                    <Label Text="Muscle Gain"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Frame x:Name="CardioFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="200">
+                    <Label Text="Cardio"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Frame x:Name="HealthierLifeFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="200">
+                    <Label Text="Healthier Life"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Gombok -->
+            <HorizontalStackLayout Margin="0,40,0,0"
+                                  Spacing="20"
+                                  HorizontalOptions="Center">
+                <Button Text="Previous"
+                        CornerRadius="20"
+                        BackgroundColor="#BADAF9"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="OnPreviousButtonClicked" />
+                <Button Text="Next"
+                        CornerRadius="20"
+                        BackgroundColor="#BADAF9"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="OnNextButtonClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

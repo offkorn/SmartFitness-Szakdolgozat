@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Authentication.WorkoutTypePage"
+             Title="Create Account"
+             BackgroundColor="White">
+
+    <!-- <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">-->
+        <VerticalStackLayout Padding="0" Spacing="20">
+
+            <!-- Cím -->
+            <Label Text="Select your workout type(s)"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="20,10,20,20" />
+
+            <!-- Edzéstípus-választás -->
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                <Frame x:Name="WeightsFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="120">
+                    <Label Text="Weights"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Frame x:Name="BodyweightFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="120">
+                    <Label Text="Bodyweight"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Frame x:Name="MachineFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="120">
+                    <Label Text="Machine"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Gombok -->
+            <HorizontalStackLayout Margin="0,40,20,0"
+                                  Spacing="20"
+                                  HorizontalOptions="Center">
+                <Button Text="Previous"
+                        CornerRadius="20"
+                        BackgroundColor="#BADAF9"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="OnPreviousButtonClicked" />
+                <Button Text="Next"
+                        CornerRadius="20"
+                        BackgroundColor="#BADAF9"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="OnNextButtonClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        <!-- </ScrollView> -->
+</ContentPage>

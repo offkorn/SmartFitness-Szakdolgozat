@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Pages.SettingsPage"  
+             Shell.NavBarIsVisible="False"  
+             BackgroundColor="#F6FAFD"
+             NavigationPage.HasNavigationBar="False"
+             >
+
+    <ScrollView Orientation="Vertical" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
+        <VerticalStackLayout Spacing="15" Padding="0,10">
+
+            <!-- tab bar, - back button and page title -->
+            <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,20">
+
+                <ImageButton Grid.Column="0" Source="back_icon" Scale="0.35" Rotation="180" 
+                             HorizontalOptions="Start" Clicked="OnBackButton" VerticalOptions="Center"></ImageButton>
+
+                <Label Grid.Column="1"
+                       Text="Settings"
+                       FontSize="Large"
+                       FontFamily="InriaSerifBold"
+                       VerticalTextAlignment="Center" HorizontalOptions="Start"/>
+            </Grid>
+
+
+            <!-- Account Frame-->
+            <Frame BackgroundColor="White" BorderColor="Transparent" Margin="15,0,15,0" Padding="20,15" CornerRadius="30">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAccountClicked"></TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+                
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="⩢  Account"
+                               FontSize="Subtitle"
+                               BackgroundColor="Transparent"
+                                TextColor="Black"
+                               VerticalOptions="Center"
+                               Grid.Column="0"/>
+                    <Image Source="back_icon.svg" Grid.Column="1" Scale="0.6"></Image>
+                </Grid>
+                
+            </Frame>
+
+
+
+
+            <!-- Workout Preferences Frame-->
+            <Frame BackgroundColor="White" BorderColor="Transparent" Margin="20,0,20,0" Padding="20,15" CornerRadius="30">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnWorkoutPreferenceClicked"></TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="⫚  Workout Preferences"
+                               FontSize="Subtitle"
+                               BackgroundColor="Transparent"
+                                TextColor="IndianRed"
+                               VerticalOptions="Center"
+                               Grid.Column="0"/>
+                    <Image Source="back_icon.png" Grid.Column="1" Scale="0.6"  ></Image>
+                </Grid>
+            </Frame>
+
+
+            <!-- Diet Preferences Frame-->
+            <Frame BackgroundColor="White" BorderColor="Transparent" Margin="20,0,20,0" Padding="20,15" CornerRadius="30" HasShadow="True">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnDietPreferenceClicked"></TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="⪨  Diet Preferences"
+                               FontSize="Subtitle"
+                               BackgroundColor="Transparent"
+                                TextColor="ForestGreen"
+                               VerticalOptions="Center"
+                               Grid.Column="0"/>
+                    <Image Source="back_icon.png" Grid.Column="1" Scale="0.6" ></Image>
+                </Grid>
+                
+            </Frame>
+
+
+            <!-- Language Frame, -not implemented -->
+            <Frame BackgroundColor="White" BorderColor="Transparent" Margin="20,0,20,0" Padding="20,15" CornerRadius="30" HasShadow="True">
+
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="₰  Language"
+                               FontSize="Subtitle"
+                               BackgroundColor="Transparent"
+                                TextColor="Black"
+                               VerticalOptions="Center"
+                               Grid.Column="0"/>
+                    <Image Source="back_icon.png" Grid.Column="1" Scale="0.6" ></Image>
+                </Grid>
+            </Frame>
+
+
+
+
+            <!-- About Frame, -not implemented -->
+            <Frame BackgroundColor="White" BorderColor="Transparent" Margin="20,0,20,0" Padding="20,15" CornerRadius="30" HasShadow="True">
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="Ξ  About"
+                               FontSize="Subtitle"
+                               BackgroundColor="Transparent"
+                                TextColor="Black"
+                               VerticalOptions="Center"
+                               Grid.Column="0"/>
+                    <Image Source="back_icon.png" Grid.Column="1" Scale="0.6" ></Image>
+                </Grid>
+            </Frame>
+
+
+            <!-- notification + Dark mode Frame, -not implemented -->
+            <Frame BorderColor="Transparent" BackgroundColor="White" Margin="20,0,20,40" Padding="20,10" CornerRadius="30" HasShadow="True">
+                <VerticalStackLayout Spacing="0">
+
+                    <!-- notification -->
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="▼  Notifications"
+                               FontSize="Subtitle"
+                                Margin="0,10,0,10"
+                                VerticalTextAlignment="Center"
+                                Grid.Column="0"/>
+
+                        <Switch  Grid.Column="1" IsToggled="False" OnColor="DarkSlateBlue" Scale="0.8"></Switch>
+                    </Grid>
+                    
+                    <BoxView HeightRequest="0.5" Color="#E0E0E0" Margin="30,0,30,0"/>
+
+
+                    <!-- Dark mode Frame -->
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="◑  Dark Mode"
+                                FontSize="Subtitle"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center"
+                                Grid.Column="0"
+                               Margin="0,10,0,10"/>
+
+                        <Switch  Grid.Column="1" IsToggled="False" OnColor="DarkSlateBlue" Scale="0.8"></Switch>
+                    </Grid>
+
+
+                </VerticalStackLayout>
+            
+            </Frame>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

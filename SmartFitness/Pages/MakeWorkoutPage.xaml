@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             x:Class="SmartFitness.Pages.MakeWorkoutPage"
+             Title="Create Workout"
+             BackgroundColor="#F6FAFD"
+             Shell.BackgroundColor="#F6FAFD">
+
+   
+
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        
+        <VerticalStackLayout Padding="10,10" Spacing="20">
+
+
+
+
+
+            <Frame x:Name="switchFrame" BorderColor="Transparent" BackgroundColor="IndianRed" Padding="1.5,1.5" Margin="10,0,10,0" CornerRadius="10">
+
+                <Grid ColumnDefinitions="*,*"  ColumnSpacing="0" >
+
+
+                    <!-- onetime  -->
+                    <Frame  x:Name="btnWorkout"
+                     Padding="8"
+                      BackgroundColor="White"     
+                      Grid.Column="0"
+                      HorizontalOptions="Fill"
+                      VerticalOptions="Center" BorderColor="Transparent" CornerRadius="8">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SimpleWorkoutSelected"></TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+
+                        <Label  x:Name="labelWorkout"    Text="Workout" TextColor="IndianRed"
+                                FontSize="Subtitle"
+                                FontFamily="InriaSerifBold"
+                                Grid.Column="0"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                    </Label>
+                    </Frame>
+
+                    <!-- plan  -->
+                    <Frame  x:Name="btnPlan"  Padding="8"
+                             BackgroundColor="Transparent"     
+                             Grid.Column="1"
+                             HorizontalOptions="Fill"
+                             VerticalOptions="Center" BorderColor="Transparent">
+                        
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="PlanSelected"></TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+
+                        <Label      x:Name="labelPlan" Text="Plan" TextColor="White"
+                                    FontSize="Subtitle"
+                                    FontFamily="InriaSerifBold"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center">
+                        </Label>
+                    </Frame>
+                    
+                </Grid>
+            </Frame>
+
+
+
+            <!-- Tartalom nézet -->
+            <ContentView x:Name="workoutContentView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+
+            
+            
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

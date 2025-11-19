@@ -1,0 +1,31 @@
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:SmartFitness.Pages"
+       xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+       x:Class="SmartFitness.AppShell"
+       Shell.FlyoutBehavior="Disabled"
+       Title="SmartFitness"
+       Shell.TabBarBackgroundColor="White"
+       Shell.TabBarUnselectedColor="Grey"
+       Shell.TabBarForegroundColor="Black"
+       Shell.ForegroundColor="Black">
+
+
+
+    <Shell.Behaviors>
+        <mct:StatusBarBehavior
+            x:Name="StatusBarBehavior"
+            StatusBarColor="Transparent"
+            StatusBarStyle="DarkContent" />
+    </Shell.Behaviors>
+
+
+
+    <TabBar>
+        <ShellContent Icon="home_icon.png" ContentTemplate="{DataTemplate local:HomePage}" />
+        <ShellContent Icon="workout_icon.png" ContentTemplate="{DataTemplate local:WorkoutPage}" />
+        <ShellContent Icon="food_icon.png" ContentTemplate="{DataTemplate local:FoodPage}" />
+        <ShellContent Icon="lecture_icon.png" ContentTemplate="{DataTemplate local:LecturePage}" />
+        <ShellContent Icon="progress_icon.png" ContentTemplate="{DataTemplate local:ProgressPage}" />
+    </TabBar>
+</Shell>

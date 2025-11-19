@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Pages.AccountPage"
+             BackgroundColor="#F6FAFD"
+             Shell.NavBarIsVisible="False"
+             >
+
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Spacing="0" Padding="0,10">
+
+
+            <!-- tab bar, - back button and page title -->
+            <HorizontalStackLayout Grid.Row="0" Spacing="0" Margin="0,0,0,20">
+
+                <ImageButton Source="back_icon" Scale="0.35" Rotation="180" HorizontalOptions="Start" Clicked="OnBackButton" VerticalOptions="Center"></ImageButton>
+
+                <Label 
+                   Text="Account"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                    VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+            </HorizontalStackLayout>
+
+
+            <!-- Account details frame-->
+            <Frame BackgroundColor="White" BorderColor="Transparent" Margin="15,0,15,0" Padding="0,20"  CornerRadius="20" HasShadow="True">
+                <VerticalStackLayout Spacing="5">
+
+                    <!-- First name-->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="30,0,30,10" Padding="0,5">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="First name"
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>    
+                            <Label x:Name="firstNameLabel" Grid.Column="1"
+                               FontSize="Subtitle"
+                               FontFamily="MadimiOne-Regular"
+                                TextColor="DarkSlateGray" />
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="60,0,60,0"/>
+
+                    <!-- Last name-->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="30,10,30,10" Padding="0,5">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Last name"
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="lastNameLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular"
+                                   TextColor="DarkSlateGray" />
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="60,0,60,0"/>
+
+                    <!-- Email -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="30,10,30,10" Padding="0,5">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Email"
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="emailLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" />
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="60,0,60,0"/>
+
+                    <!-- Born date -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="30,10,30,10" Padding="0,5">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Born Date"
+                           FontSize="Subtitle"
+                           BackgroundColor="Transparent"
+                            TextColor="Black"
+                           VerticalOptions="Center"
+                           Grid.Column="0"/>
+                            <Label x:Name="bornDateLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" 
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="60,0,60,0"/>
+
+                    <!-- BodyWeight -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="30,10,30,10" Padding="0,5">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Weight (kg)"
+                           FontSize="Subtitle"
+                           BackgroundColor="Transparent"
+                            TextColor="Black"
+                           VerticalOptions="Center"
+                           Grid.Column="0"/>
+                            <Label x:Name="weightLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" />
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="60,0,60,0"/>
+
+
+                    <!-- Height (cm) -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="30,10,30,10" Padding="0,5">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Height (cm)"
+                               FontSize="Subtitle"
+                               BackgroundColor="Transparent"
+                                TextColor="Black"
+                               VerticalOptions="Center"
+                               Grid.Column="0"/>
+                            <Label x:Name="heightLabel" Grid.Column="1"
+                               FontSize="Subtitle"
+                               FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" />
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="60,0,60,0"/>
+
+
+                    <!-- Gender -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="30,10,30,10" Padding="0,5">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Gender"
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="genderLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" />
+                        </Grid>
+                    </Frame>
+
+            </VerticalStackLayout>
+            </Frame>
+
+
+            <!-- Sign Out gomb -->
+            <Button Text="L o g   o u t"
+                    FontSize="Medium"
+                    FontFamily="K2D-Regular"
+                    Clicked="OnSignOutClicked"
+                    Margin="0,20,0,20"
+                    BackgroundColor="Transparent"
+                    TextColor="#FF4D4D"
+                    CornerRadius="20"
+                    Padding="10,5"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    MinimumWidthRequest="200" />
+            
+        </VerticalStackLayout>
+           
+    </ScrollView>
+</ContentPage>

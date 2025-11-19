@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Pages.AddMealPage"
+             Title="Create Recipe"
+             BackgroundColor="#F6FAFD"
+                          Shell.BackgroundColor="#F6FAFD">
+
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Spacing="10" Padding="0" VerticalOptions="FillAndExpand">
+            
+            <!-- Kép feltöltés -->
+            <Frame x:Name="ImageFrame" 
+                   BackgroundColor="White"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   
+                   MinimumHeightRequest="250">
+
+                <VerticalStackLayout>
+                    <Image x:Name="SelectedImage"
+                           HeightRequest="80"
+                           Aspect="AspectFill"
+                           Margin="0,0"/>
+                    
+                    <Button Text="Add Image" x:Name="AddImageButton"
+                                           FontSize="Medium"
+                                           FontAttributes="Bold"
+                                           TextColor="#555555"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                            BorderColor="Transparent"
+                                            Clicked="OnImageButton"
+                                            BackgroundColor="Transparent"/>
+                </VerticalStackLayout>
+                
+                
+            </Frame>
+
+            <!-- Típus, cím és főzési idő -->
+            <Frame BackgroundColor="White"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100">
+                <VerticalStackLayout Margin="20,10" Spacing="10">
+                    
+                           
+                        
+                        <Picker x:Name="MealTypePicker"
+                                Title="Choose type"
+                                FontSize="Small"
+                                FontAttributes="Bold"
+                                TitleColor="White"
+                                TextColor="Black" 
+                                BackgroundColor="White"
+                                ItemsSource="{Binding MealTypes}"
+                                SelectedIndex="0"
+                                HorizontalOptions="FillAndExpand"/>
+                  
+                    
+                    <Entry x:Name="TitleEntry"
+                           FontAttributes="Bold"
+                           Placeholder="Type in Title"
+                           PlaceholderColor="Black"
+                           FontSize="Medium"
+                           HorizontalOptions="FillAndExpand"/>
+                    <Entry x:Name="CookingTimeEntry"
+                           FontAttributes="Bold"
+                           Placeholder="Type Cooking time (minutes)"
+                           PlaceholderColor="Grey"
+                           FontSize="Small"
+                           Keyboard="Numeric"
+                           HorizontalOptions="FillAndExpand"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Author  -->
+            <Frame BackgroundColor="White"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100"
+                   Margin="0,10,0,0"
+                   >
+                <HorizontalStackLayout Margin="20,0,0,0" Spacing="20">
+                    <Frame CornerRadius="35"
+                           WidthRequest="60"
+                           HeightRequest="60"
+                           BorderColor="Transparent"
+                           BackgroundColor="DarkSlateGrey">
+                        <Label TextColor="White"
+                               FontSize="Large"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center">O</Label>
+                    </Frame>
+                    <VerticalStackLayout Spacing="5" Margin="0,5,0,0">
+                        <Label x:Name="AuthorLabel"
+                               FontAttributes="Bold"
+                               FontSize="Medium"
+                               Text="{Binding AuthorName}"/>
+                        <Label FontSize="Small">Submitted</Label>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Tápérték input fields -->
+            <Frame BackgroundColor="White"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100"
+                   Margin="0,10,0,0">
+                <VerticalStackLayout Margin="20,10,0,10" Spacing="10">
+                    <Label FontAttributes="Bold"
+                           FontSize="Subtitle"
+                           FontFamily=""
+                           Margin="0,0,0,20">NUTRITION</Label>
+                    <Grid ColumnDefinitions="auto,auto,auto,auto"
+                          ColumnSpacing="18"
+                          RowDefinitions="*,*"
+                          RowSpacing="5">
+                        <Label Grid.Column="0" Grid.Row="0" TextColor="Gray" FontSize="Small" Text="Calories"/>
+                        <Label Grid.Column="1" TextColor="Gray" FontSize="Small" Text="Protein"/>
+                        <Label Grid.Column="2" TextColor="Gray" FontSize="Small" Text="Carb"/>
+                        <Label Grid.Column="3" TextColor="Gray" FontSize="Small" Text="Fat"/>
+                        <Entry x:Name="CaloriesEntry" Grid.Column="0" Grid.Row="1" Keyboard="Numeric" FontAttributes="Bold" Placeholder="Type" PlaceholderColor="Black" FontSize="Small"/>
+                        <Entry x:Name="ProteinEntry" Grid.Column="1" Grid.Row="1" Keyboard="Numeric" FontAttributes="Bold" Placeholder="Type" PlaceholderColor="Black" FontSize="Small"/>
+                        <Entry x:Name="CarbsEntry" Grid.Column="2" Grid.Row="1" Keyboard="Numeric" FontAttributes="Bold" Placeholder="Type" PlaceholderColor="Black" FontSize="Small"/>
+                        <Entry x:Name="FatEntry" Grid.Column="3" Grid.Row="1" Keyboard="Numeric" FontAttributes="Bold" Placeholder="Type" PlaceholderColor="Black" FontSize="Small"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Hozzávalók -->
+            <Frame BackgroundColor="White"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100"
+                   Margin="0,10,0,0">
+                <VerticalStackLayout Margin="20,10" Spacing="0">
+                    <Label FontAttributes="Bold"
+                           FontSize="Subtitle"
+                           FontFamily=""
+                           Margin="0,0,0,10">INGREDIENTS</Label>
+                    <VerticalStackLayout x:Name="IngredientsStack" Spacing="0" Margin="10,0">
+                        <Entry x:Name="FirstIngredientEntry"
+                               Placeholder="•  Ingredient"
+                               PlaceholderColor="Black"
+                               FontSize="Medium"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Button x:Name="NewIngredientButton"
+                                BackgroundColor="Transparent"
+                                TextColor="Black"
+                                Text="Add new Ingredient"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Clicked="NewIngredientButton_Clicked"/>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Elkészítési útmutató -->
+            <Frame BackgroundColor="White"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="150"
+                   Margin="0,10,0,0">
+                <VerticalStackLayout Margin="20,10" Spacing="10">
+                    <Label FontAttributes="Bold"
+                           FontSize="Subtitle"
+                           FontFamily=""
+                           Margin="0,0,0,10">DIRECTIONS</Label>
+                    <Editor x:Name="DirectionsEditor"
+                            Placeholder="Type in helps, directions how to make the recipe, steps"
+                            PlaceholderColor="Black"
+                            FontSize="Small"
+                            AutoSize="TextChanges"
+                            HorizontalOptions="FillAndExpand"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Tutorial -->
+            <Frame BackgroundColor="White"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="150"
+                   Margin="0,10,0,0">
+                <VerticalStackLayout Margin="20,10" Spacing="10">
+                    <Label FontAttributes="Bold"
+                           FontSize="Subtitle"
+                           FontFamily=""
+                           Margin="0,0,0,10">TUTORIAL</Label>
+                    <Editor x:Name="TutorialEditor"
+                            Placeholder="Type in tutorial URLs"
+                            PlaceholderColor="#18A0FB"
+                            FontSize="Small"                           
+                            AutoSize="TextChanges"
+                            HorizontalOptions="FillAndExpand"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Submit button -->
+            <Frame BackgroundColor="White"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100"
+                   Margin="0,10,0,0">
+                
+                <Button x:Name="SubmitButton"
+                        Text="Submit Recipe"
+                        FontSize="Medium"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Margin="0,0,0,10" 
+                        BackgroundColor="#859700"
+                        CornerRadius="10"
+                        VerticalOptions="CenterAndExpand"
+                        Clicked="SubmitButton_Clicked"/>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

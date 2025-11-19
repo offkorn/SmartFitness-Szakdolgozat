@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Authentication.WorkoutExperiencePage"
+             Title="Creat Account"
+             BackgroundColor="White">
+
+    <ScrollView VerticalOptions="FillAndExpand">
+        <VerticalStackLayout Padding="0" Spacing="15" HorizontalOptions="Center">
+
+            <!-- Cím -->
+            <Label Text="Select your workout experience level"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="40,10,0,20" />
+
+            <!-- Edzéstapasztalat választása -->
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Frame x:Name="BeginnerFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="200">
+                    <Label Text="Beginner"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Frame x:Name="IntermediateFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="200">
+                    <Label Text="Intermediate"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Frame x:Name="AdvancedFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="200">
+                    <Label Text="Advanced"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Gombok -->
+            <HorizontalStackLayout Margin="0,40,0,0"
+                                  Spacing="20"
+                                  HorizontalOptions="Center">
+                <Button x:Name="PreviousButton"
+                        Text="Previous"
+                        CornerRadius="20"
+                        BackgroundColor="#BADAF9"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="OnPreviousButtonClicked" />
+                <Button x:Name="NextButton"
+                        Text="Next"
+                        CornerRadius="20"
+                        BackgroundColor="#BADAF9"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="OnNextButtonClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

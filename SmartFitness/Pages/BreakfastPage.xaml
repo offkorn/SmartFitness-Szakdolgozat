@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Pages.BreakfastPage"
+             Title="Breakfast Recipes">
+
+    <Grid RowDefinitions="Auto,*" Padding="0" RowSpacing="20" >
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                <GradientStop Color="#E3FF7C" Offset="0.0" />
+                <GradientStop Color="#FFFFFF" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- Search Bar (Decorative for now) -->
+        <Frame Grid.Row="0"
+               BackgroundColor="#ECE6F0"
+               BorderColor="Transparent"
+               CornerRadius="15"
+               Padding="0"
+               Margin="20,20,20,5"
+               HeightRequest="40">
+            <Grid>
+                <Entry Placeholder="Search breakfast recipes"
+                       Margin="20,0,40,0"
+                       VerticalOptions="Center"
+                       PlaceholderColor="DarkSlateGrey"
+                       TextColor="Black"
+                       IsEnabled="False" />
+                <Image Margin="0,0,10,0"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       Source="search_icon.png" />
+            </Grid>
+        </Frame>
+
+        <!-- Recipe List -->
+
+        <CollectionView Grid.Row="1" 
+                x:Name="BreakfastRecipes"
+                ItemsLayout="VerticalGrid, 1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="White"
+                   CornerRadius="15"
+                   Padding="0"
+                   Margin="20,0,20,10"
+                   BorderColor="Transparent"
+                   MinimumHeightRequest="150"
+                           HasShadow="True">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer 
+                        Command="{Binding BindingContext.ViewRecipeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                        CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+                        <VerticalStackLayout Spacing="0" Padding="0" VerticalOptions="EndAndExpand">
+
+                          
+                            <Image Source="{Binding ImageUrl}" Aspect="AspectFill" Margin="0,0,0,5" HeightRequest="200" />
+                            
+
+                            <Label Text="{Binding Title}"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"
+                           FontSize="Small"/>
+                            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" VerticalOptions="End" Margin="0,5,0,10">
+                                <Label Text="{Binding CookingTime, StringFormat='{0} mins'}"
+                               FontSize="Micro"/>
+                                <Label Text="{Binding Calories, StringFormat='{0} cals'}"
+                               FontSize="Micro"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+    </Grid>
+</ContentPage>

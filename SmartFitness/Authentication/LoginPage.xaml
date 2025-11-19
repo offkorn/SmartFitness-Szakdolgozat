@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Authentication.LoginPage"
+             Shell.NavBarIsVisible="False"
+             Shell.BackgroundColor="IndianRed"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="true"
+             NavigationPage.IconColor="red"
+             BackgroundColor="Red"
+             BackgroundImageSource="welcomepage_background.svg"
+             Padding="0,40,0,0">
+
+
+        
+
+        <Grid RowDefinitions="auto,*,*" RowSpacing="0" Padding="0,0,0,20">
+
+
+        
+        <!-- tab bar -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="0">
+
+            <ImageButton Source="back_icon" Scale="0.4" Rotation="180" HorizontalOptions="Start" Clicked="OnBackButton" VerticalOptions="Center"></ImageButton>
+            
+            <Label 
+               Text="Welcome back"
+               FontSize="Medium"
+               FontAttributes="Bold"
+                Margin="0,0,0,0" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+        </HorizontalStackLayout>
+        
+        
+        
+
+        <!-- Középső rész: Beviteli mezők és távolság -->
+        <VerticalStackLayout Grid.Row="1"
+                           Spacing="10"
+                           VerticalOptions="Center" Margin="20,0,20,0">
+            <Frame 
+                   BorderColor="Transparent" BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   CornerRadius="15"
+                   Padding="0"
+                   MinimumHeightRequest="40">
+
+                <Entry x:Name="emailEntry" Placeholder="enter your email"
+                       Keyboard="Email"
+                       PlaceholderColor="#4D4D4D"
+                       TextColor="Black"
+                       HorizontalTextAlignment="Center"
+                       FontSize="Medium" />
+            </Frame>
+
+                <Border BackgroundColor="#676767" Margin="30,0,30,0" HeightRequest="0.2"></Border>
+
+                <Frame BorderColor="Transparent" BackgroundColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   CornerRadius="15"
+                   Padding="0"
+                   MinimumHeightRequest="40">
+                <Entry x:Name="passwordEntry" Placeholder="enter your password"
+                       IsPassword="True"
+
+                       PlaceholderColor="#4D4D4D"
+                       TextColor="Black"
+                       HorizontalTextAlignment="Center"
+                       FontSize="Medium" />
+            </Frame>
+        </VerticalStackLayout>
+
+        <!-- Log In gomb -->
+        <VerticalStackLayout Grid.Row="2">
+            <Button 
+                              Text="LOG  IN"
+                              FontSize="Small"
+                              BackgroundColor="#4E4E4E"
+                              TextColor="White"  
+                              FontFamily="K2D-Bold"
+                              CornerRadius="20"
+                              MinimumHeightRequest="45"
+                              HorizontalOptions="FillAndExpand"
+                              VerticalOptions="End"
+                              Margin="40,0,40,0" 
+                              Clicked="OnLogIn">
+                           <Button.Shadow>
+                                 <Shadow Brush="#4F4F4F" Offset="1,5" />
+                           </Button.Shadow>
+                       </Button>
+                   
+
+            <!-- Forgot Password gomb -->
+            <Button 
+                Text="Forgot Password ?"
+                FontSize="Small"
+                BackgroundColor="Transparent"
+                TextColor="Red"
+                FontFamily="K2D-Light"
+                Margin="0,5,0,0"
+                VerticalOptions="End"
+                Clicked="OnForgotPassword" />
+            
+            
+                </VerticalStackLayout>
+        
+    </Grid>
+        
+    
+</ContentPage>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Authentication.WelcomePage"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="Transparent"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundImageSource="welcomepage_background.svg"
+             Padding="0,40,0,0">
+
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="DarkContent" />
+    </Page.Behaviors>
+
+    <Grid ColumnDefinitions="*" RowDefinitions="*,*" Padding="30,30" >
+            
+
+                <!-- Címek -->
+                <VerticalStackLayout Spacing="0" HorizontalOptions="Center" Grid.Row="0" VerticalOptions="Start">
+                <Label Text="Welcome to" FontSize="Large"  HorizontalTextAlignment="Center" Margin="0,10,0,10"/>
+                <Label Text="Smart" FontSize="35"  HorizontalTextAlignment="Center"  FontFamily="Kalam-Regular"/>
+                <Label Text="Fitness" FontSize="35"  HorizontalTextAlignment="Center" FontFamily="Kalam-Regular"/>
+                </VerticalStackLayout>
+
+                <!-- Gombok -->
+                <VerticalStackLayout Spacing="20" HorizontalOptions="FillAndExpand" Grid.Row="1" VerticalOptions="End" Margin="0,0,0,50">
+                    <Button Text="Sign up"
+                            FontSize="Medium"
+                            BackgroundColor="White"
+                            TextColor="Black"
+                            Padding="10,15" 
+                            CornerRadius="15"
+                            Clicked="OnSignUpClicked" />
+
+                    <Button Text="Log in"
+                            FontSize="Medium"
+                            BackgroundColor="LightSkyBlue"
+                            TextColor="White"
+                            Padding="10,15"  
+                            FontAttributes="Bold"
+                            Clicked="OnLogInClicked" 
+                            CornerRadius="15"/>
+                </VerticalStackLayout>
+
+        </Grid>
+    
+</ContentPage>

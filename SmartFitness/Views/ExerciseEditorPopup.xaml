@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+               xmlns:vm="clr-namespace:SmartFitness.ViewModels"
+               x:Class="SmartFitness.Views.ExerciseEditorPopup"
+               Color="White">
+
+    <ScrollView VerticalOptions="FillAndExpand">
+        <VerticalStackLayout Spacing="10" Padding="20" BindingContext="{Binding .}">
+            <Label Text="{Binding Type, Converter={StaticResource ExerciseTypeTitleConverter}}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <!-- Normál gyakorlat -->
+            <Frame IsVisible="{Binding Type, Converter={StaticResource StringEqualsConverter}, ConverterParameter='normal'}"
+                   Padding="10" BorderColor="Transparent" BackgroundColor="#FFDAB8" CornerRadius="10">
+                <VerticalStackLayout Spacing="10">
+                    <Entry Placeholder="Exercise Name" Text="{Binding Name}" FontSize="Medium" />
+                    <Label Text="Sets" FontSize="Subtitle" FontAttributes="Bold" />
+                    <CollectionView ItemsSource="{Binding Sets}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="auto,auto,auto,auto" ColumnSpacing="10" RowDefinitions="auto" Margin="0,5">
+                                    <Label Grid.Column="0" Text="{Binding SetNumber, StringFormat='{0}.'}" FontSize="Subtitle" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Entry Grid.Column="1" Placeholder="Weight" Text="{Binding Weight}" Keyboard="Numeric" FontSize="Small" WidthRequest="80" />
+                                    <Entry Grid.Column="2" Placeholder="Reps" Text="{Binding Reps}" Keyboard="Numeric" FontSize="Small" WidthRequest="80" />
+                                    <CheckBox Grid.Column="3" IsChecked="{Binding Done}" VerticalOptions="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button Text="Add Set" Command="{Binding AddSetCommand}" BackgroundColor="#FF6A00" TextColor="White" CornerRadius="10" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Szuperszett -->
+            <Frame IsVisible="{Binding Type, Converter={StaticResource StringEqualsConverter}, ConverterParameter='superset'}"
+                   Padding="10" BorderColor="Transparent" BackgroundColor="#FFDAB8" CornerRadius="10">
+                <VerticalStackLayout Spacing="10">
+                    <CollectionView ItemsSource="{Binding SupersetExercises}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="10" BorderColor="Transparent" BackgroundColor="#FFE792" CornerRadius="10" Margin="0,5">
+                                    <VerticalStackLayout Spacing="10">
+                                        <Entry Placeholder="Exercise Name" Text="{Binding Name}" FontSize="Medium" />
+                                        <Label Text="Sets" FontSize="Subtitle" FontAttributes="Bold" />
+                                        <CollectionView ItemsSource="{Binding Sets}" SelectionMode="None">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid ColumnDefinitions="auto,auto,auto,auto" ColumnSpacing="10" RowDefinitions="auto" Margin="0,5">
+                                                        <Label Grid.Column="0" Text="{Binding SetNumber, StringFormat='{0}.'}" FontSize="Subtitle" FontAttributes="Bold" VerticalOptions="Center" />
+                                                        <Entry Grid.Column="1" Placeholder="Weight" Text="{Binding Weight}" Keyboard="Numeric" FontSize="Small" WidthRequest="80" />
+                                                        <Entry Grid.Column="2" Placeholder="Reps" Text="{Binding Reps}" Keyboard="Numeric" FontSize="Small" WidthRequest="80" />
+                                                        <CheckBox Grid.Column="3" IsChecked="{Binding Done}" VerticalOptions="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                        <Button Text="Add Set" Command="{Binding AddSetCommand}" BackgroundColor="#FF6A00" TextColor="White" CornerRadius="10" />
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button Text="Add Exercise to Superset" Command="{Binding AddSupersetExerciseCommand}" BackgroundColor="#FF6A00" TextColor="White" CornerRadius="10" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Buttons -->
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Save" Command="{Binding SaveCommand}" BackgroundColor="#2CBA00" TextColor="White" CornerRadius="10" />
+                <Button Text="Cancel" Command="{Binding CancelCommand}" BackgroundColor="#FF6A00" TextColor="White" CornerRadius="10" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</toolkit:Popup>

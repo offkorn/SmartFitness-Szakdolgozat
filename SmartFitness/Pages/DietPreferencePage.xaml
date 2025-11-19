@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Pages.DietPreferencePage"
+             BackgroundColor="#F6FAFD"
+             Shell.NavBarIsVisible="False"
+             >
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout  Spacing="0" Padding="0,10">
+
+            <!-- tab bar, - back button and page title -->
+            <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,20">
+
+                <ImageButton Grid.Column="0" Source="back_icon" Scale="0.35" Rotation="180" HorizontalOptions="Start" Clicked="OnBackButton" VerticalOptions="Center"></ImageButton>
+
+                <Label Grid.Column="1"
+                       Text="Diet Preferences"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                         VerticalTextAlignment="Center" HorizontalOptions="Start"/>
+
+            </Grid>
+
+
+            <!-- Diet Preferences details frame-->
+            <Frame BackgroundColor="White" BorderColor="Transparent" Padding="0,20" Margin="15,0,15,0" CornerRadius="20">
+                <VerticalStackLayout Spacing="5">
+
+                    <!-- Intolerances -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="20,10,20,10" Padding="0,5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="Intolerances"
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="intoleranceLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray"
+                                   HorizontalTextAlignment="End"/>
+                        </Grid>
+                </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="40,0,40,0"/>
+
+
+                    <!-- Disliked Foods -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="20,10,20,10" Padding="0,5">
+                        <Grid ColumnDefinitions="Auto,*">
+                                    <Label Text="Disliked Foods"
+                                           FontSize="Subtitle"
+                                           BackgroundColor="Transparent"
+                                            TextColor="Black"
+                                           VerticalOptions="Center"
+                                           Grid.Column="0"/>
+                            <Label x:Name="dislikedFoodLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" 
+                                   HorizontalTextAlignment="End"/>
+                        </Grid>
+            </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="40,0,40,0"/>
+
+
+                    <!-- Diet Goal -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="20,10,20,10" Padding="0,5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="Diet Goal"
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="dietGoalLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" 
+                                   HorizontalTextAlignment="End"/>
+                        </Grid>
+            </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="40,0,40,0"/>
+
+
+                    <!-- Cooking Time duaration -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Margin="20,10,20,10" Padding="0,5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="Cooking Time"
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="cookingTimeLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" 
+                                   VerticalOptions="Center"
+                                   HorizontalTextAlignment="End"/>
+                        </Grid>
+            </Frame>
+
+                 
+                </VerticalStackLayout>
+            </Frame>
+
+            
+            <!-- Save Button, -not implemented yet -->
+            <Label 
+                       Text="Save Changes"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                    TextColor="#859700"
+                        Margin="0,40,0,0" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

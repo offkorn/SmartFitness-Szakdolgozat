@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Authentication.DislikedFoodsPage"
+             Title="Creating Account">
+    <ScrollView VerticalScrollBarVisibility="Never" HorizontalOptions="Center">
+    <VerticalStackLayout Padding="30" Spacing="30">
+        <Label Text="Select foods you dislike" 
+               FontSize="Large" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" 
+               Margin="0,0,0,20"/>
+
+
+        <Grid ColumnDefinitions="*,*" 
+              RowDefinitions="*,*,*" 
+              RowSpacing="15" 
+              ColumnSpacing="15"
+              HorizontalOptions="Fill"
+              VerticalOptions="Center">
+            <!-- Row 0 -->
+            <Frame x:Name="FishFrame"
+                   BackgroundColor="WhiteSmoke"
+                   BorderColor="Transparent"
+                   CornerRadius="10"
+                   HeightRequest="60"
+                   Grid.Row="0" Grid.Column="0"
+                   Padding="10">
+                <Label Text="Fish" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Frame>
+
+            <Frame x:Name="PorkFrame"
+                   BackgroundColor="WhiteSmoke"
+                   BorderColor="Transparent"
+                   CornerRadius="10"
+                   HeightRequest="60"
+                   Grid.Row="0" Grid.Column="1"
+                   Padding="10">
+                <Label Text="Pork" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Frame>
+
+            <!-- Row 1 -->
+            <Frame x:Name="EggFrame"
+                   BackgroundColor="WhiteSmoke"
+                   BorderColor="Transparent"
+                   CornerRadius="10"
+                   HeightRequest="60"
+                   Grid.Row="1" Grid.Column="0"
+                   Padding="10">
+                <Label Text="Egg" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Frame>
+
+            <Frame x:Name="MilkFrame"
+                   BackgroundColor="WhiteSmoke"
+                   BorderColor="Transparent"
+                   CornerRadius="10"
+                   HeightRequest="60"
+                   Grid.Row="1" Grid.Column="1"
+                   Padding="10">
+                <Label Text="Milk" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Frame>
+
+            <!-- Row 2 -->
+            <Frame x:Name="PotatoFrame"
+                   BackgroundColor="WhiteSmoke"
+                   BorderColor="Transparent"
+                   CornerRadius="10"
+                   HeightRequest="60"
+                   Grid.Row="2" Grid.Column="0"
+                   Padding="10">
+                <Label Text="Potato" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Frame>
+
+            <Frame x:Name="NutsFrame"
+                   BackgroundColor="WhiteSmoke"
+                   BorderColor="Transparent"
+                   CornerRadius="10"
+                   HeightRequest="60"
+                   Grid.Row="2" Grid.Column="1"
+                   Padding="10">
+                <Label Text="Nuts" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Frame>
+        </Grid>
+
+        <HorizontalStackLayout Margin="0,40,0,0" Spacing="40" HorizontalOptions="Center">
+            <Button x:Name="PreviousButton"
+                    Text="Previous"
+                    CornerRadius="20"
+                    BackgroundColor="#BADAF9"
+                    TextColor="Black"
+                    Clicked="OnPreviousButtonClicked"/>
+            <Button x:Name="NextButton"
+                    Text="Next"
+                    CornerRadius="20"
+                    BackgroundColor="#BADAF9"
+                    TextColor="Black"
+                    Clicked="OnNextButtonClicked"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

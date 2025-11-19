@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Pages.MuscleBuildingPage"
+             Title="Building Muscle"
+             BackgroundColor="#F6FAFD"
+             Shell.BackgroundColor="#F6FAFD"
+             Shell.TitleColor="Black"
+             NavigationPage.HasBackButton="True"
+             NavigationPage.HasNavigationBar="True"
+             Shell.NavBarIsVisible="True">
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Spacing="0" Padding="0" VerticalOptions="FillAndExpand">
+
+
+            <!-- Title and Introduction -->
+            <Frame BackgroundColor="White"
+                   HasShadow="False"
+                   BorderColor="Transparent"
+                   CornerRadius="0"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="80"
+                   Margin="0,0,0,0"
+                   Padding="12">
+                <VerticalStackLayout Margin="15,10" Spacing="8">
+                    <Frame BorderColor="Transparent" BackgroundColor="Black" VerticalOptions="Start" HorizontalOptions="Start" Padding="8">
+                        <Label Text="Fitness"
+                               FontSize="Micro"
+                               FontAttributes="Bold"
+                               TextColor="White"/>
+                    </Frame>
+                    <Label FontAttributes="Bold" FontSize="Medium" FontAutoScalingEnabled="True" Margin="0,8,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Understanding " FontAttributes="Bold" FontSize="Medium" TextColor="#1A2A3A"/>
+                                <Span Text="Muscle" FontAttributes="Bold" FontSize="Medium" TextColor="DarkOrange"/>
+                                <Span Text=" Building" FontAttributes="Bold" FontSize="Medium" TextColor="#1A2A3A"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontSize="Small" TextColor="#4A6375" LineHeight="1.2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Muscle building, or " FontSize="Small" TextColor="#4A6375"/>
+                                <Span Text="hypertrophy" FontSize="Small" FontAttributes="Italic,Bold"/>
+                                <Span Text=", is the process of increasing muscle size through resistance training." FontSize="Small" TextColor="#4A6375"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Key Tips -->
+            <Frame BackgroundColor="White"
+                   HasShadow="False"
+                   BorderColor="Transparent"
+                   CornerRadius="0"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100"
+                   Margin="0,12,0,0"
+                   Padding="12">
+                
+                <VerticalStackLayout Margin="15,10" Spacing="2">
+                    
+                    <Frame BorderColor="Transparent" BackgroundColor="Black" VerticalOptions="Start" HorizontalOptions="Start" Padding="8" Margin="0,0,0,20">
+                        <Label Text="KEY TIPS" FontSize="Micro" FontAttributes="Bold" TextColor="White"/>
+                    </Frame>
+
+                    <Label  Text="• Progressive Overload:" FontSize="Medium" TextColor="#1A2A3A" FontAttributes="Bold"/>
+                    <Label Text="Gradually increase weight or reps." FontSize="Subtitle" TextColor="#1A2A3A" Margin="0,0,0,20" FontFamily=""/>
+
+                    <Label Text="• Nutrition:" FontSize="Medium" TextColor="#1A2A3A" FontAttributes="Bold"/>
+                    <Label FontSize="Subtitle" Margin="0,0,0,20">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Consume adequate protein (" TextColor="#1A2A3A" />
+                                <Span Text="1.6-2.2g/kg "  TextColor="CadetBlue" FontAttributes="Bold"/>
+                                <Span Text="body weight)." TextColor="#1A2A3A"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    
+                    
+                    <Label Text="• Rest: " FontSize="Medium" TextColor="#1A2A3A" FontAttributes="Bold"/>
+                    <Label FontSize="Subtitle">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Allow " TextColor="#1A2A3A" />
+                                <Span Text="48-72 "  TextColor="CadetBlue" FontAttributes="Bold"/>
+                                <Span Text="hours between training the same muscle group. " TextColor="#1A2A3A"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Additional Info -->
+            <Frame BackgroundColor="White"
+                   HasShadow="False"
+                   BorderColor="Transparent"
+                   CornerRadius="0"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100"
+                   Margin="0,12,0,20"
+                   Padding="12">
+                <VerticalStackLayout Margin="15,10" Spacing="8">
+                    <Frame BorderColor="Transparent" BackgroundColor="Black" VerticalOptions="Start" HorizontalOptions="Start" Padding="8">
+                        <Label Text="ADDITIONAL INFO" FontSize="Micro" FontAttributes="Bold" TextColor="White"/>
+                    </Frame>
+                    <Label FontSize="Subtitle">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Start with compound exercises like squats and deadlifts. Aim for 3-5 sets of 8-12 reps for optimal " TextColor="#1A2A3A"/>
+                                <Span Text="overload"  TextColor="#FD7E14" FontAttributes="Bold"/>
+                                <Span Text="." TextColor="#1A2A3A"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

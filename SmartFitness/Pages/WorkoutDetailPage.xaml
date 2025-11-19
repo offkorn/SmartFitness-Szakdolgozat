@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartFitness.Converters"
+             x:Class="SmartFitness.Pages.WorkoutDetailPage"
+             Title="Workout Details"
+             BackgroundColor="#F6FAFD">
+
+    <ContentPage.Resources>
+        <converters:NullToDefaultImageConverter x:Key="NullToDefaultImageConverter" />
+        <converters:GoalsToStringConverter x:Key="GoalsToStringConverter" />
+        <converters:CountToVisibilityConverter x:Key="CountToVisibilityConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout VerticalOptions="FillAndExpand">
+
+            <!-- Top Section: Tags, Title, Duration -->
+            <Frame BackgroundColor="White"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100">
+                <VerticalStackLayout Margin="0,0,0,10" Spacing="10">
+
+                    <Image Source="workout_logo_icon.svg"
+                       Aspect="AspectFit" HorizontalOptions="Center"
+                       Scale="0.6"
+                           HeightRequest="80"
+                       Margin="0,0,0,20" />
+
+
+                    <!--Tags in black frames-->
+                    <FlexLayout Direction="Row"
+                                Wrap="Wrap"
+                                JustifyContent="Center"
+                                AlignItems="Center"
+                                Margin="0,0,0,10" >
+                        
+                        <!--Location Tag-->
+                        <Frame BorderColor="Transparent"
+                               BackgroundColor="Black"
+                               VerticalOptions="Start"
+                               HorizontalOptions="Start"
+                               Padding="10" Margin="0,0,2,0">
+                            <Label Text="{Binding Workout.Location}"
+                                   FontSize="Micro"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                        </Frame>
+                        
+                        <!--Experience level Tag-->
+                        <Frame BorderColor="Transparent"
+                               BackgroundColor="Black"
+                               VerticalOptions="Start"
+                               Margin="0,0,2,0"
+                               Padding="10">
+                            <Label Text="{Binding Workout.ExperienceLevel}"
+                                   FontSize="Micro"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                        </Frame>
+                        
+                        <!--Goal Tag-->
+                        <Frame BorderColor="Transparent"
+                               BackgroundColor="Black"
+                               VerticalOptions="Start"
+                              
+                               Padding="10">
+                            <Label Text="{Binding Workout.Goals, Converter={StaticResource GoalsToStringConverter}}"
+                                   FontSize="Micro"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1"/>
+                        </Frame>
+                    </FlexLayout>
+                    
+                    
+                    
+                    
+                    <!--Workout Title-->
+                    <Label Text="{Binding Workout.Title}"
+                           FontAttributes="Bold"
+                           FontSize="Medium"
+                           FontAutoScalingEnabled="True"
+                           Margin="10,10,0,0"/>
+                    
+                    <!--Workout Duration-->
+                    <Label Text="{Binding Workout.DurationMinutes, StringFormat='Duration: {0} min'}"
+                           FontSize="Small"                       
+                           TextColor="#4A6375" Margin="10,0,0,0"/>
+                    
+                    <!--Workout Equipment-->
+                    <Label Text="{Binding Workout.Equipment, Converter={StaticResource GoalsToStringConverter}, StringFormat='Equipment: {0}'}"
+                           FontSize="Small"
+                           TextColor="#4A6375" Margin="10,0,0,0"/>
+                    
+                    
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Author -->
+            <Frame BackgroundColor="White"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   HorizontalOptions="FillAndExpand"
+                   MinimumHeightRequest="100"
+                   Margin="0,10,0,0">
+                <HorizontalStackLayout Margin="20,0" Spacing="20">
+                    <Frame CornerRadius="35"
+                           WidthRequest="60"
+                           HeightRequest="60"
+                           BorderColor="Transparent"
+                           BackgroundColor="Black">
+
+                        <!--Author Logo-->
+                        <VerticalStackLayout Padding="0" VerticalOptions="Start" Spacing="0">
+                            <Label TextColor="White"
+                               FontSize="Medium"
+                               HorizontalTextAlignment="Center"
+                                   Margin="0,-7,0,0"
+                                   Padding="0"
+                               VerticalTextAlignment="Start">o</Label>
+                            <Label TextColor="White"
+                                   FontSize="Large"
+                                   Margin="0,-11,0,0"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="End">O</Label>
+                        </VerticalStackLayout>
+
+                    </Frame>
+                    <VerticalStackLayout Spacing="5" Margin="0,5,0,0">
+                        <Label x:Name="AuthorLabel"
+                               FontAttributes="Bold"
+                               FontSize="Medium"/>
+                        <Label FontSize="Small">Submitted</Label>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Frame>
+
+            
+            <!--Exercises and Sets Frame-->
+            <VerticalStackLayout>
+                <Frame BorderColor="Transparent" CornerRadius="0" Margin="0,10,0,10" Padding="15" BackgroundColor="#FFE5A7">
+                    <VerticalStackLayout>
+                        
+                        <!--Title-->
+                        <Label Text="Exercises &amp; Sets" FontSize="Medium" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
+
+                        
+            <!-- Exercises and sets -->
+            <CollectionView ItemsSource="{Binding Workout.Exercises}" >
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                                    <!--Exercises WHite Frame-->
+                                    <Frame BackgroundColor="#FFFDF8"
+                                                      HasShadow="True"
+                                                      BorderColor="Transparent"
+                                                      HorizontalOptions="FillAndExpand"
+                                                      MinimumHeightRequest="100"
+                                                      Margin="0,20,0,0"
+                                                      Padding="10,15">
+
+                            <VerticalStackLayout Margin="0,0" Spacing="10">
+                                
+                                <!-- Title of the exercise-->
+                                <Label Text="{Binding Name}"
+                                       FontAttributes="Bold"
+                                       FontSize="Subtitle"
+                                       HorizontalOptions="Center"
+                                       Margin="0,0,0,10"/>
+
+                                <!-- Exercises in frames-->
+                                <VerticalStackLayout Spacing="20" HorizontalOptions="FillAndExpand">
+
+                                                <!-- SET | WEIGHT | REPS   (| DONE)  header -->
+                                                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" >
+
+                                                    <VerticalStackLayout Grid.Column="0" Spacing="2" HorizontalOptions="Center">
+                                                        <Label Text="SET" FontSize="Small" HorizontalTextAlignment="Center"/>
+                                                    </VerticalStackLayout>
+
+                                                    <VerticalStackLayout Grid.Column="1" Spacing="2" HorizontalOptions="Center">
+                                                        <Label Text="WEIGHT" FontSize="Small" HorizontalTextAlignment="Center"/>
+                                                    </VerticalStackLayout>
+
+                                                    <VerticalStackLayout Grid.Column="2" Spacing="2" HorizontalOptions="Center">
+                                                        <Label Text="REPS" FontSize="Small" HorizontalTextAlignment="Center"/>
+                                                    </VerticalStackLayout>
+
+                                                    <!--
+                                                    <VerticalStackLayout Grid.Column="3" Spacing="2" HorizontalOptions="Center">
+                                                        <Label Text="DONE" FontSize="Small" HorizontalTextAlignment="Center"/>
+                                                    </VerticalStackLayout>
+                                                    -->
+
+                                                </Grid>
+
+
+                                    
+                                                    <!-- Set Rounds with details (set, kg, reps,) (done) -->
+                                                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+
+                                                        <!-- SET numbers -->
+                                                        <VerticalStackLayout Grid.Column="0" Spacing="15" HorizontalOptions="Center" BindableLayout.ItemsSource="{Binding Sets}">
+                                                            <BindableLayout.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Label Text="{Binding SetNumber, StringFormat='{0}.'}"
+                                                                           FontSize="Subtitle"
+                                                                           HorizontalTextAlignment="Center"
+                                                                           FontAttributes="Bold" />
+                                                                </DataTemplate>
+                                                            </BindableLayout.ItemTemplate>
+                                                        </VerticalStackLayout>
+
+                                                        <!-- WEIGHT -->
+                                                        <VerticalStackLayout Grid.Column="1" Spacing="15" HorizontalOptions="Center" BindableLayout.ItemsSource="{Binding Sets}">
+                                                            <BindableLayout.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <HorizontalStackLayout Spacing="2">
+                                                                        <Label Text="{Binding Weight}" FontAttributes="Bold" FontSize="Subtitle"/>
+                                                                        <Label Text=" kg" FontSize="Subtitle"/>
+                                                                    </HorizontalStackLayout>
+                                                                </DataTemplate>
+                                                            </BindableLayout.ItemTemplate>
+                                                        </VerticalStackLayout>
+
+                                                        <!-- REPS -->
+                                                        <VerticalStackLayout Grid.Column="2" Spacing="15" HorizontalOptions="Center" BindableLayout.ItemsSource="{Binding Sets}">
+                                                            <BindableLayout.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <HorizontalStackLayout Spacing="2">
+                                                                        <Label Text="{Binding Repetitions}" FontAttributes="Bold" FontSize="Subtitle"/>
+                                                                        <Label Text=" x" FontSize="Subtitle"/>
+                                                                    </HorizontalStackLayout>
+                                                                </DataTemplate>
+                                                            </BindableLayout.ItemTemplate>
+                                                        </VerticalStackLayout>
+
+                                                        <!-- DONE -->
+                                                       <!-- <VerticalStackLayout Grid.Column="3" Spacing="0" HorizontalOptions="Center" BindableLayout.ItemsSource="{Binding Sets}">
+                                                            <BindableLayout.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <CheckBox IsChecked="{Binding IsCompleted}"
+                                                                              Color="Gray"
+                                                                              HorizontalOptions="Center" />
+                                                                </DataTemplate>
+                                                            </BindableLayout.ItemTemplate>
+                                                        </VerticalStackLayout>
+                                                        -->
+                                                        
+                                                    </Grid>
+       
+                                </VerticalStackLayout>
+                                
+                                
+
+                                <!-- Sub-exercises (Supersets) -->
+                                <CollectionView ItemsSource="{Binding SubExercises}" Margin="10,0,0,0">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <VerticalStackLayout Margin="0,0" Spacing="10">
+
+                                                <BoxView HeightRequest="1" Color="#E0E0E0" Margin="20,15,20,10"/>
+
+                                                <!-- Title of the exercise-->
+                                                <Label Text="{Binding Name}"
+                                                       FontAttributes="Bold"
+                                                       FontSize="Subtitle"
+                                                       HorizontalOptions="Center"
+                                                       Margin="0,0,0,10"/>
+
+                                                <VerticalStackLayout Spacing="5" HorizontalOptions="CenterAndExpand">
+
+                                                                <!-- SET | WEIGHT | REPS   (| DONE)  header -->
+                                                                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" >
+
+                                                                    <VerticalStackLayout Grid.Column="0" Spacing="2" HorizontalOptions="Center">
+                                                                        <Label Text="SET" FontSize="Small" HorizontalTextAlignment="Center"/>
+                                                                    </VerticalStackLayout>
+
+                                                                    <VerticalStackLayout Grid.Column="1" Spacing="2" HorizontalOptions="Center">
+                                                                        <Label Text="WEIGHT" FontSize="Small" HorizontalTextAlignment="Center"/>
+                                                                    </VerticalStackLayout>
+
+                                                                    <VerticalStackLayout Grid.Column="2" Spacing="2" HorizontalOptions="Center">
+                                                                        <Label Text="REPS" FontSize="Small" HorizontalTextAlignment="Center"/>
+                                                                    </VerticalStackLayout>
+
+                                                                    <!--
+                                                                    <VerticalStackLayout Grid.Column="3" Spacing="2" HorizontalOptions="Center">
+                                                                        <Label Text="DONE" FontSize="Small" HorizontalTextAlignment="Center"/>
+                                                                    </VerticalStackLayout>
+                                                                    -->
+
+                                                                </Grid>
+
+
+                                                                <!-- Set Rounds with details (set, kg, reps,) (done) -->
+                                                                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+
+                                                                    <!-- SET numbers -->
+                                                                    <VerticalStackLayout Grid.Column="0" Spacing="15" HorizontalOptions="Center" BindableLayout.ItemsSource="{Binding Sets}">
+                                                                        <BindableLayout.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <Label Text="{Binding SetNumber, StringFormat='{0}.'}"
+                                                                                       FontSize="Subtitle"
+                                                                                       HorizontalTextAlignment="Center"
+                                                                                       FontAttributes="Bold" />
+                                                                            </DataTemplate>
+                                                                        </BindableLayout.ItemTemplate>
+                                                                    </VerticalStackLayout>
+
+                                                                    <!-- WEIGHT -->
+                                                                    <VerticalStackLayout Grid.Column="1" Spacing="15" HorizontalOptions="Center" BindableLayout.ItemsSource="{Binding Sets}">
+                                                                        <BindableLayout.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <HorizontalStackLayout Spacing="2">
+                                                                                    <Label Text="{Binding Weight}" FontAttributes="Bold" FontSize="Subtitle"/>
+                                                                                    <Label Text=" kg" FontSize="Subtitle"/>
+                                                                                </HorizontalStackLayout>
+                                                                            </DataTemplate>
+                                                                        </BindableLayout.ItemTemplate>
+                                                                    </VerticalStackLayout>
+
+                                                                    <!-- REPS -->
+                                                                    <VerticalStackLayout Grid.Column="2" Spacing="15" HorizontalOptions="Center" BindableLayout.ItemsSource="{Binding Sets}">
+                                                                        <BindableLayout.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <HorizontalStackLayout Spacing="2">
+                                                                                    <Label Text="{Binding Repetitions}" FontAttributes="Bold" FontSize="Subtitle"/>
+                                                                                    <Label Text=" x" FontSize="Subtitle"/>
+                                                                                </HorizontalStackLayout>
+                                                                            </DataTemplate>
+                                                                        </BindableLayout.ItemTemplate>
+                                                                    </VerticalStackLayout>
+
+                                                                    <!-- DONE -->
+                                                                    <!-- <VerticalStackLayout Grid.Column="3" Spacing="0" HorizontalOptions="Center" BindableLayout.ItemsSource="{Binding Sets}">
+                                                                        <BindableLayout.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <CheckBox IsChecked="{Binding IsCompleted}"
+                                                                                          Color="Gray"
+                                                                                          HorizontalOptions="Center" />
+                                                                            </DataTemplate>
+                                                                        </BindableLayout.ItemTemplate>
+                                                                    </VerticalStackLayout>
+                                                                    -->
+
+                                                                </Grid>
+
+
+
+                                                            </VerticalStackLayout>
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+            
+            <!-- Save Button-->
+            <Button Text="Save Workout"
+                    FontSize="Subtitle"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumHeightRequest="40"
+                    Margin="30,40,30,20"
+                    Padding="10"
+                    BackgroundColor="#FF6A00"
+                    CornerRadius="10"
+                    VerticalOptions="CenterAndExpand"
+                    Command="{Binding SaveWorkoutCommand}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

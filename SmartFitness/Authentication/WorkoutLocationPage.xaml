@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Authentication.WorkoutLocationPage"
+             Title="Create your Account"
+             BackgroundColor="White">
+
+    <ScrollView VerticalOptions="FillAndExpand">
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Cím -->
+            <Label Text="Select your workout location"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,30" />
+
+            <!-- Helyszínválasztás -->
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <Frame x:Name="GymFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="120" >
+                    <!--GestureRecognizers="{TapGestureRecognizer Command=OnGymTapped}"-->
+                    <Label Text="Gym"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Frame x:Name="HomeFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="120"  >
+                       <!--="{TapGestureRecognizer Command=OnHomeTapped}"-->
+                    <Label Text="Home"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+            </HorizontalStackLayout>
+
+            <!-- Gombok -->
+            <HorizontalStackLayout Margin="0,40,0,0"
+                                  Spacing="20"
+                                  HorizontalOptions="Center">
+                <Button Text="Previous"
+                        CornerRadius="20"
+                        BackgroundColor="#BADAF9"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="OnPreviousButtonClicked" />
+                <Button x:Name="NextButton"
+                        Text="Next"
+                        CornerRadius="20"
+                        BackgroundColor="#87A8C9" 
+                    TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                    Clicked="OnNextButtonClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

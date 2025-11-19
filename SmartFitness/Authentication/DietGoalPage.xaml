@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Authentication.DietGoalPage"
+             Title="Creating Account"
+             BackgroundColor="White">
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never" HorizontalOptions="Center">
+        <VerticalStackLayout Padding="0" Spacing="15" HorizontalOptions="Center">
+
+            <!-- Cím -->
+            <Label Text="Select your diet goal"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="40,10,0,20" />
+
+            <!-- Diétacélok választása -->
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center" >
+                <Frame x:Name="BulkFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="150">
+                    <Label Text="Bulk"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Frame x:Name="LoseFatFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="150">
+                    <Label Text="Lose Fat"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Frame x:Name="MaintainMuscleFrame"
+                       BackgroundColor="WhiteSmoke"
+                       BorderColor="Transparent"
+                       CornerRadius="10"
+                       Padding="10"
+                       MinimumHeightRequest="50"
+                       WidthRequest="150">
+                    <Label Text="Maintain"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Gombok -->
+            <HorizontalStackLayout Margin="40,40,0,0"
+                                  Spacing="40"
+                                  HorizontalOptions="Center">
+                <Button x:Name="PreviousButton"
+                        Text="Previous"
+                        CornerRadius="20"
+                        BackgroundColor="#BADAF9"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="OnPreviousButtonClicked" />
+                <Button x:Name="NextButton"
+                        Text="Next"
+                        CornerRadius="20"
+                        BackgroundColor="#BADAF9"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="OnNextButtonClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartFitness.Converters"
+             x:Class="SmartFitness.Views.WorkoutProgramView"
+             x:Name="ProgramView">
+    
+    
+    <ContentView.Resources>
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+        <converters:NumberToPlaceholderConverter x:Key="NumberToPlaceholderConverter" />
+    </ContentView.Resources>
+    
+    
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Spacing="10" Padding="0">
+            
+            <!-- Title -->
+            <Frame HorizontalOptions="FillAndExpand" Margin="10,10,10,10" BorderColor="Transparent" BackgroundColor="#FfFfff" CornerRadius="10" Padding="5,1">
+                <Entry x:Name="TitleEntry" Placeholder="Workout Title" FontSize="Subtitle" VerticalOptions="Center" PlaceholderColor="#5E5E5E" Text="{Binding Title}" />
+            </Frame>
+
+            <!-- Workout Location -->
+            <Frame Padding="0,5" BorderColor="Transparent" BackgroundColor="#ffffff" CornerRadius="10" Margin="10,0,10,0">
+                
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Workout Location" FontSize="Subtitle" FontAttributes="Bold" Margin="0,5,0,0" HorizontalTextAlignment="Center"/>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="60" RowDefinitions="auto,auto" HorizontalOptions="Center" RowSpacing="0">
+                        <RadioButton Grid.Column="0" Grid.Row="0" GroupName="Location" Value="Gym" CheckedChanged="OnLocationChanged" IsChecked="{Binding Location, Converter={StaticResource StringToBoolConverter}, ConverterParameter='Gym'}" />
+                        <Label Grid.Column="0" Grid.Row="1" Text="Gym" FontSize="Small" VerticalOptions="Center" />
+                        <RadioButton Grid.Column="1" Grid.Row="0" GroupName="Location" Value="Home" CheckedChanged="OnLocationChanged" IsChecked="{Binding Location, Converter={StaticResource StringToBoolConverter}, ConverterParameter='Home'}" />
+                        <Label Grid.Column="1" Grid.Row="1" Text="Home" FontSize="Small" VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Equipment -->
+            <Label Text="Equipment" FontSize="Subtitle" FontAttributes="Bold" Margin="0,20,0,10"/>
+            <Frame Padding="0,5" BorderColor="Transparent" BackgroundColor="#34B31D" CornerRadius="10" Margin="10,-10,10,0">
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="auto,auto" ColumnSpacing="44" RowDefinitions="auto,auto,auto" HorizontalOptions="Start" Margin="50,0,0,0">
+                        <CheckBox Grid.Column="1" Grid.Row="0" x:Name="MachineCheckBox" Color="White" CheckedChanged="OnEquipmentChanged" />
+                        <Label Grid.Column="0" Grid.Row="0" Text="Machine" FontSize="Small" VerticalOptions="Center" TextColor="White" HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Grid.Row="1" x:Name="WeightsCheckBox" Color="White" CheckedChanged="OnEquipmentChanged" />
+                        <Label Grid.Column="0" Grid.Row="1" Text="Weights" FontSize="Small" VerticalOptions="Center" TextColor="White" HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Grid.Row="2" x:Name="BodyweightCheckBox" Color="White" CheckedChanged="OnEquipmentChanged" />
+                        <Label Grid.Column="0" Grid.Row="2" Text="Bodyweight" FontSize="Small" VerticalOptions="Center" TextColor="White" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Duration / workout -->
+            <Frame Padding="5,5" BorderColor="Transparent" BackgroundColor="#ffffff" CornerRadius="10" Margin="10,10,10,0">
+                <HorizontalStackLayout Spacing="20">
+                    <Entry x:Name="DurationEntry" Placeholder="Estimated Duration" FontSize="Subtitle" Keyboard="Numeric"
+                           VerticalOptions="End" HorizontalTextAlignment="End" PlaceholderColor="#5E5E5E" 
+                           Text="{Binding DurationMinutes, Mode=TwoWay, Converter={StaticResource NumberToPlaceholderConverter}}"/>
+                    <Label Text="min" FontSize="Medium" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Workout Goals -->
+            <Label Text="Workout Goals" FontSize="Subtitle" FontAttributes="Bold" Margin="0,15,10,0"/>
+            <Frame Padding="10" BorderColor="Transparent" BackgroundColor="#ffffff" CornerRadius="10" Margin="10,0,10,0">
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="auto,auto" ColumnSpacing="30" RowDefinitions="auto,auto,auto,auto" RowSpacing="5" HorizontalOptions="Start" Margin="40,0,0,0">
+                        <CheckBox Grid.Column="1" Grid.Row="0" IsChecked="{Binding Strength}" Color="#34B31D"/>
+                        <Label Grid.Column="0" Grid.Row="0" Text="Strength" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding MuscleBuild}" Color="#34B31D"/>
+                        <Label Grid.Column="0" Grid.Row="1" Text="Muscle Build" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="{Binding Cardio}" Color="#34B31D"/>
+                        <Label Grid.Column="0" Grid.Row="2" Text="Cardio" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding HealthierLife}" Color="#34B31D"/>
+                        <Label Grid.Column="0" Grid.Row="3" Text="Healthier Life" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Experience Level -->
+            <Frame Padding="0,5" BorderColor="Transparent" BackgroundColor="#FFFfff" CornerRadius="10" Margin="10,10,10,0">
+
+                <Picker x:Name="ExperienceLevelPicker" Title="Experience Level" FontSize="Subtitle" HorizontalTextAlignment="Center"
+                            HorizontalOptions="Center" VerticalOptions="Center" SelectedItem="{Binding ExperienceLevel}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Beginner</x:String>
+                            <x:String>Intermediate</x:String>
+                            <x:String>Advanced</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Frame>
+
+            <!-- Workout Days Per Week -->
+            <Label Text="Workout Days Per Week" FontSize="Subtitle" FontAttributes="Bold" Margin="0,25,0,0"/>
+            <Frame Padding="10" BorderColor="Transparent" BackgroundColor="#ffffff" CornerRadius="10" Margin="10,0,10,10">
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="Auto,Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="5" RowSpacing="5">
+                        <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Monday, Mode=TwoWay}" Color="#34B31D"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="Monday" VerticalOptions="Center" />
+                        <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding Tuesday, Mode=TwoWay}" Color="#34B31D"/>
+                        <Label Grid.Row="1" Grid.Column="1" Text="Tuesday" VerticalOptions="Center" />
+                        <CheckBox Grid.Row="2" Grid.Column="0" IsChecked="{Binding Wednesday, Mode=TwoWay}" Color="#34B31D"/>
+                        <Label Grid.Row="2" Grid.Column="1" Text="Wednesday" VerticalOptions="Center" />
+                        <CheckBox Grid.Row="3" Grid.Column="0" IsChecked="{Binding Thursday, Mode=TwoWay}" Color="#34B31D"/>
+                        <Label Grid.Row="3" Grid.Column="1" Text="Thursday" VerticalOptions="Center" />
+                        <CheckBox Grid.Row="0" Grid.Column="2" IsChecked="{Binding Friday, Mode=TwoWay}" Color="#34B31D"/>
+                        <Label Grid.Row="0" Grid.Column="3" Text="Friday" VerticalOptions="Center" />
+                        <CheckBox Grid.Row="1" Grid.Column="2" IsChecked="{Binding Saturday, Mode=TwoWay}" Color="#34B31D" />
+                        <Label Grid.Row="1" Grid.Column="3" Text="Saturday" VerticalOptions="Center" />
+                        <CheckBox Grid.Row="2" Grid.Column="2" IsChecked="{Binding Sunday, Mode=TwoWay}" Color="#34B31D"/>
+                        <Label Grid.Row="2" Grid.Column="3" Text="Sunday" VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Dinamikus napok -->
+            <Frame x:Name="DayFrame" Padding="0,20" BorderColor="Transparent" HorizontalOptions="FillAndExpand" BackgroundColor="#ffffff" CornerRadius="15"
+                   IsVisible="{Binding Monday, Mode=OneWay}">
+                <VerticalStackLayout Spacing="15">
+                    <Frame Padding="10,5" BackgroundColor="Transparent" Margin="10,0,0,10" BorderColor="Transparent" HorizontalOptions="Start">
+                        <Label Text="Days:" FontSize="Subtitle" FontAttributes="Bold" TextColor="#477D00" FontFamily=""/>
+                    </Frame>
+                    
+                    <Frame MinimumHeightRequest="40" Padding="0" BorderColor="#76F939" BackgroundColor="Transparent" Margin="20,-5,20,0" VerticalOptions="CenterAndExpand"
+                           IsVisible="{Binding Monday, Mode=OneWay}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToDayWorkoutCommand}" CommandParameter="Monday"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="10,0,20,0">
+                            <Label Grid.Column="0" Text="Monday" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Image Grid.Column="1" Source="back_icon.svg" VerticalOptions="Center" Scale="0.8" HorizontalOptions="End"/>
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame MinimumHeightRequest="40" Padding="0" BorderColor="#76F939" BackgroundColor="Transparent" Margin="20,0,20,0" VerticalOptions="CenterAndExpand"
+                           IsVisible="{Binding Tuesday, Mode=OneWay}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToDayWorkoutCommand}" CommandParameter="Tuesday"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="10,0,20,0">
+                            <Label Grid.Column="0" Text="Tuesday" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Image Grid.Column="1" Source="back_icon.svg" VerticalOptions="Center" Scale="0.8" HorizontalOptions="End"/>
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame MinimumHeightRequest="40" Padding="0" BorderColor="#76F939" BackgroundColor="Transparent" Margin="20,0,20,0" VerticalOptions="CenterAndExpand"
+                           IsVisible="{Binding Wednesday, Mode=OneWay}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToDayWorkoutCommand}" CommandParameter="Wednesday"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="10,0,20,0">
+                            <Label Grid.Column="0" Text="Wednesday" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Image Grid.Column="1" Source="back_icon.svg" VerticalOptions="Center" Scale="0.8" HorizontalOptions="End"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame MinimumHeightRequest="40" Padding="0" BorderColor="#76F939" BackgroundColor="Transparent" Margin="20,0,20,0" VerticalOptions="CenterAndExpand"
+                           IsVisible="{Binding Thursday, Mode=OneWay}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToDayWorkoutCommand}" CommandParameter="Thursday"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="10,0,20,0">
+                            <Label Grid.Column="0" Text="Thursday" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Image Grid.Column="1" Source="back_icon.svg" VerticalOptions="Center" Scale="0.8" HorizontalOptions="End"/>
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame MinimumHeightRequest="40" Padding="0" BorderColor="#76F939" BackgroundColor="Transparent" Margin="20,0,20,0" VerticalOptions="CenterAndExpand"
+                           IsVisible="{Binding Friday, Mode=OneWay}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToDayWorkoutCommand}" CommandParameter="Friday"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="10,0,20,0">
+                            <Label Grid.Column="0" Text="Friday" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Image Grid.Column="1" Source="back_icon.svg" VerticalOptions="Center" Scale="0.8" HorizontalOptions="End"/>
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame MinimumHeightRequest="40" Padding="0" BorderColor="#76F939" BackgroundColor="Transparent" Margin="20,0,20,0" VerticalOptions="CenterAndExpand"
+                           IsVisible="{Binding Saturday, Mode=OneWay}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToDayWorkoutCommand}" CommandParameter="Saturday"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="10,0,20,0">
+                            <Label Grid.Column="0" Text="Saturday" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Image Grid.Column="1" Source="back_icon.svg" VerticalOptions="Center" Scale="0.8" HorizontalOptions="End"/>
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame MinimumHeightRequest="40" Padding="0" BorderColor="#76F939" BackgroundColor="Transparent" Margin="20,0,20,0" VerticalOptions="CenterAndExpand"
+                           IsVisible="{Binding Sunday, Mode=OneWay}">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToDayWorkoutCommand}" CommandParameter="Sunday"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="10,0,20,0">
+                            <Label Grid.Column="0" Text="Sunday" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Image Grid.Column="1" Source="back_icon.svg" VerticalOptions="Center" Scale="0.8" HorizontalOptions="End"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Weeks -->
+            
+            <Frame Margin="10,0,10,20" Padding="0,10" BorderColor="Transparent" BackgroundColor="White" CornerRadius="20">
+                <VerticalStackLayout>
+                         
+                <Label Text="Plan Distance" FontSize="Subtitle" Margin="0,0,0,20" HorizontalTextAlignment="Center" FontFamily=""/>
+
+                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="Center" ColumnDefinitions="auto,auto,auto,auto" ColumnSpacing="10" Margin="0,0,0,10">
+                    
+                    <Button Grid.Column="0" x:Name="MinusWeekButton" CornerRadius="15" BackgroundColor="#34B31D" Text="-" TextColor="White" FontSize="25" Padding="0,0" FontAttributes="Bold"
+                            Command="{Binding DecreaseWeeksCommand}" Margin="0,0,10,0"/>
+                        
+                        <Label Grid.Column="1" x:Name="WeekNumberLabel" Text="{Binding Weeks}" VerticalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" FontFamily=""/>
+                        <Label Grid.Column="2"  Text="week(s)" VerticalTextAlignment="Center" FontSize="Medium" FontFamily=""></Label>
+                    
+                    <Button Grid.Column="3" x:Name="PlusWeekButton" CornerRadius="15" BackgroundColor="#34B31D" Text="+" TextColor="White" FontSize="25" Padding="10,0" FontAttributes="Bold"
+                            Command="{Binding IncreaseWeeksCommand}" Margin="10,0,0,0"/>
+                </Grid>
+                
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Submit Button -->
+            <Button Text="Submit Plan" Command="{Binding SaveWorkoutPlanCommand}" 
+                    FontSize="Medium"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    Margin="0,20,0,10"            
+                    VerticalOptions="CenterAndExpand"
+                    BackgroundColor="#34B31D" CornerRadius="10"/>
+            
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

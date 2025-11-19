@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Pages.WorkoutPreferencePage"
+             BackgroundColor="#F6FAFD"
+             Shell.NavBarIsVisible="False"
+             >
+    
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Spacing="0" Padding="0,10">
+
+            <!-- tab bar, - back button and page title -->
+            <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,20">
+                
+                <ImageButton Grid.Column="0" Source="back_icon" Scale="0.35" Rotation="180"
+                 VerticalOptions="Center" Clicked="OnBackButton" />
+
+                <Label Grid.Column="1"
+                       Text="Workout Preferences"
+                       FontSize="Medium" FontAttributes="Bold"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Start" />
+
+            </Grid>
+
+
+            <!-- Workout Preferences details frame-->
+            <Frame BackgroundColor="White" BorderColor="Transparent" Padding="0,20" Margin="15,0,15,0" CornerRadius="20">
+                <VerticalStackLayout Spacing="5" Margin="20,10,20,10" >
+
+                    <!-- prefered location-->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent"  Padding="0,5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="Location: "
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="workoutLocationLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" 
+                                   HorizontalTextAlignment="End"/>
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="40,0,40,0"/>
+
+
+                    <!-- prefered working out type-->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Padding="0,5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="Type: "
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="workoutTypeLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" 
+                                   HorizontalTextAlignment="End"/>
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="40,0,40,0"/>
+
+
+                    <!-- Prefered Days / week number-->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent"  Padding="0,5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="Days / week: "
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="workoutDaysLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" 
+                                   HorizontalTextAlignment="End"/>
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="40,0,40,0"/>
+
+
+                    <!-- User's Goal-->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent"  Padding="0,5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="Goal: "
+                                   FontSize="Subtitle"
+                                   TextColor="Black"
+                                   VerticalOptions="Start"
+                                   Grid.Column="0" />
+
+                            <Label x:Name="workoutGoalLabel"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular"
+                                   TextColor="DarkSlateGray"
+                                   Grid.Column="1"
+                                   LineBreakMode="WordWrap"
+                                   HorizontalTextAlignment="End"
+                                   VerticalOptions="Start" />
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="40,0,40,0"/>
+
+
+                    <!-- User's Experience level -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Padding="0,5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="Experience:"
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="workoutExperienceLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" 
+                                   HorizontalTextAlignment="End"/>
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="0.5" Color="#DDDDDD" Margin="40,0,40,0"/>
+
+
+                    <!-- Each Workout duaration -->
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent" Padding="0,5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="Duration:"
+                                   FontSize="Subtitle"
+                                   BackgroundColor="Transparent"
+                                    TextColor="Black"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"/>
+                            <Label x:Name="workoutDurationLabel" Grid.Column="1"
+                                   FontSize="Subtitle"
+                                   FontFamily="MadimiOne-Regular" TextColor="DarkSlateGray" 
+                                   HorizontalTextAlignment="End"/>
+                        </Grid>
+                    </Frame>
+
+                </VerticalStackLayout>
+            </Frame>
+
+
+            <!-- Save Button, -not implemented yet -->
+            <Label 
+                    Text="Save Changes"
+                    FontSize="Medium"
+                    FontAttributes="Bold"
+                    TextColor="#859700"
+                    Margin="0,40,0,40" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

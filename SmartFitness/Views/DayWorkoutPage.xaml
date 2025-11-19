@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartFitness.Converters"
+             xmlns:local="clr-namespace:SmartFitness.Authentication.components"
+             x:Class="SmartFitness.Views.DayWorkoutPage"
+             Title="{Binding Day}"
+             BackgroundColor="#F6FAFD"
+             Shell.BackgroundColor="#F6FAFD"
+             >
+    <ContentPage.Resources>
+        <converters:NumberToPlaceholderConverter x:Key="NumberToPlaceholderConverter" />
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="0">
+            
+            <!-- Exercises -->
+            <Label Text="Exercises &amp; Sets" FontSize="Medium" FontAttributes="Bold" Margin="10,20,10,0" />
+
+
+            <!-- Add Exercises block , sets, supersets - ExerciseSetBlock component-->
+            <local:ExerciseSetBlock BindingContext="{Binding .}" />
+
+
+            <!-- Add Exercise -->
+            <Button Text="Add Exercise" Command="{Binding AddExerciseCommand}" FontSize="Subtitle"
+                    TextColor="#FF6A00" FontAttributes="Bold" BackgroundColor="Transparent" Margin="0,0,0,10"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

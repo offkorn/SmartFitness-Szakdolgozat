@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartFitness.Converters"
+             x:Class="SmartFitness.Pages.AllWorkoutsPage"
+             Title="Workouts"
+             BackgroundColor="White">
+    <ContentPage.Resources>
+        <converters:NullToDefaultImageConverter x:Key="NullToDefaultImageConverter" />
+        <converters:GoalsToStringConverter x:Key="GoalsToStringConverter" />
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Margin="10">
+            
+            <CollectionView x:Name="WorkoutsCollection"
+                            ItemsSource="{Binding Workouts}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="WhiteSmoke"
+                               CornerRadius="15"
+                               Padding="10"
+                               HasShadow="True"
+                               BorderColor="Transparent">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.ViewWorkoutCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                      CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="5">
+                                <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
+                                       Source="{Binding ImageUrl, Converter={StaticResource NullToDefaultImageConverter}, ConverterParameter='workout_logo_icon.svg'}"
+                                       Aspect="Center"
+                                       HeightRequest="80"
+                                       Scale="0.4"
+                                       Margin="0,0,10,0" />
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       FontSize="Subtitle"
+                                       HorizontalTextAlignment="Start" />
+                                <Label Grid.Row="1" Grid.Column="1"
+                                       Text="{Binding DurationMinutes, StringFormat='Duration: {0} min'}"
+                                       FontSize="Small"
+                                       TextColor="Gray"
+                                       HorizontalTextAlignment="Start" />
+                                <Label Grid.Row="2" Grid.Column="1"
+                                       Text="{Binding Goals, Converter={StaticResource GoalsToStringConverter}}"
+                                       FontSize="Small"
+                                       TextColor="Gray"
+                                       HorizontalTextAlignment="Start"
+                                       LineBreakMode="TailTruncation" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

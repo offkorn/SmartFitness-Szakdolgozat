@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SmartFitness.ViewModels"
+             xmlns:local="clr-namespace:SmartFitness.Authentication.components"
+             xmlns:converters="clr-namespace:SmartFitness.Converters"
+             x:Class="SmartFitness.Views.SimpleWorkoutView"
+             x:Name="WorkoutView">
+
+
+    <ContentView.Resources>
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+        <converters:NumberToPlaceholderConverter x:Key="NumberToPlaceholderConverter" />
+    </ContentView.Resources>
+    <ContentView.BindingContext>
+        <vm:SimpleWorkoutViewModel />
+    </ContentView.BindingContext>
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Spacing="10" Padding="0">
+
+            <!-- Title -->
+            <Frame Margin="10,10,10,0" BorderColor="Transparent" BackgroundColor="#FFFFFF" CornerRadius="10" Padding="5,1">
+                <Entry x:Name="TitleEntry" Placeholder="Workout Title" PlaceholderColor="#5E5E5E" FontSize="Subtitle" VerticalOptions="Center" Text="{Binding Title}" />
+            </Frame>
+            
+            <Label Text="Workout Location" FontSize="Subtitle" FontAttributes="Bold" Margin="0,15,0,0"/>
+            
+            <!-- Workout Location -->
+            <Frame Padding="0,5" BorderColor="Transparent" BackgroundColor="#FFFFFF" CornerRadius="10" Margin="10,0,10,0">
+                <VerticalStackLayout Spacing="10">
+                    
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="60" RowDefinitions="auto,auto" HorizontalOptions="Center" RowSpacing="0">
+                        <RadioButton Grid.Column="0" Grid.Row="0"  GroupName="Location" Value="Gym" CheckedChanged="OnLocationChanged" IsChecked="{Binding Location, Converter={StaticResource StringToBoolConverter}, ConverterParameter='Gym'}" />
+                        <Label Grid.Column="0" Grid.Row="1" Text="Gym" FontSize="Small" VerticalOptions="Center" />
+                        <RadioButton Grid.Column="1" Grid.Row="0"  GroupName="Location" Value="Home" CheckedChanged="OnLocationChanged" IsChecked="{Binding Location, Converter={StaticResource StringToBoolConverter}, ConverterParameter='Home'}" />
+                        <Label Grid.Column="1" Grid.Row="1" Text="Home" FontSize="Small" VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+
+            <Label Text="Equipment" FontSize="Subtitle" FontAttributes="Bold" Margin="0,15,0,0"/>
+            
+            <!-- Equipment -->
+            <Frame Padding="0,5" BorderColor="Transparent" BackgroundColor="#FFffff" CornerRadius="10" Margin="10,0,10,0">
+                <VerticalStackLayout Spacing="10">
+                    
+                    <Grid ColumnDefinitions="auto,auto" ColumnSpacing="45" RowDefinitions="auto,auto,auto" Margin="40,0,0,0">
+                        <CheckBox Grid.Column="1" Grid.Row="0" CheckedChanged="OnEquipmentChanged" x:Name="MachineCheckBox" Color="IndianRed" />
+                        <Label Grid.Column="0" Grid.Row="0" Text="Machine" FontSize="Small" VerticalOptions="Center"  HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Grid.Row="1" CheckedChanged="OnEquipmentChanged" x:Name="WeightsCheckBox" Color="IndianRed" />
+                        <Label Grid.Column="0" Grid.Row="1" Text="Weights" FontSize="Small" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Grid.Row="2" CheckedChanged="OnEquipmentChanged" x:Name="BodyweightCheckBox" Color="IndianRed" />
+                        <Label Grid.Column="0" Grid.Row="2" Text="Bodyweight" FontSize="Small" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Duration -->
+            <Frame Padding="5,5" BorderColor="Transparent" BackgroundColor="#ffffff" CornerRadius="10" Margin="10,10,10,0">
+                <HorizontalStackLayout Spacing="10">
+                    <Entry x:Name="DurationEntry" Placeholder="Estimated Duration" FontSize="Subtitle" Keyboard="Numeric"
+                           VerticalOptions="End" HorizontalTextAlignment="End" PlaceholderColor="#5E5E5E" 
+                           Text="{Binding DurationMinutes, Mode=TwoWay, Converter={StaticResource NumberToPlaceholderConverter}}"/>
+                    <Label Text="min" FontSize="Medium" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Label Text="Workout Goals" FontSize="Subtitle" FontAttributes="Bold" Margin="0,15,10,0"/>
+
+            <!-- Goals -->
+            <Frame Padding="0,5" BorderColor="Transparent" BackgroundColor="#FFffff" CornerRadius="10" Margin="10,0,10,0">
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="auto,auto" ColumnSpacing="35" RowDefinitions="auto,auto,auto,auto" RowSpacing="5" HorizontalOptions="Start" Margin="40,0,0,0">
+                        <CheckBox Grid.Column="1" Grid.Row="0" CheckedChanged="OnGoalChanged" x:Name="StrengthCheckBox" Color="IndianRed" />
+                        <Label Grid.Column="0" Grid.Row="0" Text="Strength" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Grid.Row="1" CheckedChanged="OnGoalChanged" x:Name="MuscleBuildCheckBox" Color="IndianRed" />
+                        <Label Grid.Column="0" Grid.Row="1" Text="Muscle Build" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Grid.Row="2" CheckedChanged="OnGoalChanged" x:Name="CardioCheckBox" Color="IndianRed" />
+                        <Label Grid.Column="0" Grid.Row="2" Text="Cardio" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Grid.Row="3" CheckedChanged="OnGoalChanged" x:Name="HealthierLifeCheckBox" Color="IndianRed" />
+                        <Label Grid.Column="0" Grid.Row="3" Text="Healthier Life" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Experience Level -->
+            <Frame Padding="0,5" BorderColor="Transparent" BackgroundColor="#FFFfff" CornerRadius="10" Margin="10,10,10,0">
+                <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Picker x:Name="ExperienceLevelPicker" Title="Experience Level" FontSize="Subtitle" HorizontalTextAlignment="Center"
+                            HorizontalOptions="Center" VerticalOptions="Center" SelectedItem="{Binding ExperienceLevel}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Beginner</x:String>
+                                <x:String>Intermediate</x:String>
+                                <x:String>Advanced</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <!--   <Image Source="arrow_icon.png" VerticalOptions="Center" Scale="0.8" HorizontalOptions="End" /> -->
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Exercises -->
+            <Label Text="Exercises &amp; Sets" FontSize="Medium" FontAttributes="Bold" Margin="0,20,0,0" />
+
+
+            <!-- Add Exercises block , sets, supersets - ExerciseSetBlock component-->
+            <local:ExerciseSetBlock BindingContext="{Binding .}" />
+
+
+            <!-- Add Exercise -->
+            <Button Text="Add Exercise" Command="{Binding AddExerciseCommand}" FontSize="Subtitle"
+                    TextColor="#FF6A00" FontAttributes="Bold" BackgroundColor="Transparent" />
+            
+            <!-- submit Workout -->
+            <Button Text="Submit Workout" Command="{Binding SaveWorkoutCommand}" 
+                    FontSize="Medium"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    Margin="0,20,0,10"            
+                    VerticalOptions="CenterAndExpand"
+                    BackgroundColor="IndianRed" CornerRadius="10" />
+            
+            
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

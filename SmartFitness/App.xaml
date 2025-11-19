@@ -1,0 +1,23 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SmartFitness"
+             x:Class="SmartFitness.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <BackButtonBehavior x:Key="CustomBackBehavior"
+                            IconOverride="food_icon"
+                            IsVisible="true"
+                            IsEnabled="true"
+                            />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+       
+
+        <!-- Aktuális téma (alapértelmezett: Light) -->
+        <!-- <ResourceDictionary MergedDictionaries="{DynamicResource LightTheme}" />-->
+    </Application.Resources>
+</Application>

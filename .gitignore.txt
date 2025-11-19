@@ -1,0 +1,42 @@
+################################################################################
+# Visual Studio / MAUI Optimized .gitignore
+################################################################################
+
+# Visual Studio cache
+.vs/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+
+# Platform-specific MAUI output
+*/bin/
+*/obj/
+
+# Generated packaging
+AppPackages/
+BundleArtifacts/
+usertoken.txt
+
+# Temp files
+*.tmp
+*.temp
+
+# SQLite local db files (optional)
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+
+# macOS / Windows junk
+.DS_Store
+Thumbs.db
+
+# Rider / VSCode junk (optional)
+.idea/
+.vscode/
+*.code-workspace

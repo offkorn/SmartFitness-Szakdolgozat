@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.BackButtonBehavior="{StaticResource CustomBackBehavior}"
+             x:Class="SmartFitness.Pages.FoodPage"
+             BackgroundColor="#F6FAFD"
+             NavigationPage.HasBackButton="False">
+
+    <Grid RowDefinitions="*,Auto" BackgroundColor="Transparent">
+        
+        <!-- Fő tartalom -->
+        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
+            
+            <VerticalStackLayout Spacing="0" Padding="0,10">
+                
+                <!-- Felső rész: Cím és Saved Meals -->
+                <Grid ColumnDefinitions="*,auto" Padding="15,10" Margin="0,0,0,40" ColumnSpacing="30" >
+                    
+                    <Frame Grid.Column="0"
+                           HasShadow="True"
+                           BorderColor="Transparent"
+                           BackgroundColor="White"
+                           CornerRadius="15"
+                           Padding="20">
+                        <Frame.Shadow>
+                            <Shadow Brush="#E8EBEE" Offset="2,4"  Radius="0"/>
+                        </Frame.Shadow> 
+                        
+                        <!-- title -->
+                        <VerticalStackLayout>
+                            <Label Text="Find your"
+                                   FontSize="Title"
+                                   FontFamily="InriaSerifBold"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center" />
+                            
+                            <Label Text="new meals!"
+                                   FontSize="Title"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center" FontFamily="InriaSerifBold" />  
+                        </VerticalStackLayout>
+                          
+                    </Frame>
+
+                    <!--saved meals-->
+                    <Frame Grid.Column="1"
+                           BackgroundColor="#313700"
+                           CornerRadius="15"
+                           Padding="15,10"
+                           Margin="0,20,0,20"
+                           HasShadow="True">
+                        
+                        <Frame.Shadow>
+                            <Shadow Brush="#E8EBEE" Offset="1,4"  Radius="0"/>
+                        </Frame.Shadow>
+                        
+                        <VerticalStackLayout>
+                            <Label Text="Saved"
+                                    FontSize="Medium"
+                                    
+                                    HorizontalTextAlignment="Start"
+                                    VerticalTextAlignment="Center" TextColor="White"/>
+                            <Label Text="meals"
+                                    FontSize="Medium"
+                                    
+                                    HorizontalTextAlignment="Start"
+                                    VerticalTextAlignment="Center" TextColor="White"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+                <!-- Search -->
+                <Frame BackgroundColor="#F6FAFD"
+                       BorderColor="#E2E2E2"
+                       HorizontalOptions="FillAndExpand"
+                       CornerRadius="15"
+                       Padding="0,0"
+                       MinimumHeightRequest="30"
+                       Margin="20,0,20,40" HasShadow="True">
+                    <Frame.Shadow>
+                        <Shadow Brush="#E8EBEE" Offset="1,4"  Radius="0"/>
+                    </Frame.Shadow>
+                    
+                    <Grid>
+                        <Entry Placeholder="Search for meals"
+                               Keyboard="Default"
+                               HorizontalOptions="FillAndExpand"
+                               Margin="20,0,40,0"
+                               VerticalOptions="Center"
+                               PlaceholderColor="DarkSlateGrey"
+                               TextColor="Black"
+                               FontSize="Small"/>
+                        <Image Margin="0,0,20,0"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Source="search_icon.png" 
+                               Scale="0.7"/>
+                    </Grid>
+                </Frame>
+
+                
+                <!-- recommended title  + see all-->
+                <Grid ColumnDefinitions="*,Auto" Margin="10,0,10,0" ColumnSpacing="10">
+                    <Label Grid.Column="0" 
+                                       Text="Recommended" 
+                                       FontSize="Subtitle" 
+                                       FontAttributes="Bold" 
+                                       TextColor="Black" 
+                                       HorizontalTextAlignment="Start" />
+                    <Label Grid.Column="1" 
+                                       Text="See all" 
+                                       FontSize="Small" 
+                                       TextColor="Black" 
+                                       HorizontalTextAlignment="End" />
+                </Grid>
+
+                
+                
+                <!-- Recommended Meals-->
+              
+                            <CollectionView x:Name="RecommendedStack" HorizontalScrollBarVisibility="Never">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame BackgroundColor="#ffffff" 
+                                               CornerRadius="15" 
+                                               WidthRequest="220" 
+                                               Padding="0" 
+                                               BorderColor="Transparent"
+                                               Margin="20,20,0,30"
+                                               >
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.ViewRecipeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+
+                                            <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="0">
+
+                                                <Image Source="{Binding ImageUrl}" Aspect="AspectFill" Margin="0,0,0,5" HeightRequest="160"/>
+
+                                                <Label Text="{Binding Title}" 
+                                                       FontAttributes="Bold" 
+                                                       VerticalTextAlignment="End" 
+                                                       HorizontalOptions="CenterAndExpand" 
+                                                       HorizontalTextAlignment="Center"
+                                                       Margin="0,0,0,5"
+                                                       FontSize="Subtitle"
+                                                       LineBreakMode="TailTruncation"/>
+                                                <HorizontalStackLayout Spacing="20" VerticalOptions="End" HorizontalOptions="CenterAndExpand" Margin="0,0,0,10">
+                                                    <Label Text="{Binding CookingTime, StringFormat='{0} mins'}" 
+                                                           VerticalTextAlignment="End" 
+                                                           FontSize="Micro"/>
+                                                    <Label Text="{Binding Calories, StringFormat='{0} cals'}" 
+                                                           VerticalTextAlignment="End" 
+                                                           FontSize="Micro"/>
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        
+                   
+                
+
+
+
+
+                <!-- Breakfast -->
+                <Frame Padding="0" Margin="0,0,0,20" HasShadow="True" BorderColor="Transparent" HorizontalOptions="FillAndExpand" MinimumHeightRequest="260" CornerRadius="0">
+
+                    <Grid>
+                        <!-- Gradient háttér -->
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#E3FF7C" Offset="0.0" />
+                                <GradientStop Color="White" Offset="0.8" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        
+                        <!-- title + see all - button-->
+                        <VerticalStackLayout Spacing="15" Margin="0,30,0,0">
+
+                            <Grid ColumnDefinitions="*,Auto" Margin="10,0,10,0">
+                                                <Label Grid.Column="0" 
+                                                       Text="Breakfast" 
+                                                       FontSize="Subtitle" 
+                                                       FontAttributes="Bold" 
+                                                       TextColor="Black" 
+                                                       HorizontalTextAlignment="Start" />
+                                                <Label Grid.Column="1" 
+                                                       x:Name="AllBreakfastLabel"
+                                                       Text="See all" 
+                                                       FontSize="Small" 
+                                                       TextColor="Black" 
+                                                       HorizontalTextAlignment="End" />
+                            </Grid>
+
+
+                            <!-- Breakfast items, csempék-->
+                            <CollectionView x:Name="BreakfastStack" HorizontalScrollBarVisibility="Never">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame BackgroundColor="#ffffff" 
+                                               CornerRadius="15" 
+                                               WidthRequest="220" 
+                                               Padding="0" 
+                                               BorderColor="Transparent"
+                                               Margin="10,0,0,20"
+                                               MinimumHeightRequest="180">
+                                            
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.ViewRecipeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                            
+                                            <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="0">
+
+                                                <Image Source="{Binding ImageUrl}" Aspect="AspectFill" Margin="0,0,0,5" HeightRequest="160"/>
+
+                                                <Label Text="{Binding Title}" 
+                                                       FontAttributes="Bold" 
+                                                       VerticalTextAlignment="End" 
+                                                       HorizontalOptions="CenterAndExpand" 
+                                                       HorizontalTextAlignment="Center"
+                                                       Margin="0,0,0,5"
+                                                       FontSize="Subtitle"
+                                                       LineBreakMode="TailTruncation"/>
+                                                <HorizontalStackLayout Spacing="20" VerticalOptions="End" HorizontalOptions="CenterAndExpand" >
+                                                    <Label Text="{Binding CookingTime, StringFormat='{0} mins'}" 
+                                           VerticalTextAlignment="End" 
+                                           FontSize="Micro"/>
+                                                    <Label Text="{Binding Calories, StringFormat='{0} cals'}" 
+                                           VerticalTextAlignment="End" 
+                                           FontSize="Micro"/>
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+         
+
+        <!-- Lunch -->
+                <Frame Padding="0" Margin="0,0,0,0" HasShadow="True" MinimumHeightRequest="260" BorderColor="Transparent" HorizontalOptions="FillAndExpand"  CornerRadius="0">
+
+                    <Grid>
+                        <!-- Gradient háttér -->
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                <GradientStop Color="#FFD87C" Offset="0.0" />
+                                <GradientStop Color="White" Offset="1" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+
+                        <VerticalStackLayout Spacing="15" Margin="0,30,0,0">
+
+                            
+                            <!-- title + see all - button-->
+                            <Grid ColumnDefinitions="*,Auto" Margin="10,0,10,0">
+                                <Label Grid.Column="0" 
+                                       Text="Lunch" 
+                                       FontSize="Subtitle" 
+                                       FontAttributes="Bold"
+                                       FontFamily=""
+                                       TextColor="Black" 
+                                       HorizontalTextAlignment="Start" />
+                                <Label Grid.Column="1" 
+                                       x:Name="AllLunchLabel"
+                                       Text="See all" 
+                                       FontSize="Small" 
+                                       TextColor="Black" 
+                                       HorizontalTextAlignment="End" />
+                            </Grid>
+
+
+                            <!-- Lunch items, csempék-->
+                            <CollectionView x:Name="LunchStack" HorizontalScrollBarVisibility="Never">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame BackgroundColor="#ffffff" 
+                                               CornerRadius="15" 
+                                               WidthRequest="220"
+                                               Padding="0"
+                                               Margin="10,0,0,20" 
+                                               BorderColor="Transparent"
+                                               HasShadow="True"
+                                               MinimumHeightRequest="180">
+                                          
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.ViewRecipeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                            
+                                            <VerticalStackLayout VerticalOptions="StartAndExpand" Spacing="0" Padding="0">
+
+                                                
+                                                <Image Source="{Binding ImageUrl}" Aspect="AspectFill" Margin="0,0,0,5" HeightRequest="150"/>
+
+
+                                                <Label Text="{Binding Title}" 
+                                                       FontAttributes="Bold" 
+                                                       VerticalTextAlignment="End" 
+                                                       HorizontalOptions="CenterAndExpand" 
+                                                       HorizontalTextAlignment="Center"
+                                                       Margin="0,0,10,5"
+                                                       FontSize="Subtitle"
+                                                       LineBreakMode="TailTruncation"/>
+                                                <HorizontalStackLayout Spacing="20" VerticalOptions="End" HorizontalOptions="CenterAndExpand" Margin="0,0,0,5">
+                                                    <Label Text="{Binding CookingTime, StringFormat='{0} mins'}" 
+                                                   VerticalTextAlignment="End" 
+                                                   FontSize="Micro"/>
+                                                    <Label Text="{Binding Calories, StringFormat='{0} cals'}" 
+                                                   VerticalTextAlignment="End" 
+                                                   FontSize="Micro"/>
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+
+                
+                <!-- Dinner -->
+
+                <Frame Padding="0" Margin="0,0,0,10" HasShadow="True" MinimumHeightRequest="260" BorderColor="Transparent" HorizontalOptions="FillAndExpand"  CornerRadius="0">
+
+                    <Grid>
+                        <!-- Gradient háttér -->
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                <GradientStop Color="#ADF1E1" Offset="0.0" />
+                                <GradientStop Color="#FFD87C" Offset="1" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        
+                       
+                        <VerticalStackLayout Spacing="15" Margin="0,30,0,0">
+
+                            <!-- title + see all - button-->
+                            <Grid ColumnDefinitions="*,Auto" Margin="10,0,10,0">
+                                <Label Grid.Column="0" 
+                                       Text="Dinner" 
+                                       FontSize="Subtitle" 
+                                       FontAttributes="Bold"
+                                       FontFamily=""
+                                       TextColor="Black" 
+                                       HorizontalTextAlignment="Start" />
+                                <Label Grid.Column="1" 
+                                       x:Name="AllDinnerLabel"
+                                       Text="See all" 
+                                       FontSize="Small" 
+                                       TextColor="Black" 
+                                       HorizontalTextAlignment="End" />
+                            </Grid>
+                            
+                            
+                            <!-- Dinner Items, csempék -->
+                            <CollectionView x:Name="DinnerStack" HorizontalScrollBarVisibility="Never">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame BackgroundColor="#ffffff" 
+                                               CornerRadius="15" 
+                                               WidthRequest="220"
+                                               Padding="0"
+                                               Margin="10,0,0,20" 
+                                               BorderColor="Transparent"
+                                               HasShadow="True"
+                                               MinimumHeightRequest="180">
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.ViewRecipeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+
+                                            <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="0" Padding="0">
+
+
+                                                <Image Source="{Binding ImageUrl}" Aspect="AspectFill" Margin="0,0,0,5" HeightRequest="160"/>
+
+
+                                                <Label Text="{Binding Title}" 
+                                                       FontAttributes="Bold" 
+                                                       VerticalTextAlignment="End" 
+                                                       HorizontalOptions="CenterAndExpand" 
+                                                       HorizontalTextAlignment="Center"
+                                                       Margin="10,0,10,5"
+                                                       FontSize="Subtitle"
+                                                       LineBreakMode="TailTruncation"/>
+                                                <HorizontalStackLayout Spacing="20" VerticalOptions="End" HorizontalOptions="CenterAndExpand" Margin="0,0,0,5">
+                                                    <Label Text="{Binding CookingTime, StringFormat='{0} mins'}" 
+                                                   VerticalTextAlignment="End" 
+                                                   FontSize="Micro"/>
+                                                    <Label Text="{Binding Calories, StringFormat='{0} cals'}" 
+                                                   VerticalTextAlignment="End" 
+                                                   FontSize="Micro"/>
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+
+        <!-- Lebegő gomb - Add new meal-->
+        <Button Grid.Row="1"
+                Text="+ Add new meal"
+                x:Name="AddMealButton"
+                FontSize="Subtitle"
+                TextColor="White"
+                FontAttributes="Bold"
+                Margin="30,10,30,20" Padding="15"
+                BackgroundColor="#859700"
+                CornerRadius="25"
+                VerticalOptions="End" 
+                Clicked="AddMealButton_Clicked" />
+
+       
+
+
+    </Grid>
+</ContentPage>

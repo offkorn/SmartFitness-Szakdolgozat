@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SmartFitness.Authentication.components"
+             x:Class="SmartFitness.Authentication.SignUpPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="Transparent"
+             NavigationPage.HasNavigationBar="False" 
+             BackgroundImageSource="welcomepage_background.svg"       
+             Padding="0,40,0,0">
+
+  
+
+       
+            <VerticalStackLayout Spacing="0">
+
+                <!-- tab bar -->
+                <HorizontalStackLayout Spacing="0" VerticalOptions="Start"> 
+
+                    <ImageButton Source="back_icon" Scale="0.4" Rotation="180" HorizontalOptions="Start" Clicked="OnBackButton" VerticalOptions="Center"></ImageButton>
+
+                    <Label 
+                           Text="Welcome back"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- title -->
+                <Label Text="Create Your Account"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       Margin="0,10,0,20" />
+
+                
+                <!-- Input fields-->
+                            
+                    <!-- First Name -->
+                    <local:CustomEntry x:Name="FirstNameEntry"
+                                       Placeholder="First Name"
+                                       Keyboard="Default" />
+                
+                <Border BackgroundColor="#676767" Margin="50,0,50,0" HeightRequest="0.2"></Border>
+
+                <!-- Last Name -->
+                    <local:CustomEntry x:Name="LastNameEntry"
+                                       Placeholder="Last Name"
+                                       Keyboard="Default" />
+
+                <Border BackgroundColor="#676767" Margin="50,0,50,0" HeightRequest="0.2"></Border>
+                    
+                <!-- Email -->
+                    <local:CustomEntry x:Name="EmailEntry"
+                                       Placeholder="Enter your email"
+                                       Keyboard="Email" />
+
+                <Border BackgroundColor="#676767" Margin="50,0,50,0" HeightRequest="0.2"></Border>
+                    
+                <!-- Password -->
+                    <local:CustomEntry x:Name="PasswordEntry"
+                                       Placeholder="Password"
+                                       IsPassword="True" />
+
+                <Border BackgroundColor="#676767" Margin="50,0,50,0" HeightRequest="0.2"></Border>
+
+                <!-- Confirm Password -->
+                    <local:CustomEntry x:Name="ConfirmPasswordEntry"
+                                       Placeholder="Confirm Password"
+                                       IsPassword="True" />
+                
+
+                <!-- next button -->
+                <Button Text="Next"
+                    FontSize="Medium"
+                    FontAttributes="Bold"
+                    CornerRadius="20"
+                    BackgroundColor="#BADAF9"
+                    TextColor="Black"
+                    Margin="40,80,40,0"
+                        VerticalOptions="End"
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="NextButton_Clicked" />
+
+               
+
+            </VerticalStackLayout>
+       
+    
+</ContentPage>
+
+        
+
