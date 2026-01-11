@@ -11,3 +11,9 @@ Funkciok:
 - recept letrehozas
 - ajanlott receptek
 - oktato oldal, temankenti cikkekkel
+
+Teszteles / Belepes
+Az alkalmazas gyors kipróbalásahoz hasznalhato az alabbi, elore regisztralt tesztfelhasznalo:
+
+email: perez02@gmail.com
+password: jjjjjj
