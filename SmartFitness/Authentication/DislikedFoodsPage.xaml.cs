@@ -42,7 +42,7 @@ namespace SmartFitness.Authentication
         {
             foreach (var frame in _foodFrames.Values)
             {
-                frame.BackgroundColor = Colors.WhiteSmoke;
+                frame.BackgroundColor = Colors.White;
             }
 
             // Visszaállítjuk a korábban kiválasztott ételeket
@@ -50,7 +50,7 @@ namespace SmartFitness.Authentication
             {
                 if (_foodFrames.TryGetValue(food, out var frame))
                 {
-                    frame.BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue
+                    frame.BackgroundColor = Color.FromRgb(218, 215, 147); // LightBlue
                 }
             }
         }
@@ -70,12 +70,12 @@ namespace SmartFitness.Authentication
             if (_selectedDislikedFoods.Contains(food))
             {
                 _selectedDislikedFoods.Remove(food);
-                _foodFrames[food].BackgroundColor = Colors.WhiteSmoke;
+                _foodFrames[food].BackgroundColor = Colors.White;
             }
             else
             {
                 _selectedDislikedFoods.Add(food);
-                _foodFrames[food].BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue
+                _foodFrames[food].BackgroundColor = Color.FromRgb(218, 215, 147); // LightBlue
             }
         }
 

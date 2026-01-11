@@ -1,8 +1,9 @@
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:SmartFitness.Pages"
+       xmlns:pages="clr-namespace:SmartFitness.Pages"
+       xmlns:auth="clr-namespace:SmartFitness.Authentication"
+       x:Class="SmartFitness.AppShell"   
        xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
-       x:Class="SmartFitness.AppShell"
        Shell.FlyoutBehavior="Disabled"
        Title="SmartFitness"
        Shell.TabBarBackgroundColor="White"
@@ -22,10 +23,21 @@
 
 
     <TabBar>
-        <ShellContent Icon="home_icon.png" ContentTemplate="{DataTemplate local:HomePage}" />
-        <ShellContent Icon="workout_icon.png" ContentTemplate="{DataTemplate local:WorkoutPage}" />
-        <ShellContent Icon="food_icon.png" ContentTemplate="{DataTemplate local:FoodPage}" />
-        <ShellContent Icon="lecture_icon.png" ContentTemplate="{DataTemplate local:LecturePage}" />
-        <ShellContent Icon="progress_icon.png" ContentTemplate="{DataTemplate local:ProgressPage}" />
+        <ShellContent Icon="home_icon.png"
+                      ContentTemplate="{DataTemplate pages:HomePage}" />
+
+        <ShellContent Icon="workout_icon.png"
+                      ContentTemplate="{DataTemplate pages:WorkoutPage}" />
+
+        <ShellContent Icon="food_icon.png"
+                      ContentTemplate="{DataTemplate pages:FoodPage}" />
+
+        <ShellContent Icon="lecture_icon.png"
+                      ContentTemplate="{DataTemplate pages:LecturePage}" />
+
+        <ShellContent Icon="progress_icon.png"
+                      ContentTemplate="{DataTemplate pages:ProgressPage}" />
     </TabBar>
+   
+
 </Shell>

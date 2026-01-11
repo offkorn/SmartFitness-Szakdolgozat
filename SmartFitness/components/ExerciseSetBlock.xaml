@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartFitness.Authentication.components.ExerciseSetBlock"
+             x:Class="SmartFitness.components.ExerciseSetBlock"
              x:Name="Root"
              xmlns:converters="clr-namespace:SmartFitness.Converters"
              xmlns:vm="clr-namespace:SmartFitness.ViewModels">
@@ -21,12 +21,36 @@
                 <Frame BackgroundColor="White" HasShadow="True" BorderColor="Transparent"
                    HorizontalOptions="FillAndExpand" MinimumHeightRequest="100"
                    Margin="10,20,10,0" Padding="10,0">
+
                     <VerticalStackLayout Margin="0,0" Spacing="10">
 
-                        <!-- Exercise Name -->
-                        <Entry FontAttributes="Bold" Placeholder="Exercise name"
-                           FontSize="Medium" HorizontalOptions="Center"
-                           Margin="0,5,0,0" Text="{Binding Name, Mode=TwoWay}" />
+                        <!-- Exercise Name + REMOVE exercise button -->
+                        <Grid ColumnDefinitions="*,auto,*" ColumnSpacing="0" >
+
+                            <ContentView Grid.Column="0" />
+
+                            <!-- Exercise Name  -->
+                            <Entry FontAttributes="Bold" Placeholder="Exercise name"
+                                   FontSize="Medium" 
+                                   HorizontalOptions="Center"
+                                   Margin="0,5,0,0" Text="{Binding Name, Mode=TwoWay}"
+                                   Grid.Column="1"/>
+
+                            <!-- REMOVE Exercise -->
+                            <ImageButton Grid.Column="2"
+                                         Source="trash_icon.svg"
+                                         Scale="0.4"
+                                         VerticalOptions="End"
+                                         Opacity="0.4"
+                                         BackgroundColor="Transparent"
+                                         HorizontalOptions="End"
+                                         Command="{Binding BindingContext.RemoveExerciseCommand, Source={x:Reference ExercisesCollectionView}}"
+                                         CommandParameter="{Binding .}"  />
+
+                        </Grid>
+
+
+
 
                         <!-- Sets and Sub-exercises -->
                         <VerticalStackLayout Spacing="10" Margin="5,10,5,0">
@@ -93,10 +117,33 @@
 
 
 
-                            <Button BackgroundColor="Transparent" TextColor="Black" Text="Add new Set"
-                                FontSize="Subtitle" HorizontalOptions="Center"
-                                Command="{Binding BindingContext.AddSetCommand, Source={x:Reference ExercisesCollectionView}}"
-                                CommandParameter="{Binding .}" />
+                            <!-- Add New Set Button + remove new set Button -->
+                            <Grid ColumnDefinitions="*,auto,*" ColumnSpacing="0" >
+
+                                <ContentView Grid.Column="0" Margin="0,0,0,0" />
+
+                                <!-- ADD New Set  -->
+                                <Button BackgroundColor="Transparent" TextColor="Black" Text="Add new Set"
+                                        FontSize="Subtitle" 
+                                        LineBreakMode="NoWrap"
+                                         HorizontalOptions="Center"
+                                        Command="{Binding BindingContext.AddSetCommand, Source={x:Reference ExercisesCollectionView}}"
+                                        CommandParameter="{Binding .}" 
+                                        Grid.Column="1"/>
+
+                                <!-- REMOVE new set  -->
+                                <Button Text="−"
+                                        TextColor="IndianRed"
+                                        FontSize="Large"
+                                        BackgroundColor="Transparent"
+                                         HorizontalOptions="Start"
+                                        Command="{Binding BindingContext.RemoveSetCommand, Source={x:Reference ExercisesCollectionView}}"
+                                        CommandParameter="{Binding .}" 
+                                        Grid.Column="2"/>
+
+                            </Grid>
+
+
 
                             <!-- Sub-exercises -->
                             <CollectionView ItemsSource="{Binding SubExercises}" SelectionMode="None">
@@ -104,9 +151,30 @@
                                     <DataTemplate>
                                         <VerticalStackLayout Margin="0,10,0,0" Spacing="10">
 
-                                            <Entry FontAttributes="Bold" Placeholder="Exercise name"
-                                               FontSize="Medium" HorizontalOptions="Center"
-                                               Margin="0,5,0,0" Text="{Binding Name, Mode=TwoWay}" />
+                                            <!-- Exercise Name + REMOVE exercise button -->
+                                            <Grid ColumnDefinitions="*,auto,*" ColumnSpacing="0" >
+
+                                                <ContentView Grid.Column="0" />
+
+                                                <!-- Exercise Name  -->
+                                                <Entry FontAttributes="Bold" Placeholder="Exercise name"
+                                                       FontSize="Medium" 
+                                                       HorizontalOptions="Center"
+                                                       Margin="0,5,0,0" Text="{Binding Name, Mode=TwoWay}"
+                                                       Grid.Column="1"/>
+
+                                                <!-- REMOVE SUB-Exercise -->
+                                                <ImageButton Grid.Column="2"
+                                                             Source="trash_icon.svg"
+                                                             Scale="0.4"
+                                                             VerticalOptions="End"
+                                                             Opacity="0.4"
+                                                             BackgroundColor="Transparent"
+                                                             HorizontalOptions="End"
+                                                             Command="{Binding BindingContext.RemoveSubExerciseCommand, Source={x:Reference ExercisesCollectionView}}"
+                                                             CommandParameter="{Binding .}"  />
+
+                                            </Grid>
 
                                             <VerticalStackLayout Spacing="10" Margin="5,10,5,0">
 
@@ -172,11 +240,33 @@
                                                 </Grid>
 
 
-                                                <!-- Add New Set Button -->
-                                                <Button BackgroundColor="Transparent" TextColor="Black" Text="Add new Set"
-                                                    FontSize="Subtitle" HorizontalOptions="Center"
-                                                    Command="{Binding BindingContext.AddSetCommand, Source={x:Reference ExercisesCollectionView}}"
-                                                    CommandParameter="{Binding .}" />
+                                                <!-- FOR SUB-EXERCISE - Add New Set Button + remove new set Button -->
+                                                <Grid ColumnDefinitions="*,auto,*" ColumnSpacing="0" >
+
+                                                    <ContentView Grid.Column="0" Margin="0,0,0,0" />
+
+                                                    <!-- ADD New Set  -->
+                                                    <Button BackgroundColor="Transparent" TextColor="Black" Text="Add new Set"
+                                                            FontSize="Subtitle" 
+                                                            LineBreakMode="NoWrap"
+                                                             HorizontalOptions="Center"
+                                                            Command="{Binding BindingContext.AddSetCommand, Source={x:Reference ExercisesCollectionView}}"
+                                                            CommandParameter="{Binding .}" 
+                                                            Grid.Column="1"/>
+
+                                                    <!-- REMOVE new set  -->
+                                                    <Button Text="−"
+                                                            TextColor="IndianRed"
+                                                            FontSize="Large"
+                                                            BackgroundColor="Transparent"
+                                                             HorizontalOptions="Start"
+                                                            Command="{Binding BindingContext.RemoveSetCommand, Source={x:Reference ExercisesCollectionView}}"
+                                                            CommandParameter="{Binding .}" 
+                                                            Grid.Column="2"/>
+
+                                                </Grid>
+
+
                                             </VerticalStackLayout>
                                         </VerticalStackLayout>
                                     </DataTemplate>
@@ -189,6 +279,7 @@
                                 Command="{Binding BindingContext.AddSupersetCommand, Source={x:Reference ExercisesCollectionView}}"
                                 CommandParameter="{Binding .}"
                                 IsVisible="{Binding IsMainExercise, Mode=OneWay}" />
+
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Frame>

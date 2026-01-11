@@ -6,7 +6,7 @@
    
 
     <ScrollView Orientation="Vertical" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
-        <VerticalStackLayout Padding="15,20" Spacing="15">
+        <VerticalStackLayout Padding="15,20" Spacing="45">
 
             
                <!--Header Frame -->
@@ -61,210 +61,128 @@
             </Frame>
 
             
-            <!-- Search bar-->
-            <Frame BackgroundColor="#F6FAFD"
-                   BorderColor="#E2E2E2"
-                   HorizontalOptions="FillAndExpand"
-                   CornerRadius="15"
-                   Padding="0"
-                   Margin="0,20,0,20" HasShadow="True">
-                <Frame.Shadow>
-                    <Shadow Brush="#E8EBEE" Offset="1,4"  Radius="0"/>
-                </Frame.Shadow>
-
-                <Grid>
-                    <Entry Placeholder="Search for meals"
-                           Keyboard="Default"
-                           HorizontalOptions="FillAndExpand"
-                           Margin="20,0,40,0"
-                           VerticalOptions="Center"
-                           PlaceholderColor="DarkSlateGrey"
-                           TextColor="Black"
-                           FontSize="Small"/>
-                    
-                    <Image Margin="0,0,20,0"
-                           HorizontalOptions="End"
-                           VerticalOptions="Center"
-                           Source="search_icon.png" 
-                           Scale="0.7"/>
-                </Grid>
-            </Frame>
+            
 
 
 
             <!-- Lecture List-->
             <VerticalStackLayout Spacing="15" Margin="0,10,0,10">
 
-                <!-- Frame with Muscle Building Button -->
-                <Frame CornerRadius="15"
-                       Padding="0,10"
-                       VerticalOptions="FillAndExpand"
-                       HorizontalOptions="FillAndExpand"
-                       BorderColor="Transparent"
-                       BackgroundColor="#ffffff"
-                       HasShadow="True">
+                <Frame CornerRadius="15" Padding="0,10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BorderColor="Transparent" BackgroundColor="#ffffff" HasShadow="True">
 
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Button x:Name="MuscleBuildingButton"
-                            BackgroundColor="Transparent"
-                            Text="Understanding Muscle Building"
-                            FontSize="Small"
-                            FontAttributes="Bold"
-                                FontFamily="" Grid.Column="0"
-                            TextColor="#2C3E50"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start"
-                            Clicked="OnMuscleBuildingClicked" />
-                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1"
-                                     Scale="0.2" Opacity="0.5"></ImageButton>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMuscleBuildingClicked" />
+                    </Frame.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="*,Auto" Padding="10,5">
+                        <Label Text="Understanding Muscle Building"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"/>
+
+                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1" Scale="0.2" Opacity="0.5" />
                     </Grid>
-                    
-                </Frame>
-
-    
-
-
-                <!-- Frame Nutrition button -->
-                <Frame CornerRadius="15"
-                       Padding="0,10"
-                       VerticalOptions="FillAndExpand"
-                       HorizontalOptions="FillAndExpand"
-                       BorderColor="Transparent"
-                       BackgroundColor="#ffffff"
-                       HasShadow="True">
-
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Button x:Name="NutritionButton"
-                            BackgroundColor="Transparent"
-                            Text="Basics of Nutrition"
-                            FontSize="Small"
-                            FontAttributes="Bold"
-                                FontFamily=""
-                            TextColor="#2C3E50"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start"
-                            Padding="10,15"
-                            Clicked="OnNutritionClicked"/>
-                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1"
-                                     Scale="0.2" Opacity="0.5"></ImageButton>
-                    </Grid>
-
                 </Frame>
 
 
-                <!-- Frame Sleep button-->
-                <Frame CornerRadius="15"
-                       Padding="0,5"
-                       VerticalOptions="FillAndExpand"
-                       HorizontalOptions="FillAndExpand"
-                       BorderColor="Transparent"
-                       BackgroundColor="#ffffff"
-                       HasShadow="True">
+                <Frame CornerRadius="15" Padding="0,10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BorderColor="Transparent" BackgroundColor="#ffffff" HasShadow="True">
 
-                    <Grid ColumnDefinitions="*,Auto">
-                            <Button x:Name="SleepButton"
-                                    BackgroundColor="#60FFFFFF"
-                                    Text="Importance of Sleep"
-                                    FontSize="Small"
-                                    FontAttributes="Bold"       FontFamily=""
-                                    TextColor="#2C3E50"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Start"
-                                    Padding="10,15"
-                                    CornerRadius="15"
-                                    Clicked="OnSleepClicked">
-                            </Button>
-                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1"
-                                     Scale="0.2" Margin="0,0,0,0" Opacity="0.5"></ImageButton>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnNutritionClicked" />
+                    </Frame.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="*,Auto" Padding="10,5">
+                        <Label Text="Basics of Nutrition"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"/>
+
+                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1" Scale="0.2" Opacity="0.5" />
                     </Grid>
-
                 </Frame>
 
 
+                <Frame CornerRadius="15" Padding="0,10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BorderColor="Transparent" BackgroundColor="#ffffff" HasShadow="True">
 
-                <!--Frame Cardio for Beginners button-->
-                <Frame CornerRadius="15"
-                       Padding="0,5"
-                       VerticalOptions="FillAndExpand"
-                       HorizontalOptions="FillAndExpand"
-                       BorderColor="Transparent"
-                       BackgroundColor="#ffffff"
-                       HasShadow="True">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSleepClicked" />
+                    </Frame.GestureRecognizers>
 
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Button 
-                                BackgroundColor="Transparent"
-                                Text="Cardio for Beginners"
-                                FontSize="Small"
-                                FontAttributes="Bold"       FontFamily=""
-                                TextColor="#2C3E50"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Start"
-                                Padding="10,15" />
-                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1"
-                                     Scale="0.2" Margin="0,0,0,0" Opacity="0.5"></ImageButton>
+                    <Grid ColumnDefinitions="*,Auto" Padding="10,5">
+                        <Label Text="Importance of Sleep"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"/>
+
+                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1" Scale="0.2" Opacity="0.5" />
                     </Grid>
-
                 </Frame>
 
 
-                <!-- Frame Flexibility and Mobility button -->
-                <Frame CornerRadius="15"
-                       Padding="0,5"
-                       VerticalOptions="FillAndExpand"
-                       HorizontalOptions="FillAndExpand"
-                       BorderColor="Transparent"
-                       BackgroundColor="#ffffff"
-                       HasShadow="True">
+                <Frame CornerRadius="15" Padding="0,10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BorderColor="Transparent" BackgroundColor="#ffffff" HasShadow="True">
 
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Button 
-                                BackgroundColor="Transparent"
-                                Text="Flexibility and Mobility"
-                                FontSize="Small"
-                                FontAttributes="Bold"       FontFamily=""
-                                TextColor="#2C3E50"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Start"
-                                Padding="10,15" />
-                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1"
-                                     Scale="0.2" Margin="0,0,0,0" Opacity="0.5"></ImageButton>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCardioClicked" />
+                    </Frame.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="*,Auto" Padding="10,5">
+                        <Label Text="Cardio for Beginners"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"/>
+
+                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1" Scale="0.2" Opacity="0.5" />
                     </Grid>
-
                 </Frame>
 
 
-                <!-- Frame Flexibility and Mobility button -->
-                <Frame CornerRadius="15"
-                       Padding="0,5"
-                       VerticalOptions="FillAndExpand"
-                       HorizontalOptions="FillAndExpand"
-                       BorderColor="Transparent"
-                       BackgroundColor="#ffffff"
-                       HasShadow="True">
+                <Frame CornerRadius="15" Padding="0,10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BorderColor="Transparent" BackgroundColor="#ffffff" HasShadow="True">
 
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Button 
-                                BackgroundColor="Transparent"
-                                Text="Mental Health Basics"
-                                FontSize="Small"
-                                FontAttributes="Bold"       FontFamily=""
-                                TextColor="#2C3E50"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Start"
-                                Padding="10,15" />
-                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1"
-                                     Scale="0.2" Margin="0,0,0,0" Opacity="0.5"></ImageButton>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFlexibilityClicked" />
+                    </Frame.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="*,Auto" Padding="10,5">
+                        <Label Text="Flexibility and Mobility"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"/>
+
+                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1" Scale="0.2" Opacity="0.5" />
                     </Grid>
-
                 </Frame>
 
 
+                <Frame CornerRadius="15" Padding="0,10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BorderColor="Transparent" BackgroundColor="#ffffff" HasShadow="True">
 
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMentalHealthClicked" />
+                    </Frame.GestureRecognizers>
 
+                    <Grid ColumnDefinitions="*,Auto" Padding="10,5">
+                        <Label Text="Mental Health Basics" 
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"/>
 
+                        <ImageButton Source="back_icon" Rotation="0" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1" Scale="0.2" Opacity="0.5" />
+                    </Grid>
+                </Frame>
 
             </VerticalStackLayout>
+   
 
         </VerticalStackLayout>
     </ScrollView>

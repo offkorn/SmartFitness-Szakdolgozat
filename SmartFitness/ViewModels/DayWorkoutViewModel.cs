@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using SmartFitness.Models;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace SmartFitness.ViewModels;
 
@@ -13,6 +14,7 @@ public partial class DayWorkoutViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<Exercise> exercises;
 
+
     public DayWorkoutViewModel(string day, ObservableCollection<Exercise> exercises)
     {
         Day = day;
@@ -21,6 +23,7 @@ public partial class DayWorkoutViewModel : ObservableObject
         {
             AddExercise();
         }
+
     }
 
     [RelayCommand]
@@ -62,6 +65,44 @@ public partial class DayWorkoutViewModel : ObservableObject
                 IsMainExercise = false
             };
             exercise.SubExercises.Add(subExercise);
+        }
+    }
+
+    
+
+    [RelayCommand]
+    private void RemoveSet(Exercise exercise) 
+    {
+        if (exercise == null) return;
+        if (exercise.Sets == null || exercise.Sets.Count == 0) return;
+
+        exercise.Sets.RemoveAt(exercise.Sets.Count - 1);
+
+        for (int i = 0; i < exercise.Sets.Count; i++)
+        {
+            exercise.Sets[i].SetNumber = i + 1;
+        }
+    }
+
+    [RelayCommand]
+    private void RemoveExercise(Exercise exercise) 
+    {
+        if (exercise == null) return;
+        Exercises.Remove(exercise);
+    }
+
+    [RelayCommand]
+    private void RemoveSubExercise(Exercise sub) 
+    {
+        if (sub == null) return;
+
+        foreach (var ex in Exercises)
+        {
+            if (ex.SubExercises.Contains(sub))
+            {
+                ex.SubExercises.Remove(sub);
+                return;
+            }
         }
     }
 }

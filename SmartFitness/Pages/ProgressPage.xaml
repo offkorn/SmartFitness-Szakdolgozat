@@ -2,7 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartFitness.Pages.ProgressPage"
+             xmlns:sfChart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              BackgroundColor="#F6FAFD">
+
+
+    
+
+
+
+
 
     <ScrollView Orientation="Vertical" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
         <VerticalStackLayout Padding="15,20" >
@@ -47,23 +55,103 @@
             
             
             <!-- pelda Weight grafikon, - illusztracio-->
-            <Label Text="&lt; Weight &gt;"
+            <Label Text="Weight"
                    FontSize="Medium"
                    FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
                    TextColor="#859700"
                    Margin="0,0,0,10" />
 
-            <Image Source="diagram.svg"></Image>
+            <!-- figmaban tervezett diagram 
+            <Image Source="diagram.svg"></Image>-->
 
-            <!-- grafikon oldalakat jelzo pontok, - illusztracio-->
+
+            <Frame BackgroundColor="White"
+                   Padding="20"
+                   Margin="0,0,0,0"
+                   CornerRadius="25"
+                   HasShadow="True"
+                   HeightRequest="300"
+                   BorderColor="Transparent">
+
+                <sfChart:SfCartesianChart HeightRequest="250" VerticalOptions="Fill" >
+
+                    <sfChart:SfCartesianChart.XAxes >
+                        <sfChart:CategoryAxis 
+                            ShowMajorGridLines="False"
+                            LabelPlacement="BetweenTicks"
+                            LabelStyle="{StaticResource AxisLabelStyle}" />
+                    </sfChart:SfCartesianChart.XAxes>
+
+                    
+                    <sfChart:SfCartesianChart.YAxes>
+                        <sfChart:NumericalAxis 
+                            Minimum="40"
+                            Maximum="100"
+                            Interval="1"
+                            ShowMajorGridLines="False"
+                            ShowMinorGridLines="False"
+                            >
+
+                            <sfChart:NumericalAxis.LabelStyle>
+                            <sfChart:ChartAxisLabelStyle
+                                LabelFormat="0'kg'"
+                                TextColor="#444"
+                                FontSize="14"
+                                FontFamily="InriaSerifBold" />
+                            </sfChart:NumericalAxis.LabelStyle>
+
+                        </sfChart:NumericalAxis>
+                    </sfChart:SfCartesianChart.YAxes>
+
+                    <sfChart:ColumnSeries 
+                        ItemsSource="{Binding WeightData}"
+                        XBindingPath="DateLabel"
+                        YBindingPath="Kg"
+                        CornerRadius="20,20,20,20"
+                        Fill="#859700"
+                        Width="0.55"
+                        ShowDataLabels="True"
+                        >
+
+                        <sfChart:ColumnSeries.DataLabelSettings>
+                            <sfChart:CartesianDataLabelSettings LabelPlacement="Outer" >
+                                <sfChart:CartesianDataLabelSettings.LabelStyle>
+                                    <sfChart:ChartDataLabelStyle 
+                                        LabelFormat="0.0'kg'"
+                                        FontSize="10"
+                                        TextColor="#444" 
+                                        Background="#00FFFFFF"   
+                                        Stroke="#00FFFFFF"
+                                        CornerRadius="0"
+                                        />
+                                </sfChart:CartesianDataLabelSettings.LabelStyle>
+                            </sfChart:CartesianDataLabelSettings>
+                        </sfChart:ColumnSeries.DataLabelSettings>
+
+                    </sfChart:ColumnSeries>
+
+
+
+                </sfChart:SfCartesianChart>
+
+            </Frame>
+
+
+
+
+
+
+
+
+            <!-- grafikon oldalakat jelzo pontok, - illusztracio
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="-25">
                 <Frame CornerRadius="30" Scale="0.25" BackgroundColor="#ACB958" />
                 <Frame CornerRadius="30" Scale="0.25" BackgroundColor="#ACB958" />
                 <Frame CornerRadius="30" Scale="0.25" BackgroundColor="#859700" />
                 <Frame CornerRadius="30" Scale="0.25" BackgroundColor="#ACB958" />
                 <Frame CornerRadius="30" Scale="0.25" BackgroundColor="#ACB958" />
-            </HorizontalStackLayout>
+            </HorizontalStackLayout>-->
 
 
 

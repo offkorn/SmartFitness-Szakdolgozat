@@ -36,67 +36,54 @@ namespace SmartFitness.Authentication
                 return;
             }
 
-            // Ellenõrizzük, hogy az ID nem NULL
             if (string.IsNullOrEmpty(_newUser.Id))
             {
                 await DisplayAlert("Error", "User ID is missing. Please try registering again.", "OK");
                 return;
             }
 
-            // Adatok kiegészítése
+            // Adatok 
             _newUser.BornDate = BirthDatePicker.Date;
             _newUser.Height = height;
             _newUser.Weight = weight;
             _newUser.Gender = GenderPicker.SelectedItem.ToString();
-            _newUser.CreatedAt = DateTime.UtcNow;
+            //_newUser.CreatedAt = DateTime.UtcNow;
 
             try
             {
-                // Hibakeresés: naplózzuk az ID-t beszúrás elõtt
-                System.Diagnostics.Debug.WriteLine($"PersonalInfoPage: Attempting to save User ID = {_newUser.Id}");
+                // 1. DIAGNOSZTIKA: Van-e Session?
+                var session = SupabaseClient.Client.Auth.CurrentSession;
+                if (session == null)
+                {
+                    // Ha ez ugrik fel, akkor a Confirm Email van bekapcsolva, vagy elveszett a login!
+                    await DisplayAlert("Hiba", "Nincs aktív bejelentkezés! (Session is null)", "OK");
+                    return;
+                }
 
-                // Ellenõrizzük, hogy létezik-e már rekord a public.users táblában
-                var existingUser = await SupabaseClient.Client
+                System.Diagnostics.Debug.WriteLine($"[DEBUG] Logged in user: {session.User.Id}");
+                System.Diagnostics.Debug.WriteLine($"[DEBUG] Saving data for: {_newUser.Id}");
+
+                // 2. MENTÉS (Upsert a legbiztosabb)
+                await SupabaseClient.Client
                     .From<User>()
-                    .Where(x => x.Id == _newUser.Id)
-                    .Single();
+                    .Upsert(_newUser);
 
-                if (existingUser != null)
-                {
-                    // Ha létezik, frissítjük a rekordot
-                    await SupabaseClient.Client
-                        .From<User>()
-                        .Where(x => x.Id == _newUser.Id)
-                        .Set(x => x.FirstName, _newUser.FirstName)
-                        .Set(x => x.LastName, _newUser.LastName)
-                        .Set(x => x.BornDate, _newUser.BornDate)
-                        .Set(x => x.Height, _newUser.Height)
-                        .Set(x => x.Weight, _newUser.Weight)
-                        .Set(x => x.Gender, _newUser.Gender)
-                        .Set(x => x.CreatedAt, _newUser.CreatedAt)
-                        .Update();
-                }
-                else
-                {
-                    // Ha nem létezik, új rekord beszúrása
-                    await SupabaseClient.Client
-                        .From<User>()
-                        .Insert(_newUser);
-                }
-
-                // Hibakeresés: naplózzuk a mentett rekordot
-                System.Diagnostics.Debug.WriteLine($"PersonalInfoPage: Saved User ID = {_newUser.Id}");
-
+                System.Diagnostics.Debug.WriteLine("[DEBUG] Mentés sikeres!");
                 await Navigation.PushAsync(new WorkoutLocationPage(_newUser));
             }
             catch (Exception ex)
             {
+                // Ha itt 42501 jön, akkor az ID-k nem egyeznek, vagy az RLS rossz.
                 await DisplayAlert("Error", $"Failed to save user: {ex.Message}", "OK");
-                System.Diagnostics.Debug.WriteLine($"PersonalInfoPage: Error = {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"[ERROR] {ex.Message}");
             }
         }
-
+        
         private async void OnPreviousButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+        private async void OnBackButton(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
         }

@@ -2,14 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartFitness.Authentication.DislikedFoodsPage"
-             Title="Creating Account">
-    <ScrollView VerticalScrollBarVisibility="Never" HorizontalOptions="Center">
+                          Shell.NavBarIsVisible="False"
+              BackgroundColor="#F6FAFD"
+             NavigationPage.HasNavigationBar="False" 
+             Padding="0,40,0,0">
+
+    <ScrollView VerticalScrollBarVisibility="Never">
     <VerticalStackLayout Padding="30" Spacing="30">
-        <Label Text="Select foods you dislike" 
-               FontSize="Large" 
-               FontAttributes="Bold" 
-               HorizontalOptions="Center" 
-               Margin="0,0,0,20"/>
+
+        <!-- tab bar -->
+        <Label Text="Select foods you dislike"
+       FontSize="Large"
+       FontAttributes="Bold"
+       HorizontalOptions="Center"
+       Margin="40,20,40,40" HorizontalTextAlignment="Center"/>
 
 
         <Grid ColumnDefinitions="*,*" 
@@ -20,7 +26,7 @@
               VerticalOptions="Center">
             <!-- Row 0 -->
             <Frame x:Name="FishFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
                    HeightRequest="60"
@@ -30,7 +36,7 @@
             </Frame>
 
             <Frame x:Name="PorkFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
                    HeightRequest="60"
@@ -41,7 +47,7 @@
 
             <!-- Row 1 -->
             <Frame x:Name="EggFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
                    HeightRequest="60"
@@ -51,7 +57,7 @@
             </Frame>
 
             <Frame x:Name="MilkFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
                    HeightRequest="60"
@@ -62,7 +68,7 @@
 
             <!-- Row 2 -->
             <Frame x:Name="PotatoFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
                    HeightRequest="60"
@@ -72,7 +78,7 @@
             </Frame>
 
             <Frame x:Name="NutsFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
                    HeightRequest="60"
@@ -82,20 +88,25 @@
             </Frame>
         </Grid>
 
-        <HorizontalStackLayout Margin="0,40,0,0" Spacing="40" HorizontalOptions="Center">
-            <Button x:Name="PreviousButton"
-                    Text="Previous"
-                    CornerRadius="20"
-                    BackgroundColor="#BADAF9"
-                    TextColor="Black"
-                    Clicked="OnPreviousButtonClicked"/>
-            <Button x:Name="NextButton"
-                    Text="Next"
-                    CornerRadius="20"
-                    BackgroundColor="#BADAF9"
-                    TextColor="Black"
-                    Clicked="OnNextButtonClicked"/>
+        <!-- Gombok -->
+        <HorizontalStackLayout Margin="0,60,0,0" Spacing="20" HorizontalOptions="Center" >
+            <Button Text="Previous" 
+                CornerRadius="20" Padding="10,15" 
+                BackgroundColor="#999101"
+                TextColor="WhiteSmoke"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnPreviousButtonClicked"  />
+            <Button Text="Next"
+                CornerRadius="20" Padding="10,15" 
+                BackgroundColor="#859700"
+                TextColor="White"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnNextButtonClicked" />
         </HorizontalStackLayout>
     </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
 </ContentPage>

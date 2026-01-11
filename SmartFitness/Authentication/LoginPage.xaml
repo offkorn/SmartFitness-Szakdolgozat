@@ -3,25 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartFitness.Authentication.LoginPage"
              Shell.NavBarIsVisible="False"
-             Shell.BackgroundColor="IndianRed"
-             NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="true"
-             NavigationPage.IconColor="red"
-             BackgroundColor="Red"
-             BackgroundImageSource="welcomepage_background.svg"
+              BackgroundColor="#F6FAFD"
+             NavigationPage.HasNavigationBar="False" 
              Padding="0,40,0,0">
 
 
         
 
-        <Grid RowDefinitions="auto,*,*" RowSpacing="0" Padding="0,0,0,20">
+        <Grid RowDefinitions="auto,*" RowSpacing="150" Padding="0"> 
 
 
-        
         <!-- tab bar -->
         <HorizontalStackLayout Grid.Row="0" Spacing="0">
 
-            <ImageButton Source="back_icon" Scale="0.4" Rotation="180" HorizontalOptions="Start" Clicked="OnBackButton" VerticalOptions="Center"></ImageButton>
+            <ImageButton Source="back_icon" Scale="0.4" Rotation="180" Clicked="OnBackButton"></ImageButton>
             
             <Label 
                Text="Welcome back"
@@ -29,20 +24,17 @@
                FontAttributes="Bold"
                 Margin="0,0,0,0" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
         </HorizontalStackLayout>
-        
-        
+
         
 
-        <!-- Középső rész: Beviteli mezők és távolság -->
-        <VerticalStackLayout Grid.Row="1"
-                           Spacing="10"
-                           VerticalOptions="Center" Margin="20,0,20,0">
+        <!-- Középső rész: email + password input -->
+        <VerticalStackLayout Grid.Row="1" Spacing="10" Margin="40,0,40,0">
             <Frame 
-                   BorderColor="Transparent" BackgroundColor="Transparent"
+                   BorderColor="#D9D9D9" BackgroundColor="Transparent"
                    HorizontalOptions="FillAndExpand"
                    CornerRadius="15"
                    Padding="0"
-                   MinimumHeightRequest="40">
+                   >
 
                 <Entry x:Name="emailEntry" Placeholder="enter your email"
                        Keyboard="Email"
@@ -52,13 +44,13 @@
                        FontSize="Medium" />
             </Frame>
 
-                <Border BackgroundColor="#676767" Margin="30,0,30,0" HeightRequest="0.2"></Border>
+                <!-- <Border BackgroundColor="#676767" Margin="30,0,30,0" HeightRequest="0.2"></Border> -->
 
-                <Frame BorderColor="Transparent" BackgroundColor="Transparent"
+            <Frame BorderColor="#D9D9D9" BackgroundColor="Transparent"
                    HorizontalOptions="FillAndExpand"
                    CornerRadius="15"
                    Padding="0"
-                   MinimumHeightRequest="40">
+                   >
                 <Entry x:Name="passwordEntry" Placeholder="enter your password"
                        IsPassword="True"
 
@@ -67,21 +59,20 @@
                        HorizontalTextAlignment="Center"
                        FontSize="Medium" />
             </Frame>
-        </VerticalStackLayout>
+      
 
+            
         <!-- Log In gomb -->
-        <VerticalStackLayout Grid.Row="2">
+        
             <Button 
                               Text="LOG  IN"
                               FontSize="Small"
                               BackgroundColor="#4E4E4E"
                               TextColor="White"  
                               FontFamily="K2D-Bold"
-                              CornerRadius="20"
-                              MinimumHeightRequest="45"
+                              CornerRadius="20" Margin="0,40,0,0"
                               HorizontalOptions="FillAndExpand"
                               VerticalOptions="End"
-                              Margin="40,0,40,0" 
                               Clicked="OnLogIn">
                            <Button.Shadow>
                                  <Shadow Brush="#4F4F4F" Offset="1,5" />
@@ -89,16 +80,6 @@
                        </Button>
                    
 
-            <!-- Forgot Password gomb -->
-            <Button 
-                Text="Forgot Password ?"
-                FontSize="Small"
-                BackgroundColor="Transparent"
-                TextColor="Red"
-                FontFamily="K2D-Light"
-                Margin="0,5,0,0"
-                VerticalOptions="End"
-                Clicked="OnForgotPassword" />
             
             
                 </VerticalStackLayout>

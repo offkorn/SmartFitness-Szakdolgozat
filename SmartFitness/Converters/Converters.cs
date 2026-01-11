@@ -273,11 +273,11 @@ public class ListToStringConverter : IValueConverter
     }
 }
 
+
 public class UserIdToInitialsConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        // TODO: Felhasználó nevének lekérése
         return "U";
     }
 
@@ -286,6 +286,7 @@ public class UserIdToInitialsConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
 
 public class UserIdToNameConverter : IValueConverter
 {

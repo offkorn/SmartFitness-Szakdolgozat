@@ -38,13 +38,13 @@ namespace SmartFitness.Authentication
 
         private void InitializeFrames()
         {
-            Day1Frame.BackgroundColor = Colors.WhiteSmoke;
-            Day2Frame.BackgroundColor = Colors.WhiteSmoke;
-            Day3Frame.BackgroundColor = Colors.WhiteSmoke;
-            Day4Frame.BackgroundColor = Colors.WhiteSmoke;
-            Day5Frame.BackgroundColor = Colors.WhiteSmoke;
-            Day6Frame.BackgroundColor = Colors.WhiteSmoke;
-            Day7Frame.BackgroundColor = Colors.WhiteSmoke;
+            Day1Frame.BackgroundColor = Colors.White;
+            Day2Frame.BackgroundColor = Colors.White;
+            Day3Frame.BackgroundColor = Colors.White;
+            Day4Frame.BackgroundColor = Colors.White;
+            Day5Frame.BackgroundColor = Colors.White;
+            Day6Frame.BackgroundColor = Colors.White;
+            Day7Frame.BackgroundColor = Colors.White;
         }
 
         private void SetupGestureRecognizers()
@@ -83,12 +83,12 @@ namespace SmartFitness.Authentication
             // Reset previous selection
             if (_selectedFrame != null)
             {
-                _selectedFrame.BackgroundColor = Colors.WhiteSmoke;
+                _selectedFrame.BackgroundColor = Colors.White;
             }
 
             // Set new selection
             _selectedFrame = selectedFrame;
-            _selectedFrame.BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue
+            _selectedFrame.BackgroundColor = Color.FromRgb(218, 215, 147); 
             _workoutPrefs.WorkoutDays = days.ToString(); // Szövegként tároljuk
         }
 

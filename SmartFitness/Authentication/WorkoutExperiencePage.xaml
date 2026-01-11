@@ -2,26 +2,30 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartFitness.Authentication.WorkoutExperiencePage"
-             Title="Creat Account"
-             BackgroundColor="White">
+             Shell.NavBarIsVisible="False"
+              BackgroundColor="#F6FAFD"
+             NavigationPage.HasNavigationBar="False" 
+             Padding="0,40,0,0">
 
-    <ScrollView VerticalOptions="FillAndExpand">
-        <VerticalStackLayout Padding="0" Spacing="15" HorizontalOptions="Center">
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Padding="0" Spacing="15" >
 
-            <!-- Cím -->
-            <Label Text="Select your workout experience level"
+            
+        <!-- tab bar -->
+        <Label Text="Select your workout experience level"
                    FontSize="Large"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   Margin="40,10,0,20" />
+                   Margin="40,20,40,40" HorizontalTextAlignment="Center"/>
 
-            <!-- Edzéstapasztalat választása -->
+
+        <!-- Edzéstapasztalat választása -->
             <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Frame x:Name="BeginnerFrame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
-                       Padding="10"
+                       Padding="20"
                        MinimumHeightRequest="50"
                        WidthRequest="200">
                     <Label Text="Beginner"
@@ -31,10 +35,10 @@
                 </Frame>
 
                 <Frame x:Name="IntermediateFrame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
-                       Padding="10"
+                       Padding="20"
                        MinimumHeightRequest="50"
                        WidthRequest="200">
                     <Label Text="Intermediate"
@@ -44,10 +48,10 @@
                 </Frame>
 
                 <Frame x:Name="AdvancedFrame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
-                       Padding="10"
+                       Padding="20"
                        MinimumHeightRequest="50"
                        WidthRequest="200">
                     <Label Text="Advanced"
@@ -57,29 +61,25 @@
                 </Frame>
             </VerticalStackLayout>
 
-            <!-- Gombok -->
-            <HorizontalStackLayout Margin="0,40,0,0"
-                                  Spacing="20"
-                                  HorizontalOptions="Center">
-                <Button x:Name="PreviousButton"
-                        Text="Previous"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
+        <!-- Gombok -->
+        <HorizontalStackLayout Margin="0,60,0,0" Spacing="20" HorizontalOptions="Center" >
+            <Button Text="Previous" 
+                        CornerRadius="20" Padding="10,15" 
+                        BackgroundColor="#999101"
+                        TextColor="WhiteSmoke"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
-                        Clicked="OnPreviousButtonClicked" />
-                <Button x:Name="NextButton"
-                        Text="Next"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
+                        Clicked="OnPreviousButtonClicked"  />
+            <Button Text="Next"
+                        CornerRadius="20" Padding="10,15" 
+                        BackgroundColor="#859700"
+                        TextColor="White"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
                         Clicked="OnNextButtonClicked" />
-            </HorizontalStackLayout>
+        </HorizontalStackLayout>
         </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView >
 </ContentPage>

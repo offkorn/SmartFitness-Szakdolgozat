@@ -28,7 +28,7 @@ namespace SmartFitness.Authentication
             // Initialize all frames
             foreach (var frame in _durationFrames.Values)
             {
-                frame.BackgroundColor = Colors.WhiteSmoke;
+                frame.BackgroundColor = Colors.White;
             }
 
             // Restore previous selection if exists
@@ -45,7 +45,7 @@ namespace SmartFitness.Authentication
                 };
                 if (selectedDuration != null && _durationFrames.TryGetValue(selectedDuration, out var frame))
                 {
-                    frame.BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue
+                    frame.BackgroundColor = Color.FromRgb(218, 215, 147); 
                 }
             }
 
@@ -73,8 +73,8 @@ namespace SmartFitness.Authentication
             foreach (var (dur, frame) in _durationFrames)
             {
                 frame.BackgroundColor = dur == duration
-                    ? Color.FromRgb(173, 216, 230) // LightBlue for selected
-                    : Colors.WhiteSmoke;            // WhiteSmoke for others
+                    ? Color.FromRgb(218, 215, 147) // LightBlue for selected
+                    : Colors.White;            // WhiteSmoke for others
             }
         }
 

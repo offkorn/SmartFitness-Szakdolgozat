@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartFitness.Authentication.components.CustomEntry"
+             x:Class="SmartFitness.components.CustomEntry"
              x:Name="CustomEntryControl">
     
     <ContentView.BindingContext>
@@ -12,8 +12,8 @@
            BorderColor="Transparent"
            HorizontalOptions="FillAndExpand"
            CornerRadius="20"
-           Padding="8"
-           MinimumHeightRequest="50">
+           Padding="10,2"
+           MinimumHeightRequest="0">
         
         <Entry Placeholder="{Binding Placeholder}"
                Text="{Binding Text, Mode=TwoWay}"
@@ -21,7 +21,7 @@
                IsPassword="{Binding IsPassword}"
                HorizontalOptions="FillAndExpand"
                VerticalOptions="Center"
-               HorizontalTextAlignment="Center"
+               HorizontalTextAlignment="Start"
                PlaceholderColor="DarkSlateGrey"
                TextColor="Black"
                BackgroundColor="White"

@@ -1,4 +1,4 @@
-namespace SmartFitness.Authentication.components;
+namespace SmartFitness.components;
 
 public partial class ExerciseSetBlock : ContentView
 {

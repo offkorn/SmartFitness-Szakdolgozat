@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.Pages.ArticleDetailPage"
+             Title="{Binding PageTitle}"
+             BackgroundColor="#F6FAFD"
+             Shell.NavBarIsVisible="True">
+
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Spacing="0" Padding="0" VerticalOptions="FillAndExpand">
+
+            <Frame BackgroundColor="White" HasShadow="False" BorderColor="Transparent" CornerRadius="0" Padding="12">
+                <VerticalStackLayout Margin="15,10" Spacing="8">
+                    <Frame BorderColor="Transparent" BackgroundColor="Black" VerticalOptions="Start" HorizontalOptions="Start" Padding="8">
+                        <Label Text="{Binding Category}" FontSize="Micro" FontAttributes="Bold" TextColor="White"/>
+                    </Frame>
+
+                    <Label FontAttributes="Bold" FontSize="Medium" Margin="0,8,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding MainTitlePart1}" FontAttributes="Bold" FontSize="Medium" TextColor="#1A2A3A"/>
+                                <Span Text=" " />
+                                <Span Text="{Binding MainTitlePart2}" FontAttributes="Bold" FontSize="Medium" TextColor="DarkOrange"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Text="{Binding Description}" FontSize="Small" TextColor="#4A6375" LineHeight="1.2"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White" HasShadow="False" BorderColor="Transparent" CornerRadius="0" Margin="0,12,0,0" Padding="12">
+                <VerticalStackLayout Margin="15,10" Spacing="2">
+                    <Frame BorderColor="Transparent" BackgroundColor="Black" VerticalOptions="Start" HorizontalOptions="Start" Padding="8" Margin="0,0,0,20">
+                        <Label Text="KEY TIPS" FontSize="Micro" FontAttributes="Bold" TextColor="White"/>
+                    </Frame>
+
+                    <Label Text="{Binding KeyTip1Title}" FontSize="Medium" TextColor="#1A2A3A" FontAttributes="Bold"/>
+                    <Label Text="{Binding KeyTip1Text}" FontSize="Subtitle" TextColor="#1A2A3A" Margin="0,0,0,20"/>
+
+                    <Label Text="{Binding KeyTip2Title}" FontSize="Medium" TextColor="#1A2A3A" FontAttributes="Bold"/>
+                    <Label Text="{Binding KeyTip2Text}" FontSize="Subtitle" TextColor="#1A2A3A" Margin="0,0,0,20"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White" HasShadow="False" BorderColor="Transparent" CornerRadius="0" Margin="0,12,0,20" Padding="12">
+                <VerticalStackLayout Margin="15,10" Spacing="8">
+                    <Frame BorderColor="Transparent" BackgroundColor="Black" VerticalOptions="Start" HorizontalOptions="Start" Padding="8">
+                        <Label Text="ADDITIONAL INFO" FontSize="Micro" FontAttributes="Bold" TextColor="White"/>
+                    </Frame>
+                    <Label Text="{Binding AdditionalInfo}" FontSize="Subtitle" TextColor="#1A2A3A"/>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
+    
+</ContentPage>

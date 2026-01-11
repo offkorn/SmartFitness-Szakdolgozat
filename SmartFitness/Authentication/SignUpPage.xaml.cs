@@ -1,5 +1,6 @@
 ﻿using SmartFitness.Models;
 using SmartFitness.Services;
+using SmartFitness.components;
 using System;
 
 namespace SmartFitness.Authentication
@@ -16,7 +17,7 @@ namespace SmartFitness.Authentication
 
         private async void NextButton_Clicked(object sender, EventArgs e)
         {
-            // Ellenőrzések
+            // Validációk 
             if (string.IsNullOrWhiteSpace(FirstNameEntry.Text) ||
                 string.IsNullOrWhiteSpace(LastNameEntry.Text) ||
                 string.IsNullOrWhiteSpace(EmailEntry.Text) ||
@@ -35,43 +36,77 @@ namespace SmartFitness.Authentication
 
             try
             {
-                // Ellenőrizzük, hogy az email már létezik-e a public.users táblában
-                var existingUser = await SupabaseClient.Client
-                    .From<User>()
-                    .Where(x => x.Email == EmailEntry.Text)
-                    .Single();
-                if (existingUser != null)
-                {
-                    await DisplayAlert("Error", "This email is already registered. Please use a different email or log in.", "OK");
-                    return;
-                }
-
-                // Supabase Auth regisztráció
+                // 1. Regisztráció
                 var authResponse = await SupabaseClient.Client.Auth.SignUp(EmailEntry.Text, PasswordEntry.Text);
-                if (authResponse.User == null)
+
+                // 2. Ha a regisztráció sikeres
+                if (authResponse.User != null)
                 {
-                    await DisplayAlert("Error", "Registration failed: Unknown error", "OK");
-                    return;
+                    // --- JAVÍTÁS KEZDETE ---
+                    // Ellenőrizzük, van-e Session. Ha nincs, beléptetjük a felhasználót kézzel.
+                    if (SupabaseClient.Client.Auth.CurrentSession == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Regisztráció kész, de nincs Session. Automatikus belépés...");
+                        try
+                        {
+                            await SupabaseClient.Client.Auth.SignIn(EmailEntry.Text, PasswordEntry.Text);
+                        }
+                        catch (Exception loginEx)
+                        {
+                            await DisplayAlert("Hiba", "A regisztráció sikerült, de a belépés nem. Jelentkezz be manuálisan.", "OK");
+                            await Navigation.PopAsync();
+                            return;
+                        }
+                    }
+                    // --- JAVÍTÁS VÉGE ---
+
+                    // Ha most már van Session, mehetünk tovább
+                    if (SupabaseClient.Client.Auth.CurrentSession != null)
+                    {
+                        NavigateToNextPage(authResponse.User.Id);
+                    }
+                    else
+                    {
+                        await DisplayAlert("Hiba", "Váratlan hiba: Nem sikerült a munkamenet (Session) létrehozása.", "OK");
+                    }
                 }
-
-
-                // Adatok mentése az ideiglenes objektumba
-                _newUser.Id = authResponse.User.Id;
-                _newUser.FirstName = FirstNameEntry.Text;
-                _newUser.LastName = LastNameEntry.Text;
-                _newUser.Email = EmailEntry.Text;
-                _newUser.CreatedAt = DateTime.UtcNow;
-
-                // Hibakeresés: naplózzuk az ID-t
-                System.Diagnostics.Debug.WriteLine($"SignUpPage: User ID = {_newUser.Id}");
-
-                // Navigáció a következő oldalra
-                await Navigation.PushAsync(new PersonalInfoPage(_newUser));
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Registration failed: {ex.Message}", "OK");
+                // Ha a user már létezik...
+                if (ex.Message.Contains("User already registered") || ex.Message.Contains("422"))
+                {
+                    try
+                    {
+                        // Silent login próbálkozás
+                        var loginResponse = await SupabaseClient.Client.Auth.SignIn(EmailEntry.Text, PasswordEntry.Text);
+                        if (loginResponse.User != null)
+                        {
+                            NavigateToNextPage(loginResponse.User.Id);
+                            return;
+                        }
+                    }
+                    catch
+                    {
+                        await DisplayAlert("Hiba", "Ez az email cím már regisztrálva van. Kérlek jelentkezz be.", "OK");
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Error", $"Registration failed: {ex.Message}", "OK");
+                }
             }
+        }
+
+        private async void NavigateToNextPage(string userId)
+        {
+            _newUser.Id = userId;
+            _newUser.FirstName = FirstNameEntry.Text;
+            _newUser.LastName = LastNameEntry.Text;
+            _newUser.Email = EmailEntry.Text;
+            _newUser.CreatedAt = DateTime.UtcNow;
+
+            await Navigation.PushAsync(new PersonalInfoPage(_newUser));
         }
 
         private async void OnBackButton(object sender, EventArgs e)

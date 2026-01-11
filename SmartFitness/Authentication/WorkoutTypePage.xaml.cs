@@ -32,14 +32,14 @@ namespace SmartFitness.Authentication
             // Initialize colors and restore selections
             foreach (var frame in _workoutFrames.Values)
             {
-                frame.BackgroundColor = Colors.WhiteSmoke;
+                frame.BackgroundColor = Colors.White;
             }
 
             foreach (var type in _selectedTypes)
             {
                 if (_workoutFrames.TryGetValue(type, out var frame))
                 {
-                    frame.BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue (#BADAF9)
+                    frame.BackgroundColor = Color.FromRgb(218, 215, 147); 
                 }
             }
 
@@ -57,12 +57,12 @@ namespace SmartFitness.Authentication
             if (_selectedTypes.Contains(type))
             {
                 _selectedTypes.Remove(type);
-                _workoutFrames[type].BackgroundColor = Colors.WhiteSmoke;
+                _workoutFrames[type].BackgroundColor = Colors.White;
             }
             else
             {
                 _selectedTypes.Add(type);
-                _workoutFrames[type].BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue
+                _workoutFrames[type].BackgroundColor = Color.FromRgb(218, 215, 147); // 
             }
         }
 

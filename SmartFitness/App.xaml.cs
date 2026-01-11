@@ -13,34 +13,38 @@ namespace SmartFitness
         public App()
         {
             InitializeComponent();
+            MainPage = new AppShell();
 
-            // Supabase inicializálás
-            SupabaseClient.Initialize();
-
-            // Ellenőrizzük, van-e bejelentkezett felhasználó
-            MainPage = IsUserLoggedIn() ? new AppShell() : new NavigationPage(new WelcomePage());
         }
 
-        private bool IsUserLoggedIn()
+
+        // amikor az app visszatér a háttérből
+        protected override async void OnResume()
         {
-            // Ha van tárolt UserId, lekérdezzük a Supabase-ből
-            string? userId = Preferences.Get("UserId", null);
-            if (!string.IsNullOrEmpty(userId))
+            base.OnResume();
+
+            
+            try
             {
-                Task.Run(async () =>
-                {
-                    var user = await SupabaseClient.Client
-                        .From<SmartFitness.Models.User>()
-                        .Where(u => u.Id == userId)
-                        .Single();
-                    if (user != null)
-                    {
-                        CurrentUser = user;
-                    }
-                }).Wait(); // Szinkron várakozás az egyszerűség kedvéért (élesben async legyen)
-                return CurrentUser != null;
+                System.Diagnostics.Debug.WriteLine("App felébredt - Session frissítése...");
+
+                // érvényes-e még a token, és ha nem - kér újat 
+                await SupabaseClient.Client.Auth.RetrieveSessionAsync();
+
+                System.Diagnostics.Debug.WriteLine("Session updated!");
             }
-            return false;
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to update session: {ex.Message}");
+            }
         }
+
+
+
+
+
     }
+
+
+
 }

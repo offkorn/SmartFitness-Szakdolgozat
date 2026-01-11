@@ -1,0 +1,45 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartFitness.components.DailyQuoteBlock">
+
+
+    
+
+    <Grid x:Name="TapGrid">
+        
+        <!-- Quote frame -->
+        <Frame BackgroundColor="White"
+       CornerRadius="15"
+       Padding="15"
+       HasShadow="True"
+       BorderColor="Transparent"
+           x:Name="QuoteFrame">
+
+            <Frame.Shadow>
+                <Shadow Brush="#C0C0C0" Offset="1,1" Radius="5" />
+            </Frame.Shadow>
+
+
+            <!-- Quotes -->
+            <Label x:Name="QuoteLabel"
+                   FontSize="Large"
+                   TextColor="White"
+                   FontAttributes="Italic"
+                   LineBreakMode="WordWrap" 
+                   Padding="10"
+                   HorizontalTextAlignment="Center"/>
+
+        </Frame>
+
+        <!-- if tap qoute change -->
+    <Grid BackgroundColor="Transparent" InputTransparent="False">
+
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnQuoteTapped" />
+        </Grid.GestureRecognizers>
+
+    </Grid>
+
+    </Grid>
+
+</ContentView>

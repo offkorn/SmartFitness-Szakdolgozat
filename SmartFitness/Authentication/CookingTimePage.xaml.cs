@@ -46,11 +46,11 @@ namespace SmartFitness.Authentication
 
         private void InitializeFrames()
         {
-            LessThan10Frame.BackgroundColor = Colors.WhiteSmoke;
-            TwentyMinFrame.BackgroundColor = Colors.WhiteSmoke;
-            ThirtyMinFrame.BackgroundColor = Colors.WhiteSmoke;
-            SixtyMinFrame.BackgroundColor = Colors.WhiteSmoke;
-            OneTwentyMinFrame.BackgroundColor = Colors.WhiteSmoke;
+            LessThan10Frame.BackgroundColor = Colors.White;
+            TwentyMinFrame.BackgroundColor = Colors.White;
+            ThirtyMinFrame.BackgroundColor = Colors.White;
+            SixtyMinFrame.BackgroundColor = Colors.White;
+            OneTwentyMinFrame.BackgroundColor = Colors.White;
         }
 
         private void SetupGestureRecognizers()
@@ -81,12 +81,12 @@ namespace SmartFitness.Authentication
             // Reset previous selection
             if (_selectedFrame != null)
             {
-                _selectedFrame.BackgroundColor = Colors.WhiteSmoke;
+                _selectedFrame.BackgroundColor = Colors.White;
             }
 
             // Set new selection
             _selectedFrame = selectedFrame;
-            _selectedFrame.BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue
+            _selectedFrame.BackgroundColor = Color.FromRgb(218, 215, 147); // LightBlue
             _dietPrefs.CookingTime = minutes;
         }
 
@@ -110,10 +110,11 @@ namespace SmartFitness.Authentication
                 // A User ID alapján állítsuk be a foreign key-t
                 _dietPrefs.UserId = _newUser.Id;
 
-                // Mentsük a DietPreferences-t a Supabase-be
+                // Mentsük a DietPreferences-t a Supabase-be  
                 var dietResponse = await SupabaseClient.Client
                     .From<DietPreferences>()
-                    .Insert(_dietPrefs);
+                    .OnConflict("user_id")
+                    .Upsert(_dietPrefs);
 
                 await DisplayAlert("Success", "Registration completed successfully!", "OK");
 

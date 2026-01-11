@@ -40,7 +40,7 @@ namespace SmartFitness.Authentication
         {
             foreach (var frame in _goalFrames.Values)
             {
-                frame.BackgroundColor = Colors.WhiteSmoke;
+                frame.BackgroundColor = Colors.White;
             }
 
             // Visszaállítjuk a korábban kiválasztott célokat
@@ -48,7 +48,7 @@ namespace SmartFitness.Authentication
             {
                 if (_goalFrames.TryGetValue(goal, out var frame))
                 {
-                    frame.BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue
+                    frame.BackgroundColor = Color.FromRgb(218, 215, 147); 
                 }
             }
         }
@@ -68,12 +68,12 @@ namespace SmartFitness.Authentication
             if (_selectedGoals.Contains(goal))
             {
                 _selectedGoals.Remove(goal);
-                _goalFrames[goal].BackgroundColor = Colors.WhiteSmoke;
+                _goalFrames[goal].BackgroundColor = Colors.White;
             }
             else
             {
                 _selectedGoals.Add(goal);
-                _goalFrames[goal].BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue
+                _goalFrames[goal].BackgroundColor = Color.FromRgb(218, 215, 147); // LightBlue
             }
         }
 

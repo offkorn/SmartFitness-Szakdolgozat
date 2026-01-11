@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartFitness.Converters" 
              Shell.BackButtonBehavior="{StaticResource CustomBackBehavior}"
              x:Class="SmartFitness.Pages.FoodPage"
              BackgroundColor="#F6FAFD"
              NavigationPage.HasBackButton="False">
+
+
+    <ContentPage.Resources>
+        <converters:NullToDefaultImageConverter x:Key="NullToDefaultImageConverter" />
+    </ContentPage.Resources>
 
     <Grid RowDefinitions="*,Auto" BackgroundColor="Transparent">
         
@@ -14,7 +20,7 @@
             <VerticalStackLayout Spacing="0" Padding="0,10">
                 
                 <!-- Felső rész: Cím és Saved Meals -->
-                <Grid ColumnDefinitions="*,auto" Padding="15,10" Margin="0,0,0,40" ColumnSpacing="30" >
+                <Grid ColumnDefinitions="*,auto" Padding="15,10" Margin="0,0,0,30" ColumnSpacing="30" >
                     
                     <Frame Grid.Column="0"
                            HasShadow="True"
@@ -50,96 +56,167 @@
                            Padding="15,10"
                            Margin="0,20,0,20"
                            HasShadow="True">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSavedMealsTapped" />
+                        </Frame.GestureRecognizers>
+
+            
                         
-                        <Frame.Shadow>
-                            <Shadow Brush="#E8EBEE" Offset="1,4"  Radius="0"/>
-                        </Frame.Shadow>
-                        
+
                         <VerticalStackLayout>
                             <Label Text="Saved"
-                                    FontSize="Medium"
-                                    
+                                    FontSize="Medium" 
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center" TextColor="White"/>
+                            
                             <Label Text="meals"
                                     FontSize="Medium"
-                                    
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center" TextColor="White"/>
                         </VerticalStackLayout>
                     </Frame>
                 </Grid>
 
+                
                 <!-- Search -->
                 <Frame BackgroundColor="#F6FAFD"
                        BorderColor="#E2E2E2"
                        HorizontalOptions="FillAndExpand"
                        CornerRadius="15"
                        Padding="0,0"
-                       MinimumHeightRequest="30"
-                       Margin="20,0,20,40" HasShadow="True">
+                       MinimumHeightRequest="50"
+                       Margin="20,0,20,20" 
+                       HasShadow="True">
+
                     <Frame.Shadow>
-                        <Shadow Brush="#E8EBEE" Offset="1,4"  Radius="0"/>
+                        <Shadow Brush="#E8EBEE" Offset="1,4" Radius="0"/>
                     </Frame.Shadow>
-                    
+
                     <Grid>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSearchBarTapped" />
+                        </Grid.GestureRecognizers>
+
                         <Entry Placeholder="Search for meals"
-                               Keyboard="Default"
+                               IsReadOnly="True"
+                               InputTransparent="True" 
                                HorizontalOptions="FillAndExpand"
                                Margin="20,0,40,0"
                                VerticalOptions="Center"
                                PlaceholderColor="DarkSlateGrey"
                                TextColor="Black"
                                FontSize="Small"/>
+
                         <Image Margin="0,0,20,0"
                                HorizontalOptions="End"
                                VerticalOptions="Center"
                                Source="search_icon.png" 
-                               Scale="0.7"/>
+                               Scale="0.7"
+                               InputTransparent="True"/>
                     </Grid>
                 </Frame>
 
-                
-                <!-- recommended title  + see all-->
-                <Grid ColumnDefinitions="*,Auto" Margin="10,0,10,0" ColumnSpacing="10">
-                    <Label Grid.Column="0" 
+
+                <!-- Daily Calorie Recommended -->
+                <Frame 
+                       HasShadow="True"
+                       BorderColor="Transparent"
+                       BackgroundColor="Transparent"
+                       CornerRadius="15"
+                       Padding="0"
+                       Margin="20,0,20,10">
+
+                    <Frame.Shadow>
+                        <Shadow Brush="#E8EBEE" Offset="1,2"  Radius="5"/>
+                    </Frame.Shadow>
+
+                    <Grid Padding="10">
+                        <!-- Gradient háttér -->
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#ffffff" Offset="0.0" />
+                                <GradientStop Color="#ECECEC" Offset="0.8" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Recommended Daily Intake"
+                                   FontAttributes="Bold"
+                                   FontSize="Small" HorizontalOptions="Center"
+                                   TextColor="#5A4A00"/>
+
+                            <Label x:Name="CaloriesLabel"
+                                   Text="--- kcal"
+                                   FontAttributes="Bold"
+                                   FontSize="Large" HorizontalOptions="Center"
+                                   TextColor="#859700"/>
+
+                            <Label Text="Based on your personal details."
+                                   FontSize="Caption" HorizontalOptions="Center"
+                                   TextColor="#5A5A5A"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+
+
+                <!-- Recommended Meals-->
+                <Frame Padding="0" Margin="0,0,0,20" HasShadow="True" BorderColor="Transparent" HorizontalOptions="FillAndExpand" CornerRadius="0">
+
+                    <Grid>
+                        <!-- Gradient háttér -->
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                <GradientStop Color="#CFFFE1" Offset="0.0" />
+                                <GradientStop Color="#F6FAFD" Offset="0.4" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        <VerticalStackLayout Spacing="15" Margin="0,30,0,0">
+                            
+                        <!-- recommended title  + see all-->
+                        <Grid ColumnDefinitions="*,Auto" Margin="10,0,10,0" ColumnSpacing="10">
+                            <Label Grid.Column="0" 
                                        Text="Recommended" 
                                        FontSize="Subtitle" 
                                        FontAttributes="Bold" 
                                        TextColor="Black" 
                                        HorizontalTextAlignment="Start" />
-                    <Label Grid.Column="1" 
+                                <!-- 
+                                <Label Grid.Column="1" 
                                        Text="See all" 
                                        FontSize="Small" 
                                        TextColor="Black" 
-                                       HorizontalTextAlignment="End" />
-                </Grid>
+                                       HorizontalTextAlignment="End" />-->
+                        </Grid>
 
-                
-                
-                <!-- Recommended Meals-->
-              
-                            <CollectionView x:Name="RecommendedStack" HorizontalScrollBarVisibility="Never">
-                                <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0" />
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Frame BackgroundColor="#ffffff" 
+
+
+                        <CollectionView x:Name="RecommendedStack" HorizontalScrollBarVisibility="Never">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame BackgroundColor="#ffffff" 
                                                CornerRadius="15" 
                                                WidthRequest="220" 
                                                Padding="0" 
                                                BorderColor="Transparent"
-                                               Margin="20,20,0,30"
+                                               Margin="10,0,0,20"
                                                >
 
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding BindingContext.ViewRecipeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}"/>
-                                            </Frame.GestureRecognizers>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.ViewRecipeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
 
-                                            <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="0">
+                                        <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="0">
 
-                                                <Image Source="{Binding ImageUrl}" Aspect="AspectFill" Margin="0,0,0,5" HeightRequest="160"/>
+                                                <Image Source="{Binding ImageUrl, Converter={StaticResource NullToDefaultImageConverter}, ConverterParameter='default_food_icon.svg'}" 
+                                                   Aspect="AspectFill" 
+                                                   Margin="0,0,0,5" 
+                                                   HeightRequest="160"/>
 
                                                 <Label Text="{Binding Title}" 
                                                        FontAttributes="Bold" 
@@ -149,39 +226,40 @@
                                                        Margin="0,0,0,5"
                                                        FontSize="Subtitle"
                                                        LineBreakMode="TailTruncation"/>
-                                                <HorizontalStackLayout Spacing="20" VerticalOptions="End" HorizontalOptions="CenterAndExpand" Margin="0,0,0,10">
-                                                    <Label Text="{Binding CookingTime, StringFormat='{0} mins'}" 
+                                            <HorizontalStackLayout Spacing="20" VerticalOptions="End" HorizontalOptions="CenterAndExpand" Margin="0,0,0,10">
+                                                <Label Text="{Binding CookingTime, StringFormat='{0} mins'}" 
                                                            VerticalTextAlignment="End" 
                                                            FontSize="Micro"/>
-                                                    <Label Text="{Binding Calories, StringFormat='{0} cals'}" 
+                                                <Label Text="{Binding Calories, StringFormat='{0} cals'}" 
                                                            VerticalTextAlignment="End" 
                                                            FontSize="Micro"/>
-                                                </HorizontalStackLayout>
-                                            </VerticalStackLayout>
-                                        </Frame>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                            
+                        </VerticalStackLayout>
+                    </Grid>
                         
-                   
-                
-
+                </Frame>
 
 
 
                 <!-- Breakfast -->
-                <Frame Padding="0" Margin="0,0,0,20" HasShadow="True" BorderColor="Transparent" HorizontalOptions="FillAndExpand" MinimumHeightRequest="260" CornerRadius="0">
+                <Frame Padding="0" Margin="0,0,0,20" HasShadow="True" BorderColor="Transparent" HorizontalOptions="FillAndExpand" CornerRadius="0">
 
                     <Grid>
                         <!-- Gradient háttér -->
                         <Grid.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                <GradientStop Color="#E3FF7C" Offset="0.0" />
-                                <GradientStop Color="White" Offset="0.8" />
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                <GradientStop Color="#FFEFA3" Offset="0.0" />
+                                <GradientStop Color="#F6FAFD" Offset="0.4" />
                             </LinearGradientBrush>
                         </Grid.Background>
 
-                        
+
                         <!-- title + see all - button-->
                         <VerticalStackLayout Spacing="15" Margin="0,30,0,0">
 
@@ -192,12 +270,12 @@
                                                        FontAttributes="Bold" 
                                                        TextColor="Black" 
                                                        HorizontalTextAlignment="Start" />
-                                                <Label Grid.Column="1" 
+                                <!-- <Label Grid.Column="1" 
                                                        x:Name="AllBreakfastLabel"
                                                        Text="See all" 
                                                        FontSize="Small" 
                                                        TextColor="Black" 
-                                                       HorizontalTextAlignment="End" />
+                                                       HorizontalTextAlignment="End" />-->
                             </Grid>
 
 
@@ -214,7 +292,7 @@
                                                Padding="0" 
                                                BorderColor="Transparent"
                                                Margin="10,0,0,20"
-                                               MinimumHeightRequest="180">
+                                               >
                                             
                                             <Frame.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding BindingContext.ViewRecipeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}"/>
@@ -222,7 +300,10 @@
                                             
                                             <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="0">
 
-                                                <Image Source="{Binding ImageUrl}" Aspect="AspectFill" Margin="0,0,0,5" HeightRequest="160"/>
+                                                <Image Source="{Binding ImageUrl, Converter={StaticResource NullToDefaultImageConverter}, ConverterParameter='default_food_icon.svg'}" 
+                                                   Aspect="AspectFill" 
+                                                   Margin="0,0,0,5" 
+                                                   HeightRequest="160"/>
 
                                                 <Label Text="{Binding Title}" 
                                                        FontAttributes="Bold" 
@@ -251,14 +332,14 @@
          
 
         <!-- Lunch -->
-                <Frame Padding="0" Margin="0,0,0,0" HasShadow="True" MinimumHeightRequest="260" BorderColor="Transparent" HorizontalOptions="FillAndExpand"  CornerRadius="0">
+                <Frame Padding="0" Margin="0,0,0,20" HasShadow="True"  BorderColor="Transparent" HorizontalOptions="FillAndExpand"  CornerRadius="0">
 
                     <Grid>
                         <!-- Gradient háttér -->
                         <Grid.Background>
                             <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Color="#FFD87C" Offset="0.0" />
-                                <GradientStop Color="White" Offset="1" />
+                                <GradientStop Color="#FFD1A1" Offset="0.0" />
+                                <GradientStop Color="#F6FAFD" Offset="0.4" />
                             </LinearGradientBrush>
                         </Grid.Background>
 
@@ -272,15 +353,14 @@
                                        Text="Lunch" 
                                        FontSize="Subtitle" 
                                        FontAttributes="Bold"
-                                       FontFamily=""
                                        TextColor="Black" 
                                        HorizontalTextAlignment="Start" />
-                                <Label Grid.Column="1" 
+                                <!-- <Label Grid.Column="1" 
                                        x:Name="AllLunchLabel"
                                        Text="See all" 
                                        FontSize="Small" 
                                        TextColor="Black" 
-                                       HorizontalTextAlignment="End" />
+                                       HorizontalTextAlignment="End" /> -->
                             </Grid>
 
 
@@ -307,8 +387,11 @@
                                             
                                             <VerticalStackLayout VerticalOptions="StartAndExpand" Spacing="0" Padding="0">
 
-                                                
-                                                <Image Source="{Binding ImageUrl}" Aspect="AspectFill" Margin="0,0,0,5" HeightRequest="150"/>
+
+                                                <Image Source="{Binding ImageUrl, Converter={StaticResource NullToDefaultImageConverter}, ConverterParameter='default_food_icon.svg'}" 
+                                                   Aspect="AspectFill" 
+                                                   Margin="0,0,0,5" 
+                                                   HeightRequest="160"/>
 
 
                                                 <Label Text="{Binding Title}" 
@@ -340,19 +423,19 @@
                 
                 <!-- Dinner -->
 
-                <Frame Padding="0" Margin="0,0,0,10" HasShadow="True" MinimumHeightRequest="260" BorderColor="Transparent" HorizontalOptions="FillAndExpand"  CornerRadius="0">
+                <Frame Padding="0" Margin="0,0,0,0" HasShadow="True"  BorderColor="Transparent" HorizontalOptions="FillAndExpand"  CornerRadius="0">
 
                     <Grid>
                         <!-- Gradient háttér -->
                         <Grid.Background>
                             <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Color="#ADF1E1" Offset="0.0" />
-                                <GradientStop Color="#FFD87C" Offset="1" />
+                                <GradientStop Color="#D2E6FF" Offset="0.0" />
+                                <GradientStop Color="#F6FAFD" Offset="0.4" />
                             </LinearGradientBrush>
                         </Grid.Background>
 
-                        
-                       
+
+
                         <VerticalStackLayout Spacing="15" Margin="0,30,0,0">
 
                             <!-- title + see all - button-->
@@ -361,15 +444,14 @@
                                        Text="Dinner" 
                                        FontSize="Subtitle" 
                                        FontAttributes="Bold"
-                                       FontFamily=""
                                        TextColor="Black" 
                                        HorizontalTextAlignment="Start" />
-                                <Label Grid.Column="1" 
+                                <!--  <Label Grid.Column="1" 
                                        x:Name="AllDinnerLabel"
                                        Text="See all" 
                                        FontSize="Small" 
                                        TextColor="Black" 
-                                       HorizontalTextAlignment="End" />
+                                       HorizontalTextAlignment="End" />-->
                             </Grid>
                             
                             
@@ -427,6 +509,7 @@
             </VerticalStackLayout>
         </ScrollView>
 
+     
 
         <!-- Lebegő gomb - Add new meal-->
         <Button Grid.Row="1"

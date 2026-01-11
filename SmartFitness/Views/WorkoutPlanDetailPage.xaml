@@ -127,7 +127,8 @@
                     BackgroundColor="{Binding IsProgramStarted, Converter={StaticResource BoolToBackgroundColorConverter}}"
                     CornerRadius="10"
                     VerticalOptions="CenterAndExpand"
-                    Command="{Binding ToggleStartCommand}"/>
+                    Command="{Binding ToggleStartCommand}" 
+                    Clicked="StartProgramButton_Clicked"/>
 
 
 

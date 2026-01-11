@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using Supabase;
 using SmartFitness.Services;
+using System.Windows.Input;
 
 
 namespace SmartFitness.ViewModels;
@@ -34,13 +35,27 @@ public partial class SimpleWorkoutViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<Exercise> exercises = new();
 
+
+   
+    public IRelayCommand<Exercise> RemoveExerciseCommand { get; }
+    public IRelayCommand<Exercise> RemoveSubExerciseCommand { get; }
+    public IRelayCommand<Exercise> RemoveSetCommand { get; }
+
+
+
+
     public SimpleWorkoutViewModel()
     {
         Title = string.Empty;
         Location = "Gym";
         ExperienceLevel = "Beginner";
-        Console.WriteLine("SimpleWorkoutViewModel initialized");
+
+        RemoveSetCommand = new RelayCommand<Exercise>(OnRemoveSet);
+        RemoveExerciseCommand = new RelayCommand<Exercise>(OnRemoveExercise);
+        RemoveSubExerciseCommand = new RelayCommand<Exercise>(OnRemoveSubExercise);
     }
+
+
 
     [RelayCommand]
     private void AddExercise()
@@ -164,8 +179,8 @@ public partial class SimpleWorkoutViewModel : ObservableObject
                 CreatedBy = App.CurrentUser.Id,
                 CreatedAt = DateTime.UtcNow,
                 Exercises = Exercises.ToList(),
-                PlanId = null, // SimpleWorkout esetén null
-                Day = null     // SimpleWorkout esetén null
+                PlanId = null, 
+                Day = null     
             };
 
             
@@ -179,4 +194,58 @@ public partial class SimpleWorkoutViewModel : ObservableObject
             await Application.Current.MainPage.DisplayAlert("Error", $"Failed to save workout: {ex.Message}", "OK");
         }
     }
+
+    
+
+
+
+    // Remove commands section
+    private void OnRemoveSet(Exercise exercise)
+    {
+        if (exercise == null)
+            return;
+
+        if (exercise.Sets == null || exercise.Sets.Count == 0)
+            return;
+
+        // utolsó set törlése
+        exercise.Sets.RemoveAt(exercise.Sets.Count - 1);
+
+        // sorszámok újraszámozása
+        for (int i = 0; i < exercise.Sets.Count; i++)
+        {
+            exercise.Sets[i].SetNumber = i + 1;
+        }
+    }
+
+    private void OnRemoveExercise(Exercise exercise)
+    {
+        if (exercise == null) return;
+        Exercises.Remove(exercise);
+    }
+
+    private void OnRemoveSubExercise(Exercise sub)
+    {
+        if (sub == null) return;
+
+        foreach (var ex in Exercises)
+        {
+            if (ex.SubExercises.Contains(sub))
+            {
+                ex.SubExercises.Remove(sub);
+                return;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

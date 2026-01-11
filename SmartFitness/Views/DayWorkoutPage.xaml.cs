@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using SmartFitness.Models;
 using SmartFitness.ViewModels;
+using SmartFitness.components;
 using System;
 using System.Collections.ObjectModel;
 

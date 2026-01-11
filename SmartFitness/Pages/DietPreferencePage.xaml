@@ -106,13 +106,7 @@
             </Frame>
 
             
-            <!-- Save Button, -not implemented yet -->
-            <Label 
-                       Text="Save Changes"
-                       FontSize="Medium"
-                       FontAttributes="Bold"
-                    TextColor="#859700"
-                        Margin="0,40,0,0" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+            
 
         </VerticalStackLayout>
     </ScrollView>

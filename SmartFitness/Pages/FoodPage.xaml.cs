@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using Microsoft.Maui.Storage;
 using SmartFitness.Models;
 using SmartFitness.Services;
 using Supabase;
+using Supabase.Gotrue;
 
 namespace SmartFitness.Pages;
 
 public partial class FoodPage : ContentPage
 {
-    private readonly Client _supabase = SupabaseClient.Client;
+    private readonly Supabase.Client _supabase = SupabaseClient.Client;
     private ObservableCollection<Meal> breakfastMeals = new();
     private ObservableCollection<Meal> lunchMeals = new();
     private ObservableCollection<Meal> dinnerMeals = new();
@@ -25,9 +27,9 @@ public partial class FoodPage : ContentPage
 
         ViewRecipeCommand = new Command<Meal>(async (meal) => await ViewRecipe(meal));
 
-        AddLabelNavigation(AllBreakfastLabel, typeof(BreakfastPage));
-        AddLabelNavigation(AllLunchLabel, typeof(LunchPage));
-        AddLabelNavigation(AllDinnerLabel, typeof(DinnerPage));
+        //AddLabelNavigation(AllBreakfastLabel, typeof(BreakfastPage));
+        //AddLabelNavigation(AllLunchLabel, typeof(LunchPage));
+        //AddLabelNavigation(AllDinnerLabel, typeof(DinnerPage));
     }
 
     private void AddLabelNavigation(Label label, Type pageType)
@@ -44,22 +46,23 @@ public partial class FoodPage : ContentPage
     {
         base.OnAppearing();
         await LoadMeals();
+        CalculateDailyCalories();
+
     }
 
     private async Task LoadMeals()
     {
         try
         {
-            // Hibakeresési naplózás a munkamenet állapotáról
+            // Hibakeresés log a session állapotáról
             Console.WriteLine($"[DEBUG] Munkamenet ellenõrzése: CurrentSession = {_supabase.Auth.CurrentSession != null}, User = {_supabase.Auth.CurrentSession?.User != null}");
             Console.WriteLine($"[DEBUG] App.CurrentUser ellenõrzése: User = {App.CurrentUser != null}, UserId = {App.CurrentUser?.Id}");
 
-            // Ellenõrizzük, hogy App.CurrentUser létezik-e
+            // Ellenõrizzük hogy App.CurrentUser létezik-e
             if (App.CurrentUser == null || string.IsNullOrEmpty(App.CurrentUser.Id))
             {
                 Console.WriteLine("[DEBUG] App.CurrentUser null vagy nincs ID. Munkamenet frissítése folyamatban.");
 
-                // Tartalék: Munkamenet lekérése vagy frissítése
                 var session = _supabase.Auth.CurrentSession;
                 if (session == null || session.User == null)
                 {
@@ -80,13 +83,12 @@ public partial class FoodPage : ContentPage
                     }
                 }
 
-                // App.CurrentUser frissítése, ha a munkamenet helyreállt
-                App.CurrentUser = new User { Id = session.User.Id }; // Igazítsd a User modellhez
-                Console.WriteLine($"[DEBUG] App.CurrentUser frissítve a munkamenetbõl: UserId = {App.CurrentUser.Id}");
+                
+                App.CurrentUser = new Models.User { Id = session.User.Id }; 
+                Console.WriteLine($"[DEBUG] App.CurrentUser frissítve: UserId = {App.CurrentUser.Id}");
             }
 
             var userId = App.CurrentUser.Id;
-            Console.WriteLine($"[DEBUG] Felhasználó ID használata: {userId}");
 
             // Összes recept lekérése
             var mealResponse = await _supabase.From<Meal>().Get();
@@ -100,7 +102,7 @@ public partial class FoodPage : ContentPage
 
             if (preferences == null)
             {
-                await DisplayAlert("Info", "Nincsenek diéta preferenciák megadva. Kérlek, állítsd be a preferenciáidat.", "OK");
+                await DisplayAlert("Info", "Nincsenek diéta preferenciák megadva.", "OK");
                 Console.WriteLine("[DEBUG] Nem található diéta preferencia a felhasználóhoz");
                 return;
             }
@@ -121,7 +123,7 @@ public partial class FoodPage : ContentPage
                 { "seafood", new List<string> { "fish", "shrimp", "crab", "lobster", "salmon", "tuna" } }
             };
 
-            // Felhasználói preferenciák feldolgozása
+            // Felhasználói preferenciák 
             var foodIntolerances = preferences.FoodIntolerance?.ToLower() == "none" || string.IsNullOrWhiteSpace(preferences.FoodIntolerance)
                 ? new List<string>()
                 : preferences.FoodIntolerance.Split(',').Select(s => s.Trim().ToLower()).ToList();
@@ -147,10 +149,8 @@ public partial class FoodPage : ContentPage
             {
                 bool isSuitable = true;
 
-                // Recept részleteinek naplózása
-                Console.WriteLine($"[DEBUG] Recept értékelése: {meal.Title}, Kalóriák = {meal.Calories}, Összetevõk = {(meal.Ingredients != null ? string.Join(", ", meal.Ingredients) : "null")}");
-
-                // Ételintoleranciák ellenõrzése (csak ha meg van adva)
+                
+                // Ételintoleranciák ellenõrzése (csak ha van)
                 if (foodIntolerances.Any())
                 {
                     if (meal.Ingredients == null || !meal.Ingredients.Any())
@@ -268,6 +268,90 @@ public partial class FoodPage : ContentPage
         }
     }
 
+
+
+    // daily calorie intake recommendation calculator
+    private async void CalculateDailyCalories()
+    {
+        try
+        {
+            if (App.CurrentUser == null)
+            {
+                CaloriesLabel.Text = "User data missing";
+                return;
+            }
+
+            var u = App.CurrentUser;
+
+            // age
+            var bornDate = u.BornDate ?? DateTime.Now;
+            var age = DateTime.Now.Year - bornDate.Year;
+            if (bornDate.Date > DateTime.Now.AddYears(-age)) age--;
+
+            // BMR function
+            double bmr;
+            
+
+            switch (u.Gender?.ToLower())
+            {
+                case "male":
+                    bmr = (double)(10 * u.Weight + 6.25 * u.Height - 5 * age + 5);
+                    break;
+
+                case "female":
+                    bmr = (double)(10 * u.Weight + 6.25 * u.Height - 5 * age - 161);
+                    break;
+
+                case "none": 
+                default:
+                    bmr = (double)(10 * u.Weight + 6.25 * u.Height - 5 * age - 78);
+                    break;
+            }
+
+            double activity = 1.4;
+            double calories = bmr * activity;
+
+            // Diet preferences 
+            try
+            {
+                var pref = await _supabase.From<DietPreferences>()
+                   .Where(p => p.UserId == u.Id)
+                   .Single();
+
+                if (pref != null)
+                {
+                    switch (pref.DietGoal?.ToLower().Replace(" ", "").Trim())
+                    {
+                        case "bulk":
+                            calories += 300;
+                            break;
+                        case "losefat":
+                            calories -= 300;
+                            break;
+                        case "maintain":
+                            break;
+                    }
+                }
+            }
+            catch
+            {
+                CaloriesLabel.Text = "Failed to load preferences";
+                return;
+            }
+
+            CaloriesLabel.Text = $"{Math.Round(calories)} kcal";
+        }
+        catch (Exception ex)
+        {
+            CaloriesLabel.Text = "Calculation error";
+            Console.WriteLine($"[CALORIE CALC ERROR] {ex.Message}");
+        }
+    }
+
+
+
+
+
     private async void AddMealButton_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new AddMealPage());
@@ -277,4 +361,66 @@ public partial class FoodPage : ContentPage
     {
         await Navigation.PushAsync(new RecipeDetailPage(meal));
     }
+
+
+    
+
+    private async void OnSearchBarTapped(object sender, EventArgs e)
+    {
+       
+        var allMeals = new List<Meal>();
+        allMeals.AddRange(breakfastMeals);
+        allMeals.AddRange(lunchMeals);
+        allMeals.AddRange(dinnerMeals);
+        allMeals.AddRange(recommendedMeals);
+
+     
+        var distinctMeals = allMeals.GroupBy(x => x.Id).Select(y => y.First()).ToList();
+
+        await Navigation.PushAsync(new FoodSearchPage(distinctMeals));
+    }
+
+
+
+
+    private async void OnSavedMealsTapped(object sender, EventArgs e)
+    {
+        if (App.CurrentUser == null)
+        {
+            await DisplayAlert("Info", "Log in to see saved meals", "OK");
+            return;
+        }
+
+
+        try
+        {
+            var savedLinks = await _supabase.From<SavedMeal>()
+                .Where(x => x.UserId == App.CurrentUser.Id)
+                .Get();
+
+            var mealIds = savedLinks.Models.Select(x => x.MealId).ToList();
+
+            if (!mealIds.Any())
+            {
+                await DisplayAlert("Info", "You haven't saved any meals yet.", "OK");
+                return;
+            }
+
+            var mealsResponse = await _supabase.From<Meal>()
+                .Filter("id", Supabase.Postgrest.Constants.Operator.In, mealIds) 
+                .Get();
+
+            var savedMealsList = mealsResponse.Models;
+
+ 
+            await Navigation.PushAsync(new SavedMealsPage(savedMealsList.ToList()));
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", "Failed to load saved meals: " + ex.Message, "OK");
+        }
+    }
+
+
+
 }

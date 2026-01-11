@@ -43,7 +43,7 @@ public partial class WorkoutDetailViewModel : ObservableObject
     [RelayCommand]
     private async Task SaveWorkout()
     {
-        // Placeholder: Mentési logika később
-        await Application.Current.MainPage.DisplayAlert("Info", "Az edzés mentése még nem implementálva.", "OK");
+        // Mentési logika későbbi továbbfejlesztéshez
+        //await Application.Current.MainPage.DisplayAlert("Info", "Az edzés mentése még nem implementálva.", "OK");
     }
 }

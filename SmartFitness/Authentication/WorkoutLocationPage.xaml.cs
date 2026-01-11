@@ -14,16 +14,16 @@ namespace SmartFitness.Authentication
             _workoutPrefs = new WorkoutModel { UserId = null }; // Az ID-t késõbb töltjük ki
 
             // Initialize colors
-            GymFrame.BackgroundColor = Colors.WhiteSmoke;
-            HomeFrame.BackgroundColor = Colors.WhiteSmoke;
+            GymFrame.BackgroundColor = Colors.White;
+            HomeFrame.BackgroundColor = Colors.White;
 
             // Setup tap gestures
             var gymTap = new TapGestureRecognizer();
             gymTap.Tapped += (s, e) =>
             {
                 _workoutPrefs.WorkoutLocation = "Gym";
-                GymFrame.BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue (#BADAF9)
-                HomeFrame.BackgroundColor = Colors.WhiteSmoke;
+                GymFrame.BackgroundColor = Color.FromRgb(218, 215, 147); 
+                HomeFrame.BackgroundColor = Colors.White;
             };
             GymFrame.GestureRecognizers.Add(gymTap);
 
@@ -31,8 +31,8 @@ namespace SmartFitness.Authentication
             homeTap.Tapped += (s, e) =>
             {
                 _workoutPrefs.WorkoutLocation = "Home";
-                HomeFrame.BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue (#BADAF9)
-                GymFrame.BackgroundColor = Colors.WhiteSmoke;
+                HomeFrame.BackgroundColor = Color.FromRgb(218, 215, 147); 
+                GymFrame.BackgroundColor = Colors.White;
             };
             HomeFrame.GestureRecognizers.Add(homeTap);
         }
@@ -53,5 +53,6 @@ namespace SmartFitness.Authentication
         {
             await Navigation.PopAsync(); // Vissza a PersonalInfoPage-re
         }
+        
     }
 }

@@ -2,23 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartFitness.Authentication.WorkoutTypePage"
-             Title="Create Account"
-             BackgroundColor="White">
+              Shell.NavBarIsVisible="False"
+                BackgroundColor="#F6FAFD"
+                NavigationPage.HasNavigationBar="False" 
+      
+                Padding="0,40,0,0">
 
-    <!-- <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">-->
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
         <VerticalStackLayout Padding="0" Spacing="20">
 
-            <!-- Cím -->
-            <Label Text="Select your workout type(s)"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   Margin="20,10,20,20" />
+        <!-- tab bar -->
+        <Label Text="Select your workout type(s)"
+               FontSize="Large"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,20,0,50" />
 
-            <!-- Edzéstípus-választás -->
+        <!-- Edzéstípus-választás -->
             <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
                 <Frame x:Name="WeightsFrame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -31,7 +34,7 @@
                 </Frame>
 
                 <Frame x:Name="BodyweightFrame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -44,7 +47,7 @@
                 </Frame>
 
                 <Frame x:Name="MachineFrame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -57,27 +60,25 @@
                 </Frame>
             </VerticalStackLayout>
 
-            <!-- Gombok -->
-            <HorizontalStackLayout Margin="0,40,20,0"
-                                  Spacing="20"
-                                  HorizontalOptions="Center">
-                <Button Text="Previous"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
-                        FontSize="Medium"
-                        FontAttributes="Bold"
-                        HorizontalOptions="FillAndExpand"
-                        Clicked="OnPreviousButtonClicked" />
+        <!-- Gombok -->
+        <HorizontalStackLayout Margin="0,60,0,0" Spacing="20" HorizontalOptions="Center" >
+            <Button Text="Previous" 
+                CornerRadius="20" Padding="10,15" 
+                BackgroundColor="#999101"
+                TextColor="WhiteSmoke"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnPreviousButtonClicked"  />
                 <Button Text="Next"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
-                        FontSize="Medium"
-                        FontAttributes="Bold"
-                        HorizontalOptions="FillAndExpand"
-                        Clicked="OnNextButtonClicked" />
+                CornerRadius="20" Padding="10,15" 
+                BackgroundColor="#859700"
+                TextColor="White"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnNextButtonClicked" />
             </HorizontalStackLayout>
-        </VerticalStackLayout>
-        <!-- </ScrollView> -->
+    </VerticalStackLayout>
+      </ScrollView> 
 </ContentPage>

@@ -87,13 +87,12 @@
 
 
                 <Grid ColumnDefinitions="*,Auto">
-                    <Label Text="₰  Language"
+                    <Label Text=" "
                                FontSize="Subtitle"
                                BackgroundColor="Transparent"
                                 TextColor="Black"
                                VerticalOptions="Center"
                                Grid.Column="0"/>
-                    <Image Source="back_icon.png" Grid.Column="1" Scale="0.6" ></Image>
                 </Grid>
             </Frame>
 
@@ -104,13 +103,12 @@
             <Frame BackgroundColor="White" BorderColor="Transparent" Margin="20,0,20,0" Padding="20,15" CornerRadius="30" HasShadow="True">
 
                 <Grid ColumnDefinitions="*,Auto">
-                    <Label Text="Ξ  About"
+                    <Label Text=" "
                                FontSize="Subtitle"
                                BackgroundColor="Transparent"
                                 TextColor="Black"
                                VerticalOptions="Center"
                                Grid.Column="0"/>
-                    <Image Source="back_icon.png" Grid.Column="1" Scale="0.6" ></Image>
                 </Grid>
             </Frame>
 
@@ -121,28 +119,26 @@
 
                     <!-- notification -->
                     <Grid ColumnDefinitions="*,Auto">
-                        <Label Text="▼  Notifications"
+                        <Label Text=""
                                FontSize="Subtitle"
                                 Margin="0,10,0,10"
                                 VerticalTextAlignment="Center"
                                 Grid.Column="0"/>
 
-                        <Switch  Grid.Column="1" IsToggled="False" OnColor="DarkSlateBlue" Scale="0.8"></Switch>
+                        
                     </Grid>
                     
-                    <BoxView HeightRequest="0.5" Color="#E0E0E0" Margin="30,0,30,0"/>
 
 
                     <!-- Dark mode Frame -->
                     <Grid ColumnDefinitions="*,Auto">
-                        <Label Text="◑  Dark Mode"
+                        <Label Text=""
                                 FontSize="Subtitle"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center"
                                 Grid.Column="0"
                                Margin="0,10,0,10"/>
 
-                        <Switch  Grid.Column="1" IsToggled="False" OnColor="DarkSlateBlue" Scale="0.8"></Switch>
                     </Grid>
 
 

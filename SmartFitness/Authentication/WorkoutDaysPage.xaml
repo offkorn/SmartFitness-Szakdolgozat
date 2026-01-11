@@ -2,23 +2,25 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartFitness.Authentication.WorkoutDaysPage"
-             Title="Create Account"
-             BackgroundColor="White">
+             Shell.NavBarIsVisible="False"
+              BackgroundColor="#F6FAFD"
+             NavigationPage.HasNavigationBar="False" 
+             Padding="0,40,0,0">
 
     <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never"> 
-        <VerticalStackLayout Padding="0" Spacing="15" HorizontalOptions="Center">
+        <VerticalStackLayout Padding="0" Spacing="15" >
 
-            <!-- Cím -->
+            <!-- tab bar -->
             <Label Text="Select workout days per week"
                    FontSize="Large"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   Margin="20,10,0,20" />
+                   Margin="0,20,0,40" />
 
             <!-- Edzésnapok választása -->
             <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
                 <Frame x:Name="Day1Frame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -31,7 +33,7 @@
                 </Frame>
 
                 <Frame x:Name="Day2Frame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -44,7 +46,7 @@
                 </Frame>
 
                 <Frame x:Name="Day3Frame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -57,7 +59,7 @@
                 </Frame>
 
                 <Frame x:Name="Day4Frame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -70,7 +72,7 @@
                 </Frame>
 
                 <Frame x:Name="Day5Frame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -83,7 +85,7 @@
                 </Frame>
 
                 <Frame x:Name="Day6Frame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -96,7 +98,7 @@
                 </Frame>
 
                 <Frame x:Name="Day7Frame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -110,23 +112,19 @@
             </VerticalStackLayout>
 
             <!-- Gombok -->
-            <HorizontalStackLayout Margin="0,40,0,0"
-                                  Spacing="20"
-                                  HorizontalOptions="Center">
-                <Button x:Name="PreviousButton"
-                        Text="Previous"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
+            <HorizontalStackLayout Margin="0,60,0,0" Spacing="20" HorizontalOptions="Center" >
+                <Button Text="Previous" 
+                        CornerRadius="20" Padding="10,15" 
+                        BackgroundColor="#999101"
+                        TextColor="WhiteSmoke"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
-                        Clicked="OnPreviousButtonClicked" />
-                <Button x:Name="NextButton"
-                        Text="Next"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
+                        Clicked="OnPreviousButtonClicked"  />
+                                    <Button Text="Next"
+                        CornerRadius="20" Padding="10,15" 
+                        BackgroundColor="#859700"
+                        TextColor="White"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"

@@ -2,6 +2,7 @@
 using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.PlatformConfiguration;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace SmartFitness;
 
@@ -27,8 +28,8 @@ public static class MauiProgram
                 fonts.AddFont("K2D-Thin.ttf", "K2D-Thin");
                 fonts.AddFont("Kalam-Regular.ttf", "Kalam-Regular");
             }
-            ).UseMauiCommunityToolkit();
-
+            ).UseMauiCommunityToolkit()
+            .ConfigureSyncfusionCore();
 
         // Aláhúzás eltüntetése Entry komponensnél Androidon
         Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("NoUnderline", static (h, v) =>

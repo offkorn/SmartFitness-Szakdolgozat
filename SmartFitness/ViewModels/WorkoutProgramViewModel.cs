@@ -188,7 +188,7 @@ public partial class WorkoutProgramViewModel : ObservableObject
                 {
                     throw new Exception("Failed to insert WorkoutPlan: No record returned.");
                 }
-                plan = response.Models[0]; // Frissítsük a plan objektumot a visszatérített rekorddal
+                plan = response.Models[0]; 
             }
             catch (Exception ex)
             {
@@ -246,11 +246,32 @@ public partial class WorkoutProgramViewModel : ObservableObject
                 // Mentsük a Workout-ot
                 try
                 {
-                    await _supabase.From<Workout>().Insert(workout);
+
+                    var workoutResponse = await _supabase
+                        .From<Workout>()
+                        .Insert(workout, new Supabase.Postgrest.QueryOptions { Returning = Supabase.Postgrest.QueryOptions.ReturnType.Representation });
+
+                    var savedWorkout = workoutResponse.Models.FirstOrDefault();
+
+                    if (savedWorkout != null)
+                    {
+                        // kapcsolat mentése a plan_workouts táblába
+                        var link = new PlanWorkout
+                        {
+                            Id = Guid.NewGuid().ToString(),
+
+                            PlanId = plan.Id,
+                            WorkoutId = savedWorkout.Id,
+                            Day = day,
+                            UserId = App.CurrentUser.Id
+                        };
+
+                        await _supabase.From<PlanWorkout>().Insert(link);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", $"Failed to save workout for {day}: {ex.Message}", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Error", $"Failed to save workout linkage for {day}: {ex.Message}", "OK");
                     return;
                 }
             }

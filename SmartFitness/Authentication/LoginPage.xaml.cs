@@ -2,6 +2,7 @@ using Microsoft.Maui.Controls;
 using SmartFitness.Models;
 using SmartFitness.Services;
 using SmartFitness.Pages;
+using System.Text.Json;
 
 namespace SmartFitness.Authentication
 {
@@ -36,20 +37,20 @@ namespace SmartFitness.Authentication
                     .Where(u => u.Id == session.User.Id)
                     .Single();
 
-               
+
 
                 if (user != null)
                 {
-                    // Tároljuk a bejelentkezett felhasználót és az ID-t
                     App.CurrentUser = user;
                     Preferences.Set("UserId", user.Id);
 
-                    //await DisplayAlert("Success", "Login successful!", "OK");
-                    if (Application.Current != null)
-                    {
-                        Application.Current.MainPage = new AppShell();
-                    }
+                    
+                    var sessionJson = JsonSerializer.Serialize(session);
+                    Preferences.Set("supabase_session", sessionJson);
+
+                    Application.Current.MainPage = new AppShell();
                 }
+
             }
             catch (Exception ex)
             {
@@ -58,10 +59,7 @@ namespace SmartFitness.Authentication
         
         }
 
-        private async void OnForgotPassword(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ForgotPasswordPage());
-        }
+        
 
         private async void OnBackButton(object sender, EventArgs e)
         {

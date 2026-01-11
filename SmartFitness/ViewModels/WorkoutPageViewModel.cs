@@ -44,8 +44,8 @@ public partial class WorkoutPageViewModel : ObservableObject
             // Felhasználói azonosító ellenőrzése
             if (!Guid.TryParse(App.CurrentUser.Id, out _))
             {
-                Debug.WriteLine($"Hiba: Érvénytelen UUID formátum: {App.CurrentUser.Id}");
-                await Application.Current.MainPage.DisplayAlert("Hiba", "Érvénytelen felhasználói azonosító!", "OK");
+                Debug.WriteLine($"Error: Érvénytelen UUID formátum: {App.CurrentUser.Id}");
+                await Application.Current.MainPage.DisplayAlert("Error", "Érvénytelen felhasználói azonosító!", "OK");
                 return;
             }
 
@@ -62,11 +62,11 @@ public partial class WorkoutPageViewModel : ObservableObject
                 Debug.WriteLine($"Edzések sikeresen betöltve: {Workouts.Count} db");
                 if (Workouts.Count == 0)
                 {
-                    Debug.WriteLine("[DEBUG] Figyelmeztetés: Egyetlen edzés sem töltődött be az adatbázisból!");
+                    Debug.WriteLine("[DEBUG] Warning: Egyetlen edzés sem töltődött be az adatbázisból!");
                 }
             }
 
-            // Összes WorkoutPlan betöltése (minden felhasználótól, maximum 50 rekord)
+            // Összes WorkoutPlan betöltése 
             Debug.WriteLine("WorkoutPlan-ek betöltése...");
             var planResponse = await _supabase.From<WorkoutPlan>()
             .Order(x => x.CreatedAt, Supabase.Postgrest.Constants.Ordering.Descending)
@@ -80,7 +80,7 @@ public partial class WorkoutPageViewModel : ObservableObject
             Debug.WriteLine($"Programok sikeresen betöltve: {WorkoutPlans.Count} db");
             if (WorkoutPlans.Count == 0)
             {
-                Debug.WriteLine("[DEBUG] Figyelmeztetés: Egyetlen program sem töltődött be az adatbázisból!");
+                Debug.WriteLine("[DEBUG] Warning: Egyetlen program sem töltődött be az adatbázisból!");
             }
 
             // Felhasználói preferenciák lekérése és szűrés
@@ -95,13 +95,11 @@ public partial class WorkoutPageViewModel : ObservableObject
                 await Application.Current.MainPage.DisplayAlert("Info", "Nincsenek edzés preferenciák megadva. Kérlek, állítsd be a preferenciáidat.", "OK");
                 return;
             }
-            Debug.WriteLine($"[DEBUG] Talált preferenciák: WorkoutLocation = {preferences.WorkoutLocation}, WorkoutType = {preferences.WorkoutType}, WorkoutDuration = {preferences.WorkoutDuration}, WorkoutGoal = {preferences.WorkoutGoal}, WorkoutExperience = {preferences.WorkoutExperience}, WorkoutDays = {preferences.WorkoutDays ?? "null"}");
 
             // Ajánlott edzések és programok szűrése
             await FilterRecommendedWorkouts(preferences);
             await FilterRecommendedWorkoutPlans(preferences);
-            Debug.WriteLine($"[DEBUG] Ajánlott edzések száma: {RecommendedWorkouts.Count}");
-            Debug.WriteLine($"[DEBUG] Ajánlott programok száma: {RecommendedWorkoutPlans.Count}");
+
             if (RecommendedWorkouts.Count == 0)
             {
                 Debug.WriteLine("[DEBUG] Nincs ajánlott edzés, mert egyik edzés sem felelt meg a szűrési feltételeknek.");
@@ -255,11 +253,11 @@ public partial class WorkoutPageViewModel : ObservableObject
 
             // Edzéstípus és felszerelés megfeleltetése
             var equipmentMapping = new Dictionary<string, List<string>>
-{
-{ "bodyweight", new List<string> { "none", "bodyweight" } },
-{ "machine", new List<string> { "machine", "cardio machine", "strength machine" } },
-{ "weights", new List<string> { "dumbbell", "barbell", "kettlebell", "weight plate", "weights" } }
-};
+            {
+            { "bodyweight", new List<string> { "none", "bodyweight" } },
+            { "machine", new List<string> { "machine", "cardio machine", "strength machine" } },
+            { "weights", new List<string> { "dumbbell", "barbell", "kettlebell", "weight plate", "weights" } }
+            };
 
             // Preferenciák feldolgozása
             var workoutLocation = preferences.WorkoutLocation?.ToLower()?.Trim();

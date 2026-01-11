@@ -38,7 +38,7 @@ namespace SmartFitness.Authentication
         {
             foreach (var frame in _experienceFrames.Values)
             {
-                frame.BackgroundColor = Colors.WhiteSmoke;
+                frame.BackgroundColor = Colors.White;
             }
         }
 
@@ -56,11 +56,11 @@ namespace SmartFitness.Authentication
         {
             foreach (var frame in _experienceFrames.Values)
             {
-                frame.BackgroundColor = Colors.WhiteSmoke;
+                frame.BackgroundColor = Colors.White;
             }
-            _experienceFrames[experience].BackgroundColor = Color.FromRgb(173, 216, 230);
+            _experienceFrames[experience].BackgroundColor = Color.FromRgb(218, 215, 147);
             _workoutPrefs.WorkoutExperience = experience;
-            NextButton.IsEnabled = true;
+            
         }
 
         private async void OnNextButtonClicked(object sender, EventArgs e)
@@ -80,15 +80,16 @@ namespace SmartFitness.Authentication
                     return;
                 }
 
-                // A User ID alapján állítsuk be a foreign key-t
-                _workoutPrefs.UserId = _newUser.Id; // Javítsd ki Id-rõl UserId-re
+               
+                _workoutPrefs.UserId = _newUser.Id;
 
-                // Csak a WorkoutPreferences-t mentsük
+                // Csak a WorkoutPreferences-t mentjük
                 var workoutResponse = await SupabaseClient.Client
                     .From<WorkoutModel>()
-                    .Insert(_workoutPrefs);
+                    .OnConflict("user_id") 
+                    .Upsert(_workoutPrefs);
 
-                // Létrehozzuk a DietPreferences objektumot és továbbnavigálunk
+
                 var dietPrefs = new DietPreferences { UserId = _newUser.Id };
                 await Navigation.PushAsync(new FoodIntolerancePage(_newUser, dietPrefs));
             }

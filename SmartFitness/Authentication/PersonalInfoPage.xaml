@@ -3,25 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="SmartFitness.Authentication.PersonalInfoPage"
-             Title="Create Your Account"
-             BackgroundColor="White">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F6FAFD"
+            NavigationPage.HasNavigationBar="False" 
+            Padding="0,40,0,0">
 
-    <ScrollView VerticalOptions="FillAndExpand">
-        
-        
-        <VerticalStackLayout Padding="20" Spacing="20">
 
-           
 
-            <!-- Személyes adatok -->
-            <VerticalStackLayout Spacing="15">
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Padding="0" >
+
+       
+      
+
+            <!-- tab bar -->
+
+        <Label Text="Type in your personal details"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,30" />
+
+
+
+
+        <!-- Személyes adatok -->
+        <VerticalStackLayout Spacing="0" Padding="0">
+            
                 <!-- Születési dátum -->
-                <Frame BackgroundColor="WhiteSmoke"
-                       BorderColor="Transparent"
-                       CornerRadius="20"
-                       Padding="10"
-                       MinimumHeightRequest="50">
-                    <DatePicker x:Name="BirthDatePicker"
+            <Label Text="Born Date" FontSize="Medium" FontAttributes="Bold" Margin="30,30,0,0"></Label>
+            <Frame BorderColor="Transparent"  CornerRadius="10" Margin="40,10" Padding="10,2">
+                <DatePicker x:Name="BirthDatePicker"
                                 Format="yyyy-MM-dd"
                                 MaximumDate="{x:Static sys:DateTime.Now}"
                                 MinimumDate="1900-01-01"
@@ -32,13 +44,10 @@
                 </Frame>
 
                 <!-- Magasság -->
-                <Frame BackgroundColor="WhiteSmoke"
-                       BorderColor="Transparent"
-                       CornerRadius="20"
-                       Padding="10"
-                       MinimumHeightRequest="50">
-                    <Entry x:Name="HeightEntry"
-                           Placeholder="Height (cm)"
+            <Label Text="Height in cm" FontSize="Medium" FontAttributes="Bold" Margin="30,10,0,0"></Label>
+            <Frame BorderColor="Transparent"  CornerRadius="10" Margin="40,10" Padding="10,2">
+                <Entry x:Name="HeightEntry"
+                           
                            Keyboard="Numeric"
                            TextColor="Black"
                            FontSize="Medium"
@@ -48,13 +57,9 @@
                 </Frame>
 
                 <!-- Súly -->
-                <Frame BackgroundColor="WhiteSmoke"
-                       BorderColor="Transparent"
-                       CornerRadius="20"
-                       Padding="10"
-                       MinimumHeightRequest="50">
-                    <Entry x:Name="WeightEntry"
-                           Placeholder="Weight (kg)"
+            <Label Text="Weight in kg" FontSize="Medium" FontAttributes="Bold" Margin="30,10,0,0"></Label>
+            <Frame BorderColor="Transparent"  CornerRadius="10" Margin="40,10" Padding="10,2">
+                <Entry x:Name="WeightEntry"
                            Keyboard="Numeric"
                            TextColor="Black"
                            FontSize="Medium"
@@ -64,13 +69,10 @@
                 </Frame>
 
                 <!-- Nem -->
-                <Frame BackgroundColor="WhiteSmoke"
-                       BorderColor="Transparent"
-                       CornerRadius="20"
-                       Padding="10"
-                       MinimumHeightRequest="50">
-                    <Picker x:Name="GenderPicker"
-                            Title="Choose your gender"
+            <Label Text="Gender" FontSize="Medium" FontAttributes="Bold" Margin="30,10,0,0"></Label>
+            <Frame BorderColor="Transparent"  CornerRadius="10" Margin="40,10" Padding="10,2">
+                <Picker x:Name="GenderPicker"
+                            Title="Tap to select"
                             TextColor="Black"
                             FontSize="Medium"
                             HorizontalOptions="FillAndExpand">
@@ -84,26 +86,24 @@
             </VerticalStackLayout>
 
             <!-- Gombok -->
-            <HorizontalStackLayout Margin="0,20,0,0"
-                                  Spacing="20"
-                                  HorizontalOptions="Center">
-                <Button Text="Previous"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
+            <HorizontalStackLayout Margin="0,40,0,0" Spacing="20" HorizontalOptions="Center" >
+                <Button Text="Previous" 
+                        CornerRadius="20" Padding="10,15" 
+                        BackgroundColor="#999101"
+                        TextColor="WhiteSmoke"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
-                        Clicked="OnPreviousButtonClicked" />
+                        Clicked="OnPreviousButtonClicked"  />
                 <Button Text="Next"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
+                        CornerRadius="20" Padding="10,15" 
+                        BackgroundColor="#859700"
+                        TextColor="White"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
                         Clicked="OnNextButtonClicked" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
 </ContentPage>

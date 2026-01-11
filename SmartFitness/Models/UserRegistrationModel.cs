@@ -8,7 +8,7 @@ namespace SmartFitness.Models
         public string UserId { get; set; } = string.Empty;  // foreign key for workout and diet tables
 
 
-        // Alapadatok
+        // Alap personal useradatok
         public required string FirstName { get; set; } = string.Empty;
         public required string LastName { get; set; } = string.Empty;
         public required string Email { get; set; } = string.Empty;

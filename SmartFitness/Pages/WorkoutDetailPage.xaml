@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:SmartFitness.Converters"
              x:Class="SmartFitness.Pages.WorkoutDetailPage"
-             Title="Workout Details"
-             BackgroundColor="#F6FAFD">
+             BackgroundColor="#F6FAFD"
+             Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <converters:NullToDefaultImageConverter x:Key="NullToDefaultImageConverter" />
@@ -14,6 +14,24 @@
 
     <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
         <VerticalStackLayout VerticalOptions="FillAndExpand">
+
+
+
+            <!-- tab bar, - back button and page title -->
+            <Grid Grid.Row="0" Margin="0,0,0,10" Padding="5,0">
+
+                <ImageButton Source="back_icon" Scale="0.35" Rotation="180" HorizontalOptions="Start" Clicked="OnBackButton" VerticalOptions="Center"></ImageButton>
+
+                <Label 
+                       Text="Workout Details"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                        VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+
+                <ImageButton x:Name="SaveButton" Source="bookmark_unfilled_icon.svg" Scale="0.5"  HorizontalOptions="End" Clicked="OnSaveClicked" VerticalOptions="Center"></ImageButton>
+
+            </Grid>
+
 
             <!-- Top Section: Tags, Title, Duration -->
             <Frame BackgroundColor="White"
@@ -100,45 +118,7 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Author -->
-            <Frame BackgroundColor="White"
-                   HasShadow="True"
-                   BorderColor="Transparent"
-                   HorizontalOptions="FillAndExpand"
-                   MinimumHeightRequest="100"
-                   Margin="0,10,0,0">
-                <HorizontalStackLayout Margin="20,0" Spacing="20">
-                    <Frame CornerRadius="35"
-                           WidthRequest="60"
-                           HeightRequest="60"
-                           BorderColor="Transparent"
-                           BackgroundColor="Black">
-
-                        <!--Author Logo-->
-                        <VerticalStackLayout Padding="0" VerticalOptions="Start" Spacing="0">
-                            <Label TextColor="White"
-                               FontSize="Medium"
-                               HorizontalTextAlignment="Center"
-                                   Margin="0,-7,0,0"
-                                   Padding="0"
-                               VerticalTextAlignment="Start">o</Label>
-                            <Label TextColor="White"
-                                   FontSize="Large"
-                                   Margin="0,-11,0,0"
-                                   HorizontalTextAlignment="Center"
-                                   VerticalTextAlignment="End">O</Label>
-                        </VerticalStackLayout>
-
-                    </Frame>
-                    <VerticalStackLayout Spacing="5" Margin="0,5,0,0">
-                        <Label x:Name="AuthorLabel"
-                               FontAttributes="Bold"
-                               FontSize="Medium"/>
-                        <Label FontSize="Small">Submitted</Label>
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
-            </Frame>
-
+           
             
             <!--Exercises and Sets Frame-->
             <VerticalStackLayout>
@@ -272,7 +252,7 @@
                                                        HorizontalOptions="Center"
                                                        Margin="0,0,0,10"/>
 
-                                                <VerticalStackLayout Spacing="5" HorizontalOptions="CenterAndExpand">
+                                                       <VerticalStackLayout Spacing="20" HorizontalOptions="FillAndExpand">
 
                                                                 <!-- SET | WEIGHT | REPS   (| DONE)  header -->
                                                                 <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" >
@@ -337,17 +317,7 @@
                                                                         </BindableLayout.ItemTemplate>
                                                                     </VerticalStackLayout>
 
-                                                                    <!-- DONE -->
-                                                                    <!-- <VerticalStackLayout Grid.Column="3" Spacing="0" HorizontalOptions="Center" BindableLayout.ItemsSource="{Binding Sets}">
-                                                                        <BindableLayout.ItemTemplate>
-                                                                            <DataTemplate>
-                                                                                <CheckBox IsChecked="{Binding IsCompleted}"
-                                                                                          Color="Gray"
-                                                                                          HorizontalOptions="Center" />
-                                                                            </DataTemplate>
-                                                                        </BindableLayout.ItemTemplate>
-                                                                    </VerticalStackLayout>
-                                                                    -->
+                                                           
 
                                                                 </Grid>
 
@@ -369,8 +339,8 @@
                 </Frame>
             </VerticalStackLayout>
             
-            <!-- Save Button-->
-            <Button Text="Save Workout"
+            <!-- Save / finish Button-->
+            <Button Text="Done"
                     FontSize="Subtitle"
                     TextColor="White"
                     FontAttributes="Bold"
@@ -381,7 +351,8 @@
                     BackgroundColor="#FF6A00"
                     CornerRadius="10"
                     VerticalOptions="CenterAndExpand"
-                    Command="{Binding SaveWorkoutCommand}" />
+                    Command="{Binding SaveWorkoutCommand}" 
+                    Clicked="WorkoutSaveButton_Clicked"/>
 
         </VerticalStackLayout>
     </ScrollView>

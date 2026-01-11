@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartFitness.Converters"
+             x:Class="SmartFitness.Pages.SavedWorkoutsPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F6FAFD">
+
+    <ContentPage.Resources>
+        <converters:NullToDefaultImageConverter x:Key="NullToDefaultImageConverter" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, *">
+
+        <HorizontalStackLayout Grid.Row="0" Padding="0,10" Spacing="0">
+            <ImageButton Source="back_icon.svg" Scale="0.35" Rotation="180" 
+                         HorizontalOptions="Start" Clicked="OnBackClicked" VerticalOptions="Center"/>
+
+            <Label Text="Saved Workouts"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="1" 
+                        x:Name="ResultsCollectionView" 
+                        Margin="0,10,0,20"
+                        RemainingItemsThreshold="5"
+                        RemainingItemsThresholdReached="OnLoadMoreItems">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                    <Label Text="No saved workouts found." 
+                           TextColor="Gray" 
+                           FontSize="Body"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeShape="RoundRectangle 15"
+                            StrokeThickness="0"
+                            BackgroundColor="White"
+                            Margin="15,6"
+                            Padding="10">
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnResultTapped" />
+                        </Border.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="80, *">
+                            <Image Grid.Column="0" 
+                                   Source="{Binding ImageUrl, Converter={StaticResource NullToDefaultImageConverter}, ConverterParameter='workout_logo_icon.svg'}" 
+                                   Aspect="AspectFill" 
+                                   HeightRequest="70" 
+                                   WidthRequest="70" 
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center">
+                                <Image.Clip>
+                                    <EllipseGeometry Center="35,35" RadiusX="35" RadiusY="35"/>
+                                </Image.Clip>
+                            </Image>
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4" Margin="10,0,0,0">
+
+                                <Label Text="{Binding Title}" 
+                                       FontAttributes="Bold" 
+                                       FontSize="Medium" 
+                                       TextColor="Black" 
+                                       LineBreakMode="TailTruncation"/>
+
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding DurationMinutes, StringFormat='{0} min'}" 
+                                           TextColor="#859700" 
+                                           FontSize="Small"/>
+
+                                    <Label Text="•" TextColor="Gray" FontSize="Small"/>
+
+                                    <Label Text="{Binding ExperienceLevel}" 
+                                           TextColor="Gray" 
+                                           FontSize="Small"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

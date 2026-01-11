@@ -1,5 +1,6 @@
-﻿using SmartFitness.Helpers;
+﻿
 using SmartFitness.ViewModels;
+using SmartFitness.components;
 using static System.Collections.Specialized.NameObjectCollectionBase;
 
 namespace SmartFitness.Views;
@@ -117,4 +118,8 @@ public partial class SimpleWorkoutView : ContentView
             Console.WriteLine($"OnGoalChanged error: {ex.Message}");
         }
     }
+
+
+
+
 }

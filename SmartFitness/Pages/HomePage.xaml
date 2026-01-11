@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartFitness.Pages.HomePage"
+             xmlns:local="clr-namespace:SmartFitness.components"
              BackgroundColor="#F6FAFD">
 
     <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
@@ -67,10 +68,14 @@
                                              VerticalOptions="Center">
 
                             <HorizontalStackLayout Spacing="0" HorizontalOptions="Center">
-                                <Label Text="32"
+
+                                <Label x:Name="StreakLabel"
+                                       Text="0"
                                        FontSize="Title" FontFamily=""
                                        FontAttributes="Bold"
-                                       TextColor="White" VerticalTextAlignment="Center"/>
+                                       TextColor="White" 
+                                       VerticalTextAlignment="Center" />
+
                                 <ImageButton Source="flame_icon"
                                              Scale="0.55"
                                              BackgroundColor="Transparent" />
@@ -80,7 +85,8 @@
                                    FontSize="Micro"
                                    TextColor="White" />
 
-                            <Label Text="Tomorrow"
+                            <Label 
+                                   x:Name="NextWorkoutLabel"
                                    FontSize="Medium"
                                    FontAttributes="Bold"
                                    TextColor="White" />
@@ -96,18 +102,32 @@
 
 
             <!-- Actual Program -->
-            
+
             <Label Text="Actual Program"
                    FontSize="Subtitle"
                    FontAttributes="Bold"
                    TextColor="Black"
+                   Margin="0,20,0,10" />
+
+
+            <!-- Ha nincs program -->
+            <Label x:Name="NoProgramLabel"
+                   Text="You have no active program."
+                   FontSize="Medium"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"
+                   IsVisible="False"
                    Margin="0,10,0,10" />
 
-            <Frame BackgroundColor="White"
+
+            <!-- Ha van program  ez a teljes kártya -->
+            <Frame x:Name="ProgramFrame"
+                   BackgroundColor="White"
                    CornerRadius="15"
                    Padding="15"
                    HasShadow="True"
-                   BorderColor="Transparent">
+                   BorderColor="Transparent"
+                   IsVisible="False">
 
                 <Frame.Shadow>
                     <Shadow Brush="#C0C0C0" Offset="1,1" Radius="5" />
@@ -115,32 +135,40 @@
 
                 <VerticalStackLayout Spacing="5">
 
-                    <Label Text="Push - Pull - Leg Split"
+                    <Label x:Name="ProgramNameLabel"
                            FontAttributes="Bold"
                            HorizontalOptions="Center"
                            FontSize="Medium" />
 
-                    <Label Text="3 weeks"
-                           HorizontalOptions="Center" />
+                    <Label x:Name="ProgramWeeksLabel" HorizontalOptions="Center" />
 
-                    <Label Text="intermediate"
-                           HorizontalOptions="Center"
-                           Margin="0,0,0,10" />
+                    <Label x:Name="ProgramExperienceLabel" HorizontalOptions="Center" Margin="0,0,0,10" />
 
-                    <Button Text="Next Workout: Pull day"
+                    <Button x:Name="ProgramNextWorkoutButton"
+                            Text="Next Workout"
                             BackgroundColor="#859700"
                             TextColor="White"
                             FontAttributes="Bold"
                             CornerRadius="15"
                             Padding="20,8"
-                            HorizontalOptions="Center" />
+                            HorizontalOptions="Center" 
+                            Clicked="OnNextWorkoutClicked"/>
+
                 </VerticalStackLayout>
 
             </Frame>
 
 
+            <Label Text="Daily Quotes"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   Margin="0,30,0,10" />
+            <!-- Daily Quote frame -->
+            <local:DailyQuoteBlock x:Name="DailyQuote" />
 
-            <!-- Measurements - bodyweight counter-->
+
+            <!-- Measurements - bodyweight counter / editor-->
             <Label Text="Measurements"
                    FontSize="Subtitle"
                    FontAttributes="Bold"
@@ -180,10 +208,11 @@
                                 CornerRadius="15"
                                 Padding="15,5"
                                 FontSize="25"
-                                FontAttributes="Bold" />
+                                FontAttributes="Bold" 
+                                Clicked="MinusWeightButton_Clicked"/>
 
-                        <Label x:Name="WeekNumberLabel"
-                               Text="85,0 kg"
+                        <Label x:Name="UserWeightLabel"
+                               TextColor="Black"
                                FontSize="Large"
                                VerticalTextAlignment="Center"
                                HorizontalTextAlignment="Center" />
@@ -195,7 +224,8 @@
                                 CornerRadius="15"
                                 Padding="15,5"
                                 FontSize="25"
-                                FontAttributes="Bold" />
+                                FontAttributes="Bold" 
+                                Clicked="PlusWeightButton_Clicked"/>
                     </HorizontalStackLayout>
 
                 </VerticalStackLayout>
@@ -206,74 +236,8 @@
 
 
 
-            <!-- More Programs -->
-            <Label Text="More Programs"
-                   FontSize="Subtitle"
-                   FontAttributes="Bold"
-                   TextColor="Black"
-                   Margin="0,15,0,5" />
 
-            <ScrollView Orientation="Horizontal"
-                        HorizontalScrollBarVisibility="Never">
-
-                <HorizontalStackLayout Spacing="12">
-
-
-                    <Frame BackgroundColor="LightSlateGrey"
-                           CornerRadius="15"
-                           Padding="20,40"
-                           >
-
-                        <VerticalStackLayout Spacing="4"
-                                             HorizontalOptions="CenterAndExpand">
-
-                            <Label Text="Arm Plan"
-                                   FontAttributes="Bold"
-                                   FontSize="Medium"
-                                   TextColor="PapayaWhip"
-                                   HorizontalTextAlignment="Center" />
-
-                            <Label Text="10 weeks | muscle build"
-                                   FontSize="Small"
-                                   TextColor="White"
-                                   HorizontalTextAlignment="Center" />
-
-                        </VerticalStackLayout>
-
-                    </Frame>
-
-
-                    <Frame BackgroundColor="LightSlateGrey"
-                           CornerRadius="15"
-                           Padding="20,40"
-                           >
-                        <VerticalStackLayout Spacing="4" HorizontalOptions="CenterAndExpand">
-                            <Label Text="Arm Plan" FontAttributes="Bold"
-                                   FontSize="Medium"
-                                   TextColor="PapayaWhip"
-                                   HorizontalTextAlignment="Center" />
-                            <Label Text="10 weeks | muscle build"
-                                   FontSize="Small" TextColor="White" />
-                        </VerticalStackLayout>
-                    </Frame>
-
-                    <Frame BackgroundColor="LightSlateGrey"
-                           CornerRadius="15"
-                           Padding="20,40"
-                           >
-                        <VerticalStackLayout Spacing="4"
-                                             HorizontalOptions="CenterAndExpand">
-                            <Label Text="Arm Plan" FontAttributes="Bold"
-                                   FontSize="Medium"
-                                   TextColor="PapayaWhip" />
-                            <Label Text="10 weeks | muscle build"
-                                   FontSize="Small" TextColor="White" />
-                        </VerticalStackLayout>
-                    </Frame>
-
-                </HorizontalStackLayout>
-
-            </ScrollView>
+            
 
         </VerticalStackLayout>
     </ScrollView>

@@ -1,23 +1,55 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartFitness.Pages.RecipeDetailPage"
-             Title="Recipe Details"     
+             x:Class="SmartFitness.Pages.RecipeDetailPage"  
+             xmlns:converters="clr-namespace:SmartFitness.Converters" 
              BackgroundColor="#F6FAFD"
-             Shell.TitleColor="Black"
-             NavigationPage.HasBackButton="True"
-             NavigationPage.HasNavigationBar="True"
-             Shell.NavBarIsVisible="True"
-             Shell.BackgroundColor="#F6FAFD">
+             Shell.NavBarIsVisible="False">
 
 
-    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never"> 
-        <VerticalStackLayout Spacing="0" Padding="0" VerticalOptions="FillAndExpand">
-            
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:RecipeImageConverter x:Key="RecipeImageConverter" />
+            <converters:RecipeImageScaleConverter x:Key="RecipeImageScaleConverter" />
+            <converters:NullToDefaultImageConverter x:Key="NullToDefaultImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView VerticalScrollBarVisibility="Never"> 
+        <VerticalStackLayout Spacing="0" Padding="0,10" VerticalOptions="FillAndExpand">
+
+
+            <!-- tab bar, - back button and page title -->
+            <Grid Grid.Row="0" Margin="0,0,0,10" Padding="5,0">
+
+                <ImageButton Source="back_icon" Scale="0.35" Rotation="180" HorizontalOptions="Start" Clicked="OnBackButton" VerticalOptions="Center"></ImageButton>
+
+                <Label 
+                   Text="Recipe Details"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                    VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+
+                <ImageButton x:Name="SaveButton" Source="bookmark_unfilled_icon.svg" Scale="0.5"  HorizontalOptions="End" Clicked="OnSaveClicked" VerticalOptions="Center"></ImageButton>
+
+            </Grid>
+
+
+
             <!-- Image Placeholder -->
-          
-                <Image Source="{Binding ImageUrl}" Aspect="AspectFill" Margin="0,0,0,0" HeightRequest="250" />
-           
+
+            <Grid HeightRequest="250" Margin="0,0,0,0">
+
+                <BoxView Color="#ffffff" />
+
+                <Image Source="{Binding ImageUrl, Converter={StaticResource RecipeImageConverter}}" 
+                       Scale="{Binding ImageUrl, Converter={StaticResource RecipeImageScaleConverter}}"
+                       Aspect="AspectFill"
+                       IsVisible="True">
+                </Image>
+
+            </Grid>
+
 
             <!-- Type, Title, Cooking Time -->
             <Frame BackgroundColor="White"
@@ -137,6 +169,9 @@
                     <Label Text="{Binding Directions}" FontSize="Small" TextColor="Black"/>
                 </VerticalStackLayout>
             </Frame>
+            
+            
+            
 
             <!-- Tutorial -->
             <Frame BackgroundColor="White"
@@ -163,6 +198,9 @@
                 </VerticalStackLayout>
             </Frame>
 
+            
+            
+            
 
         </VerticalStackLayout>
     </ScrollView>

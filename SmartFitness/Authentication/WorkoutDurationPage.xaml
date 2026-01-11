@@ -2,27 +2,28 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartFitness.Authentication.WorkoutDurationPage"
-             Title="Create Account"
-             BackgroundColor="White">
+             Shell.NavBarIsVisible="False"
+              BackgroundColor="#F6FAFD"
+             NavigationPage.HasNavigationBar="False" 
+             Padding="0,40,0,0">
 
     <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
-        <VerticalStackLayout Padding="0" Spacing="15" HorizontalOptions="Center">
+        <VerticalStackLayout Padding="0" Spacing="15" >
 
-            <!-- Cím -->
+            <!-- tab bar -->
             <Label Text="Select your workout duration"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   Margin="40,0,0,30" />
+               FontSize="Large"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,20,0,50" />
 
             <!-- Edzésidőtartam-választás -->
             <Frame x:Name="TenMinutesFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
-                   Padding="10"
-                   MinimumHeightRequest="50"
-                   WidthRequest="150">
+                   Padding="20"
+                   HorizontalOptions="Center">
                 <Label Text="Less than 10 mins"
                        FontSize="Medium"
                        HorizontalOptions="Center"
@@ -30,12 +31,11 @@
             </Frame>
 
             <Frame x:Name="TwentyMinutesFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
-                   Padding="10"
-                   MinimumHeightRequest="50"
-                   WidthRequest="150">
+                   Padding="20"
+                    HorizontalOptions="Center">
                 <Label Text="20 mins"
                        FontSize="Medium"
                        HorizontalOptions="Center"
@@ -43,12 +43,11 @@
             </Frame>
 
             <Frame x:Name="ThirtyMinutesFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
-                   Padding="10"
-                   MinimumHeightRequest="50"
-                   WidthRequest="150">
+                    Padding="20"
+                    HorizontalOptions="Center">
                 <Label Text="30 mins"
                        FontSize="Medium"
                        HorizontalOptions="Center"
@@ -56,12 +55,11 @@
             </Frame>
 
             <Frame x:Name="OneHourFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
-                   Padding="10"
-                   MinimumHeightRequest="50"
-                   WidthRequest="150">
+                    Padding="20"
+                    HorizontalOptions="Center">
                 <Label Text="1 hour"
                        FontSize="Medium"
                        HorizontalOptions="Center"
@@ -69,12 +67,11 @@
             </Frame>
 
             <Frame x:Name="OneAndHalfHourFrame"
-                   BackgroundColor="WhiteSmoke"
+                   BackgroundColor="White"
                    BorderColor="Transparent"
                    CornerRadius="10"
-                   Padding="10"
-                   MinimumHeightRequest="50"
-                   WidthRequest="150">
+                    Padding="20" 
+                    HorizontalOptions="Center">
                 <Label Text="1.5 hours"
                        FontSize="Medium"
                        HorizontalOptions="Center"
@@ -82,25 +79,23 @@
             </Frame>
 
             <!-- Gombok -->
-            <HorizontalStackLayout Margin="0,40,0,0"
-                                  Spacing="20"
-                                  HorizontalOptions="Center">
-                <Button Text="Previous"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
-                        FontSize="Medium"
-                        FontAttributes="Bold"
-                        HorizontalOptions="FillAndExpand"
-                        Clicked="OnPreviousButtonClicked" />
+            <HorizontalStackLayout Margin="0,60,0,0" Spacing="20" HorizontalOptions="Center" >
+                <Button Text="Previous" 
+                CornerRadius="20" Padding="10,15" 
+                BackgroundColor="#999101"
+                TextColor="WhiteSmoke"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnPreviousButtonClicked"  />
                 <Button Text="Next"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
-                        FontSize="Medium"
-                        FontAttributes="Bold"
-                        HorizontalOptions="FillAndExpand"
-                        Clicked="OnNextButtonClicked" />
+                CornerRadius="20" Padding="10,15" 
+                BackgroundColor="#859700"
+                TextColor="White"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnNextButtonClicked" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

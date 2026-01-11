@@ -49,16 +49,19 @@
                     </Frame.Shadow>
                 </Frame>
 
+                
                 <!-- Jobb oldal: Saved workouts + make workout -->
                 <VerticalStackLayout Grid.Column="1" Spacing="10" Margin="0,15,0,0">
+                    
                     <Frame BackgroundColor="#313700"
                            CornerRadius="15"
                            BorderColor="Transparent"
                            Padding="10"
                            MinimumHeightRequest="70" HasShadow="True">
-                        <Frame.Shadow>
-                            <Shadow Brush="#C0C0C0" Offset="1,1"  Radius="3"/>
-                        </Frame.Shadow>
+                        
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSavedWorkoutsTapped" />
+                        </Frame.GestureRecognizers>
 
                         <StackLayout Spacing="1" HorizontalOptions="Center" Margin="0,0,0,0" Orientation="Vertical">
                             <Label Text="Saved" TextColor="White"
@@ -86,46 +89,79 @@
                 </VerticalStackLayout>
             </Grid>
 
-            <!-- Search bar -->
+
+            <!-- Search -->
             <Frame BackgroundColor="#F6FAFD"
-                   BorderColor="#E2E2E2"
-                   HorizontalOptions="FillAndExpand" Padding="0"
-                   CornerRadius="15"
-                   Margin="15,0,15,30" HasShadow="True">
+                    BorderColor="#E2E2E2"
+                    HorizontalOptions="FillAndExpand"
+                    CornerRadius="15"
+                    Padding="0,0"
+                    MinimumHeightRequest="50"
+                    Margin="20,0,20,20" 
+                    HasShadow="True">
+
                 <Frame.Shadow>
-                    <Shadow Brush="#E8EBEE" Offset="1,3"  Radius="2"/>
+                    <Shadow Brush="#E8EBEE" Offset="1,4" Radius="0"/>
                 </Frame.Shadow>
 
                 <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSearchBarTapped" />
+                    </Grid.GestureRecognizers>
+
                     <Entry Placeholder="Search for meals"
-                           Keyboard="Default"
-                           HorizontalOptions="FillAndExpand"
-                           Margin="20,0,40,0"
-                           VerticalOptions="Center"
-                           PlaceholderColor="DarkSlateGrey"
-                           TextColor="Black"
-                           FontSize="Subtitle"/>
+                            IsReadOnly="True"
+                            InputTransparent="True" 
+                            HorizontalOptions="FillAndExpand"
+                            Margin="20,0,40,0"
+                            VerticalOptions="Center"
+                            PlaceholderColor="DarkSlateGrey"
+                            TextColor="Black"
+                            FontSize="Small"/>
+
                     <Image Margin="0,0,20,0"
-                           HorizontalOptions="End"
-                           VerticalOptions="Center"
-                           Source="search_icon.png" 
-                           Scale="0.8"/>
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            Source="search_icon.png" 
+                            Scale="0.7"
+                            InputTransparent="True"/>
                 </Grid>
             </Frame>
 
 
-            
+
             <!-- Actual Program -->
-            <Label Text="Actual Program" FontSize="Subtitle" FontAttributes="Bold" TextColor="Black" Margin="15,20,0,10" />
-           
-                <Frame BackgroundColor="Transparent"
-                   CornerRadius="15" 
-                   BorderColor="Transparent" 
+            <Label Text="Actual Program" 
+                   FontSize="Subtitle" 
+                   FontAttributes="Bold" 
+                   TextColor="Black" 
+                   Margin="15,20,0,10" />
+
+            <!-- Ha nincs aktív program -->
+            <Label x:Name="NoProgramLabel"
+                   Text="You have no active program."
+                   FontSize="Medium"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"
+                   IsVisible="False"
+                   Margin="0,10,0,10" />
+
+            <!-- Ha van aktív program -->
+            <Frame x:Name="ProgramFrame"
+                   BackgroundColor="Transparent"
+                   CornerRadius="15"
+                   BorderColor="Transparent"
                    HasShadow="True"
-                     Padding="0,0" Margin="15,0,15,0">
+                   Padding="0"
+                   Margin="15,0,15,15"
+                   IsVisible="False">
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnProgramTapped" />
+                </Frame.GestureRecognizers>
 
                 <Grid>
-                <!-- Gradient háttér -->
+                    <!-- Gradient háttér -->
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                             <GradientStop Color="#4A5400" Offset="0.0" />
@@ -133,13 +169,25 @@
                         </LinearGradientBrush>
                     </Grid.Background>
 
-                    <VerticalStackLayout Spacing="5" Padding="0,10">
-                        <Label Text="Push - Pull - Leg Split" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium" TextColor="White" FontFamily="" Margin="0,0,0,5"></Label>
-                        <Label Text="10 weeks" HorizontalOptions="Center" TextColor="White" FontSize="Medium"></Label>
-                        <Label Text="3 days / week" HorizontalOptions="Center" TextColor="White"></Label>
+                    <VerticalStackLayout Spacing="5" Padding="0,15">
+                        <Label x:Name="ProgramTitleLabel"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               FontSize="Medium"
+                               TextColor="White" />
+
+                        <Label x:Name="ProgramStartedLabel"
+                               HorizontalOptions="Center"
+                               FontSize="Subtitle"
+                               TextColor="White" />
                     </VerticalStackLayout>
-                  </Grid>  
+
+                </Grid>
             </Frame>
+
+
+
+
 
 
             <!-- Recommended Programs , csempék-->
@@ -147,9 +195,8 @@
                 <Grid>
                     <!-- Gradient háttér -->
                     <Grid.Background>
-                        <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                            <GradientStop Color="#F6FAFD" Offset="0.2"/>
-                            <GradientStop Color="LightBlue" Offset="0.0" />
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                            <GradientStop Color="LightCoral" Offset="0.0" />
                             <GradientStop Color="#F6FAFD" Offset="0.4" />
                         </LinearGradientBrush>
                     </Grid.Background>
@@ -162,12 +209,12 @@
                        FontAttributes="Bold"
                        TextColor="Black"
                        HorizontalTextAlignment="Start" />
-                            <Label Grid.Column="1"
+                            <!--    <Label Grid.Column="1"
                        Text="See all"
                        FontSize="Small"
                        TextColor="Black"
                        HorizontalTextAlignment="End">
-                            </Label>
+                            </Label> -->
                         </Grid>
 
                         <CollectionView ItemsSource="{Binding RecommendedWorkoutPlans}" HorizontalScrollBarVisibility="Never">
@@ -222,8 +269,8 @@
                     <!-- Gradient háttér -->
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                            <GradientStop Color="LightSalmon" Offset="0.0" />
-                            <GradientStop Color="White" Offset="0.8" />
+                            <GradientStop Color="LightCoral" Offset="0.0" />
+                            <GradientStop Color="#F6FAFD" Offset="0.4" />
                         </LinearGradientBrush>
                     </Grid.Background>
 
@@ -235,12 +282,12 @@
                        FontAttributes="Bold"
                        TextColor="Black"
                        HorizontalTextAlignment="Start" />
-                            <Label Grid.Column="1"
+                            <!--        <Label Grid.Column="1"
                        Text="See all"
                        FontSize="Small"
                        TextColor="Black"
                        HorizontalTextAlignment="End">
-                            </Label>
+                            </Label> -->  
                         </Grid>
 
                         <CollectionView ItemsSource="{Binding RecommendedWorkouts}" HorizontalScrollBarVisibility="Never">
@@ -298,7 +345,7 @@
                                    FontAttributes="Bold"
                                    TextColor="Black"
                                    HorizontalTextAlignment="Start" />
-                <Label Grid.Column="1"
+                <!--  <Label Grid.Column="1"
                                    x:Name="AllSimpleWorkoutLabel"
                                    Text="See all"
                                    FontSize="Small"
@@ -307,7 +354,7 @@
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ViewAllWorkoutsCommand}" />
                     </Label.GestureRecognizers>
-                </Label>
+                </Label> -->
             </Grid>
 
             <!-- Created Simple Workouts , csempék-->
@@ -316,10 +363,10 @@
                     
                     <!-- Gradient háttér -->
                     <Grid.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                            <GradientStop Color="#C7FFFF" Offset="0.0" />
-                            <GradientStop Color="#F6FAFD" Offset="0.95" />
-                        </LinearGradientBrush> 
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                            <GradientStop Color="LightCyan" Offset="0.0" />
+                            <GradientStop Color="#F6FAFD" Offset="0.4" />
+                        </LinearGradientBrush>
                     </Grid.Background>
 
                     <VerticalStackLayout Spacing="15" Margin="0,10,0,0">
@@ -392,16 +439,17 @@
                                    FontAttributes="Bold"
                                    TextColor="Black"
                                    HorizontalTextAlignment="Start" />
-                            <Label Grid.Column="1"
+                            <!-- <Label Grid.Column="1"
                                    x:Name="AllWorkoutProgramLabel"
                                    Text="See all"
                                    FontSize="Small"
                                    TextColor="Black"
-                                   HorizontalTextAlignment="End">
+                                   HorizontalTextAlignment="End"> 
+                            
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding ViewAllProgramsCommand}" />
                                 </Label.GestureRecognizers>
-                            </Label>
+                            </Label> -->
                         </Grid>
 
                         <CollectionView ItemsSource="{Binding WorkoutPlans}" HorizontalScrollBarVisibility="Never">

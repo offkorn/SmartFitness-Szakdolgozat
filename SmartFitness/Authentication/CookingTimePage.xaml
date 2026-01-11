@@ -2,23 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartFitness.Authentication.CookingTimePage"
-             Title="Creating Account"
-             BackgroundColor="White">
+             Shell.NavBarIsVisible="False"
+              BackgroundColor="#F6FAFD"
+             NavigationPage.HasNavigationBar="False" 
+             Padding="0,40,0,0">
 
-    <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="Center" VerticalScrollBarVisibility="Never">
+    <ScrollView VerticalScrollBarVisibility="Never">
         <VerticalStackLayout Padding="0" Spacing="15" HorizontalOptions="Center">
 
-            <!-- Cím -->
+
+            <!-- tab bar -->
             <Label Text="Select your cooking time"
                    FontSize="Large"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   Margin="0,10,0,20" />
+                   Margin="40,20,40,40" HorizontalTextAlignment="Center"/>
 
             <!-- Főzési idő választása -->
             <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Frame x:Name="LessThan10Frame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -31,7 +34,7 @@
                 </Frame>
 
                 <Frame x:Name="TwentyMinFrame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -44,7 +47,7 @@
                 </Frame>
 
                 <Frame x:Name="ThirtyMinFrame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -57,7 +60,7 @@
                 </Frame>
 
                 <Frame x:Name="SixtyMinFrame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -70,7 +73,7 @@
                 </Frame>
 
                 <Frame x:Name="OneTwentyMinFrame"
-                       BackgroundColor="WhiteSmoke"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
                        Padding="10"
@@ -87,25 +90,25 @@
             <HorizontalStackLayout Margin="0,40,0,0"
                                   Spacing="20"
                                   HorizontalOptions="Center">
-                <Button x:Name="PreviousButton"
-                        Text="Previous"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
-                        FontSize="Medium"
-                        FontAttributes="Bold"
-                        HorizontalOptions="FillAndExpand"
-                        Clicked="OnPreviousButtonClicked" />
+                <Button Text="Previous" 
+                CornerRadius="20" Padding="10,15" 
+                BackgroundColor="#999101"
+                TextColor="WhiteSmoke"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnPreviousButtonClicked"  />
                 <Button x:Name="NextButton"
                         Text="Finish Account"
-                        CornerRadius="20"
-                        BackgroundColor="Azure"
-                        TextColor="Black"
+                        CornerRadius="20" Padding="10,15" 
+                        BackgroundColor="#859700"
+                        TextColor="White"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
                         Clicked="OnFinishButtonClicked" />
             </HorizontalStackLayout>
+
         </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView >
 </ContentPage>

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using SmartFitness.Models;
 using SmartFitness.Pages;
+using SmartFitness.Services;
 using Supabase;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -24,14 +25,16 @@ public partial class WorkoutPlanDetailViewModel : ObservableObject
     public WorkoutPlanDetailViewModel(Client supabase)
     {
         _supabase = supabase;
-        IsProgramStarted = false; // Alapértelmezetten a Start gomb látható
+        IsProgramStarted = false; // Alapértelmezetten a Start gomb van
+       
+
     }
 
     public async Task LoadPlanAsync(string planId)
     {
         try
         {
-            Debug.WriteLine($"Betöltés WorkoutPlan ID: {planId}");
+            Debug.WriteLine($"Loading WorkoutPlan ID: {planId}");
 
             // WorkoutPlan betöltése
             var planResponse = await _supabase.From<WorkoutPlan>()
@@ -39,29 +42,29 @@ public partial class WorkoutPlanDetailViewModel : ObservableObject
                 .Single();
             if (planResponse == null)
             {
-                Debug.WriteLine($"Hiba: Nincs WorkoutPlan a megadott ID-val: {planId}");
-                throw new Exception($"Nincs edzésprogram a megadott azonosítóval: {planId}");
+                Debug.WriteLine($"Error: no WorkoutPlan with ID: {planId}");
+                throw new Exception($"No workoutplan with this id: {planId}");
             }
             WorkoutPlan = planResponse;
-            Debug.WriteLine($"WorkoutPlan betöltve: {WorkoutPlan.Title}, Days: {string.Join(", ", WorkoutPlan.Days ?? new List<string>())}");
+            Debug.WriteLine($"WorkoutPlan loadoed: {WorkoutPlan.Title}, Days: {string.Join(", ", WorkoutPlan.Days ?? new List<string>())}");
 
             // Kapcsolódó Workouts betöltése
             var workoutResponse = await _supabase.From<Workout>()
                 .Where(x => x.PlanId == planId)
                 .Get();
             var workouts = workoutResponse.Models;
-            Debug.WriteLine($"Workouts betöltve: {workouts.Count} db");
+            Debug.WriteLine($"Workouts loaded: {workouts.Count}");
 
             // PlanDays összeállítása
             PlanDays.Clear();
             var days = WorkoutPlan.Days ?? new List<string>();
             if (!days.Any())
             {
-                Debug.WriteLine("Figyelmeztetés: A WorkoutPlan Days lista üres vagy null");
+                Debug.WriteLine("Warning: WorkoutPlan Days list empty or null");
                 PlanDays.Add(new PlanDay
                 {
                     Day = "N/A",
-                    Workout = new Workout { Title = "Nincs edzés definiálva" }
+                    Workout = new Workout { Title = "No workout defined" }
                 });
             }
             else
@@ -72,16 +75,20 @@ public partial class WorkoutPlanDetailViewModel : ObservableObject
                     PlanDays.Add(new PlanDay
                     {
                         Day = day,
-                        Workout = workoutForDay ?? new Workout { Title = "Nincs edzés erre a napra" }
+                        Workout = workoutForDay ?? new Workout { Title = "No workout for today" }
                     });
                 }
             }
 
-            Debug.WriteLine($"WorkoutPlan sikeresen betöltve: {WorkoutPlan.Title}, {PlanDays.Count} nap");
+            if (App.CurrentUser != null)
+                await CheckIfProgramActive(planId, App.CurrentUser.Id);
+
+
+            Debug.WriteLine($"WorkoutPlan succesfully loaded: {WorkoutPlan.Title}, {PlanDays.Count} day");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"LoadPlanAsync hiba: {ex.Message}\nStackTrace: {ex.StackTrace}");
+            Debug.WriteLine($"LoadPlanAsync error: {ex.Message}\nStackTrace: {ex.StackTrace}");
             throw; // A hibát továbbadjuk az OnAppearing-nek
         }
     }
@@ -91,22 +98,22 @@ public partial class WorkoutPlanDetailViewModel : ObservableObject
     {
         if (planDay?.Workout == null || string.IsNullOrEmpty(planDay.Workout.Id))
         {
-            Debug.WriteLine($"SelectPlanDay: Nincs érvényes Workout a naphoz: {planDay?.Day}");
-            await Application.Current.MainPage.DisplayAlert("Hiba", "Ehhez a naphoz nincs edzés definiálva.", "OK");
+            Debug.WriteLine($"SelectPlanDay: No valid workout for this day: {planDay?.Day}");
+            await Application.Current.MainPage.DisplayAlert("Error", "No workout for this day.", "OK");
             return;
         }
 
         try
         {
-            Debug.WriteLine($"SelectPlanDay: Navigálás WorkoutDetailPage-re, WorkoutId: {planDay.Workout.Id}");
+            Debug.WriteLine($"SelectPlanDay: Navigate to WorkoutDetailPage, WorkoutId: {planDay.Workout.Id}");
             var viewModel = new WorkoutDetailViewModel();
             await viewModel.LoadWorkoutAsync(planDay.Workout.Id);
             await Application.Current.MainPage.Navigation.PushAsync(new WorkoutDetailPage(viewModel));
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"SelectPlanDay hiba: {ex.Message}\nStackTrace: {ex.StackTrace}");
-            await Application.Current.MainPage.DisplayAlert("Hiba", $"Nem sikerült betölteni az edzést: {ex.Message}", "OK");
+            Debug.WriteLine($"SelectPlanDay error: {ex.Message}\nStackTrace: {ex.StackTrace}");
+            await Application.Current.MainPage.DisplayAlert("Error", $"Failed to load workout: {ex.Message}", "OK");
         }
     }
 
@@ -114,15 +121,25 @@ public partial class WorkoutPlanDetailViewModel : ObservableObject
     private void ToggleStart()
     {
         IsProgramStarted = !IsProgramStarted;
-        Debug.WriteLine($"ToggleStart: Program állapota: {(IsProgramStarted ? "Started" : "Stopped")}");
+        Debug.WriteLine($"ToggleStart: Program state: {(IsProgramStarted ? "Started" : "Stopped")}");
     }
 
 
+    public async Task CheckIfProgramActive(string planId, string userId)
+    {
+        var active = await ProgramService.GetActiveProgramAsync(userId);
 
+        if (active == null)
+        {
+            IsProgramStarted = false;
+            return;
+        }
+
+        IsProgramStarted = (active.PlanId == planId);
+    }
+
+    
 }
-
-
-
 
 public class PlanDay
 {

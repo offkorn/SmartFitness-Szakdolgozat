@@ -40,7 +40,7 @@ namespace SmartFitness.Authentication
         {
             foreach (var frame in _intoleranceFrames.Values)
             {
-                frame.BackgroundColor = Colors.WhiteSmoke;
+                frame.BackgroundColor = Colors.White;
             }
 
             // Visszaállítjuk a korábban kiválasztott intoleranciákat
@@ -48,7 +48,7 @@ namespace SmartFitness.Authentication
             {
                 if (_intoleranceFrames.TryGetValue(intolerance, out var frame))
                 {
-                    frame.BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue
+                    frame.BackgroundColor = Color.FromRgb(218, 215, 147); // LightBlue
                 }
             }
         }
@@ -68,12 +68,12 @@ namespace SmartFitness.Authentication
             if (_selectedIntolerances.Contains(intolerance))
             {
                 _selectedIntolerances.Remove(intolerance);
-                _intoleranceFrames[intolerance].BackgroundColor = Colors.WhiteSmoke;
+                _intoleranceFrames[intolerance].BackgroundColor = Colors.White;
             }
             else
             {
                 _selectedIntolerances.Add(intolerance);
-                _intoleranceFrames[intolerance].BackgroundColor = Color.FromRgb(173, 216, 230); // LightBlue
+                _intoleranceFrames[intolerance].BackgroundColor = Color.FromRgb(218, 215, 147); // LightBlue
             }
         }
 

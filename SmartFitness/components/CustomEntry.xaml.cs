@@ -1,6 +1,6 @@
 using Microsoft.Maui.Controls;
 
-namespace SmartFitness.Authentication.components;
+namespace SmartFitness.components;
 
 public partial class CustomEntry : ContentView
 {

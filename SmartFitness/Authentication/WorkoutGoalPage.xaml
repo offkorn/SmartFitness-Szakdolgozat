@@ -2,95 +2,95 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartFitness.Authentication.WorkoutGoalPage"
-             Title="Workout Goal"
-             BackgroundColor="White">
+             Shell.NavBarIsVisible="False"
+              BackgroundColor="#F6FAFD"
+             NavigationPage.HasNavigationBar="False" 
+             Padding="0,40,0,0">
 
-    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
-        <VerticalStackLayout Padding="0" Spacing="15" HorizontalOptions="Center">
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Padding="0" Spacing="15">
 
-            <!-- Cím -->
-            <Label Text="Select your workout goals"
+        <!-- Cím -->
+        <Label Text="Select your workout goals"
                    FontSize="Large"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    Margin="20,10,0,20" />
 
-            <!-- Edzéscélok választása -->
-            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
-                <Frame x:Name="StrengthFrame"
-                       BackgroundColor="WhiteSmoke"
+        <!-- Edzéscélok választása -->
+        <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Frame x:Name="StrengthFrame"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
-                       Padding="10"
+                       Padding="20"
                        MinimumHeightRequest="50"
                        WidthRequest="200">
-                    <Label Text="Strength"
+                <Label Text="Strength"
                            FontSize="Medium"
                            HorizontalOptions="Center"
                            VerticalOptions="Center" />
-                </Frame>
+            </Frame>
 
-                <Frame x:Name="MuscleGainFrame"
-                       BackgroundColor="WhiteSmoke"
+            <Frame x:Name="MuscleGainFrame"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
-                       Padding="10"
+                       Padding="20"
                        MinimumHeightRequest="50"
                        WidthRequest="200">
-                    <Label Text="Muscle Gain"
+                <Label Text="Muscle Gain"
                            FontSize="Medium"
                            HorizontalOptions="Center"
                            VerticalOptions="Center" />
-                </Frame>
+            </Frame>
 
-                <Frame x:Name="CardioFrame"
-                       BackgroundColor="WhiteSmoke"
+            <Frame x:Name="CardioFrame"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
-                       Padding="10"
+                       Padding="20"
                        MinimumHeightRequest="50"
                        WidthRequest="200">
-                    <Label Text="Cardio"
+                <Label Text="Cardio"
                            FontSize="Medium"
                            HorizontalOptions="Center"
                            VerticalOptions="Center" />
-                </Frame>
+            </Frame>
 
-                <Frame x:Name="HealthierLifeFrame"
-                       BackgroundColor="WhiteSmoke"
+            <Frame x:Name="HealthierLifeFrame"
+                       BackgroundColor="White"
                        BorderColor="Transparent"
                        CornerRadius="10"
-                       Padding="10"
+                       Padding="20"
                        MinimumHeightRequest="50"
                        WidthRequest="200">
-                    <Label Text="Healthier Life"
+                <Label Text="Healthier Life"
                            FontSize="Medium"
                            HorizontalOptions="Center"
                            VerticalOptions="Center" />
-                </Frame>
-            </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
 
-            <!-- Gombok -->
-            <HorizontalStackLayout Margin="0,40,0,0"
-                                  Spacing="20"
-                                  HorizontalOptions="Center">
-                <Button Text="Previous"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
+        <!-- Gombok -->
+        <HorizontalStackLayout Margin="0,60,0,0" Spacing="20" HorizontalOptions="Center" >
+            <Button Text="Previous" 
+                        CornerRadius="20" Padding="10,15" 
+                        BackgroundColor="#999101"
+                        TextColor="WhiteSmoke"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
-                        Clicked="OnPreviousButtonClicked" />
-                <Button Text="Next"
-                        CornerRadius="20"
-                        BackgroundColor="#BADAF9"
-                        TextColor="Black"
+                        Clicked="OnPreviousButtonClicked"  />
+            <Button Text="Next"
+                        CornerRadius="20" Padding="10,15" 
+                        BackgroundColor="#859700"
+                        TextColor="White"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
                         Clicked="OnNextButtonClicked" />
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-    </ScrollView>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+        </ScrollView>
 </ContentPage>
