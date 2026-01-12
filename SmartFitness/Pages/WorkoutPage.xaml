@@ -109,7 +109,7 @@
                         <TapGestureRecognizer Tapped="OnSearchBarTapped" />
                     </Grid.GestureRecognizers>
 
-                    <Entry Placeholder="Search for meals"
+                    <Entry Placeholder="Search for plans and workouts"
                             IsReadOnly="True"
                             InputTransparent="True" 
                             HorizontalOptions="FillAndExpand"
